@@ -4,9 +4,9 @@
     <div class="flex flex-1 flex-col w-full h-full">
       <Header></Header>
       <router-view v-slot="{ Component }" class="layout">
-        <!-- <keep-alive> -->
-        <component :is="Component" />
-        <!-- </keep-alive> -->
+        <keep-alive>
+          <component :is="Component" :key="$route.fullPath" />
+        </keep-alive>
       </router-view>
     </div>
   </div>

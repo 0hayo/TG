@@ -1,5 +1,6 @@
 // 导入依赖
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import Layout from '@/views/Layout/index.vue'
 
 // 配置routes
 const routes: Array<RouteRecordRaw> = [
@@ -17,31 +18,97 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/404'
   },
   {
-    path: '/MonitoringPlan/:planCount',
-    name: 'MonitoringPlan',
-    component: () => import('@/views/MonitoringPlan/index.vue'),
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login/index.vue'),
     meta: {
-      title: 'MonitoringPlan',
+      title: 'Login',
       auth: false
     }
   },
   {
-    path: '/TgConfiguration',
-    name: 'TgConfiguration',
-    component: () => import('@/views/TgConfiguration/index.vue'),
+    path: '/',
+    name: 'Layout',
+    component: Layout,
     meta: {
-      title: 'TgConfiguration',
+      title: 'Layout',
       auth: false
-    }
-  },
-  {
-    path: '/DataCenter',
-    name: 'DataCenter',
-    component: () => import('@/views/DataCenter/index.vue'),
-    meta: {
-      title: 'DataCenter',
-      auth: false
-    }
+    },
+    redirect: '/MonitoringPlan/0',
+    children: [
+      {
+        path: '/MonitoringPlan/:planCount',
+        name: 'MonitoringPlan',
+        component: () => import('@/views/MonitoringPlan/index.vue'),
+        meta: {
+          title: 'MonitoringPlan',
+          auth: false
+        }
+      },
+      {
+        path: '/TgConfiguration',
+        name: 'TgConfiguration',
+        component: () => import('@/views/TgConfiguration/index.vue'),
+        meta: {
+          title: 'TgConfiguration',
+          auth: false
+        }
+      },
+      {
+        path: '/DataCenter',
+        name: 'DataCenter',
+        component: () => import('@/views/DataCenter/index.vue'),
+        meta: {
+          title: 'DataCenter',
+          auth: false
+        }
+      },
+      {
+        path: '/KeyWords',
+        name: 'KeyWords',
+        component: () => import('@/views/KeyWords/index.vue'),
+        meta: {
+          title: 'KeyWords',
+          auth: false
+        }
+      },
+      {
+        path: '/Setting',
+        name: 'Setting',
+        component: () => import('@/views/Setting/index.vue'),
+        meta: {
+          title: 'Setting',
+          auth: false
+        }
+      },
+      {
+        path: '/MediaManagement',
+        name: 'MediaManagement',
+        component: () => import('@/views/MediaManagement/index.vue'),
+        meta: {
+          title: 'Setting',
+          auth: false
+        }
+      },
+      {
+        path: '/UserManagement',
+        name: 'UserManagement',
+        component: () => import('@/views/UserManagement/index.vue'),
+        meta: {
+          title: 'Setting',
+          auth: false
+        }
+      },
+      {
+        path: '/PlanManagement',
+        name: 'PlanManagement',
+        component: () => import('@/views/PlanManagement/index.vue'),
+        meta: {
+          title: 'Setting',
+          auth: false
+        }
+      }
+    ]
   }
 ]
 

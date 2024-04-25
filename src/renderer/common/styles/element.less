@@ -2,45 +2,45 @@
 @import './global.less';
 
 :root {
-  --el-color-primary: @primary !important;
-  --el-text-color-primary: @title-text !important;
-  --el-text-color-regular: @Secondary-text !important;
-  --el-bg-color: @bg-color-1 !important;
-  --el-fill-color-blank: @bg-color-1 !important;
-  --el-border-color-lighter: @border-hr !important;
-  --el-fill-color-light: @table-hover !important;
-  --el-mask-color: rgba(0, 0, 0, 0.1) !important;
-  --el-bg: #000;
+  // --el-color-primary: @primary !important;
+  // --el-text-color-primary: @title-text !important;
+  // --el-text-color-regular: @Secondary-text !important;
+  // --el-bg-color: @bg-color-1 !important;
+  // --el-fill-color-blank: @bg-color-1 !important;
+  // --el-border-color-lighter: @border-hr !important;
+  // --el-fill-color-light: @table-hover !important;
+  // --el-mask-color: rgba(0, 0, 0, 0.1) !important;
+  // --el-bg: #000;
 }
 
-.el-dialog {
-  --el-bg-color: rgba(39, 40, 43, 0.9) !important;
-  border-radius: 8px !important;
-  box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.2) !important;
-  backdrop-filter: blur(10px) !important;
-  .el-dialog__header {
-    border-bottom: 1px solid @border-hr;
-    margin-right: 0;
-    padding: 13px 24px;
+// .el-dialog {
+//   --el-bg-color: rgba(39, 40, 43, 0.9) !important;
+//   border-radius: 8px !important;
+//   box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.2) !important;
+//   backdrop-filter: blur(10px) !important;
+//   .el-dialog__header {
+//     border-bottom: 1px solid @border-hr;
+//     margin-right: 0;
+//     padding: 13px 24px;
 
-    .el-dialog__headerbtn {
-      top: 0;
-    }
-  }
-  .el-dialog__body {
-    padding-bottom: 0;
-  }
-  .el-dialog__footer {
-    border-top: 1px solid @border-hr;
-    padding: 10px 24px;
-  }
-}
+//     .el-dialog__headerbtn {
+//       top: 0;
+//     }
+//   }
+//   .el-dialog__body {
+//     padding-bottom: 0;
+//   }
+//   .el-dialog__footer {
+//     border-top: 1px solid @border-hr;
+//     padding: 10px 24px;
+//   }
+// }
 
-.el-input {
-  --el-fill-color-blank: @bg-color-1 !important;
-  --el-border-color: @border-hr !important;
-  --el-input-text-color: #4ea7fc !important;
-}
+// .el-input {
+//   --el-fill-color-blank: @bg-color-1 !important;
+//   --el-border-color: @border-hr !important;
+//   --el-input-text-color: #4ea7fc !important;
+// }
 
 // .el-descriptions{
 // flex: 1;
@@ -62,86 +62,86 @@
 //   }
 // }
 
-.el-button {
-  --el-button-border-color: @button-stroke;
-  --el-button-bg-color: @button-fill;
-  // --el-button-text-color: @primary-text;
-  gap: 8px;
-  &:hover,
-  &:focus,
-  &:active {
-    // color: @nav-hover;
-    border-color: @nav-hover;
-    background-color: @nav-hover;
-    outline: 0;
-  }
-}
+// .el-button {
+//   --el-button-border-color: @button-stroke;
+//   --el-button-bg-color: @button-fill;
+//   // --el-button-text-color: @primary-text;
+//   gap: 8px;
+//   &:hover,
+//   &:focus,
+//   &:active {
+//     // color: @nav-hover;
+//     border-color: @nav-hover;
+//     background-color: @nav-hover;
+//     outline: 0;
+//   }
+// }
 
-.el-drawer {
-  --el-drawer-bg-color: @bg-color-1 !important;
-  height: calc(100vh - 64px) !important;
-  border-left: 1px solid @border-hr;
-  margin-top: 64px;
+// .el-drawer {
+//   --el-drawer-bg-color: @bg-color-1 !important;
+//   height: calc(100vh - 64px) !important;
+//   border-left: 1px solid @border-hr;
+//   margin-top: 64px;
 
-  .el-drawer__body {
-    padding: 10px 16px 0px 16px;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    overflow: hidden;
-  }
+//   .el-drawer__body {
+//     padding: 10px 16px 0px 16px;
+//     display: flex;
+//     flex: 1;
+//     flex-direction: column;
+//     overflow: hidden;
+//   }
 
-  .el-tabs {
-    flex: 1;
-  }
+//   .el-tabs {
+//     flex: 1;
+//   }
 
-  .el-tabs--card > .el-tabs__header {
-    border-bottom: none;
-    margin-bottom: 24px;
+//   .el-tabs--card > .el-tabs__header {
+//     border-bottom: none;
+//     margin-bottom: 24px;
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 50px;
-      left: -24px;
-      width: 300px;
-      height: 1px;
-      border-bottom: 1px solid @border-hr;
-    }
-  }
+//     &::before {
+//       content: '';
+//       position: absolute;
+//       top: 50px;
+//       left: -24px;
+//       width: 300px;
+//       height: 1px;
+//       border-bottom: 1px solid @border-hr;
+//     }
+//   }
 
-  .el-tabs--card > .el-tabs__header .el-tabs__nav {
-    background-color: @bg-color-2;
-    border-radius: 4px;
-    border: none;
-  }
-  .el-tabs--card > .el-tabs__header .el-tabs__item {
-    width: 100px;
-    border-radius: 4px;
-    border-left: none !important;
-  }
-  .el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
-    background-color: @button-fill;
-    border: none;
-    border-radius: 4px;
-    border: 1px solid @button-stroke !important;
-  }
-}
-.el-checkbox.is-bordered {
-  padding: 20px 16px;
-  border-radius: 0;
-  margin-top: -1px;
-  border-color: @border-hr;
-  border-left: none;
-  border-right: none;
-}
+//   .el-tabs--card > .el-tabs__header .el-tabs__nav {
+//     background-color: @bg-color-2;
+//     border-radius: 4px;
+//     border: none;
+//   }
+//   .el-tabs--card > .el-tabs__header .el-tabs__item {
+//     width: 100px;
+//     border-radius: 4px;
+//     border-left: none !important;
+//   }
+//   .el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
+//     background-color: @button-fill;
+//     border: none;
+//     border-radius: 4px;
+//     border: 1px solid @button-stroke !important;
+//   }
+// }
+// .el-checkbox.is-bordered {
+//   padding: 20px 16px;
+//   border-radius: 0;
+//   margin-top: -1px;
+//   border-color: @border-hr;
+//   border-left: none;
+//   border-right: none;
+// }
 
-.el-checkbox.is-bordered.is-checked {
-  z-index: 200;
-  border-color: @primary;
-  background-color: rgba(78, 167, 252, 0.1);
-}
+// .el-checkbox.is-bordered.is-checked {
+//   z-index: 200;
+//   border-color: @primary;
+//   background-color: rgba(78, 167, 252, 0.1);
+// }
 
-.el-notification {
-  background: @bg-color-2;
-}
+// .el-notification {
+//   background: @bg-color-2;
+// }

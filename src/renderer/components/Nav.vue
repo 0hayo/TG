@@ -10,6 +10,18 @@
           <el-icon><Plus /></el-icon>新增监测方案
         </div>
         <router-link
+          class="navitem icon font_family icon-telegram"
+          :to="{ path: '/MonitoringPlan/1' }"
+        >
+          方案1
+        </router-link>
+        <router-link
+          class="navitem icon font_family icon-telegram"
+          :to="{ path: '/MonitoringPlan/2' }"
+        >
+          方案2
+        </router-link>
+        <!-- <router-link
           v-for="item in planList"
           :key="item.id"
           class="navitem"
@@ -31,15 +43,33 @@
 
             <el-icon @click="deletePlan(item.id)"><Delete /></el-icon>
           </div>
-        </router-link>
+        </router-link> -->
       </div>
       <div class="box-2 box">
-        <p>TG管理</p>
+        <p>系统管理</p>
         <router-link
           class="navitem icon font_family icon-telegram"
-          :to="{ path: '/TgConfiguration' }"
+          :to="{ path: '/MediaManagement' }"
         >
-          TG配置
+          媒体管理
+        </router-link>
+        <router-link
+          class="navitem icon font_family icon-telegram"
+          :to="{ path: '/UserManagement' }"
+        >
+          用户管理
+        </router-link>
+        <router-link
+          class="navitem icon font_family icon-telegram"
+          :to="{ path: '/PlanManagement' }"
+        >
+          方案管理
+        </router-link>
+        <router-link class="navitem icon font_family icon-telegram" :to="{ path: '/KeyWords' }">
+          关键词管理
+        </router-link>
+        <router-link class="navitem icon font_family icon-telegram" :to="{ path: '/Setting' }">
+          设置
         </router-link>
         <!-- <p>数据库</p>
         <router-link class="navitem icon font_family icon-add" :to="{ path: '/DataCenter' }">
