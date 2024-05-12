@@ -21,8 +21,4 @@ const emit = defineEmits<{
 }>()
 </script>
 
-<style scoped lang="less">
-.el-button {
-  background-color: @button-fill;
-}
-</style>
+<style scoped lang="less"></style>

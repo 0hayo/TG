@@ -69,15 +69,4 @@ onBeforeMount(async () => {
   <audio id="tipAudio" src="./assets/mp3/bo.mp3" controls hidden="true"></audio>
 </template>
 
-<style lang="less" scoped>
-.flag {
-  width: 100vw;
-  height: 100vh;
-  text-align: center;
-  line-height: 100vh;
-}
-
-.bgColor {
-  background-color: var(--el-bg);
-}
-</style>
+<style lang="less" scoped></style>

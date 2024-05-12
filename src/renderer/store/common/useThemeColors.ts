@@ -10,7 +10,8 @@ const useThemeColors = defineStore(NAMES.USE_STYLE, {
         '--tg-login-bg': '#fff',
         // '--tg-default-color': '#4a4a4a',
         '--tg-border-color': '#4B4B4B',
-        '--tg-container-color': '#141414'
+        '--tg-container-color': '#141414',
+        '--bg-sider-color': '#000000'
       },
       night: {
         '--tg-default-bg': '#141414',

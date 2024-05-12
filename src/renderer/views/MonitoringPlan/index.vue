@@ -146,31 +146,4 @@ const show = () => {
 // }
 </script>
 
-<style scoped lang="less">
-.layout {
-  flex: 1;
-  display: flex;
-  height: calc(100vh - 64px);
-  overflow-y: hidden;
-  overflow-x: auto;
-}
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .img {
-    width: 800px;
-    height: 600px;
-    background: url(../../assets/img/kong.png) no-repeat center;
-  }
-
-  div {
-    font-weight: normal !important;
-  }
-  a {
-    color: @primary;
-    display: inline-block;
-  }
-}
-</style>
+<style scoped lang="less"></style>
