@@ -2,7 +2,7 @@
   <div class="header">
     <div class="left">
       <div class="icon font_family icon-side-bar"></div>
-      <p class="title">工作台</p>
+      <p class="title text-aaa">工作台</p>
       <!-- <p>></p> -->
       <!-- <p class="subheading">监测方案一</p> -->
     </div>
@@ -12,9 +12,9 @@
         <el-icon v-if="ringtones" class="cursor-pointer" @click="setRingtones(false)"
           ><Bell
         /></el-icon>
-        <el-icon v-else class="cursor-pointer" @click="setRingtones(true)"
-          ><MuteNotification
-        /></el-icon>
+        <el-icon v-else class="cursor-pointer" @click="setRingtones(true)">
+          <MuteNotification />
+        </el-icon>
       </div>
       <div class="window">
         <div class="icon font_family icon-Subtract" @click="setWindowSize('min')"></div>
@@ -50,6 +50,9 @@ const setWindowSize = (type: string) => {
 
 const ringtones = computed(() => monitoringData.$state.ringtones)
 const setRingtones = (v: boolean) => {
+  !v
+    ? document.documentElement.classList.add('dark')
+    : document.documentElement.classList.remove('dark')
   monitoringData.setRingtones(v)
 }
 </script>

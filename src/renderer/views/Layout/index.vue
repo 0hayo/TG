@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row w-full h-100vh overflow-hidden">
+  <div class="flex flex-row w-full h-100vh overflow-hidden bg-white dark:bg-slate-800">
     <Nav></Nav>
     <div class="flex flex-1 flex-col w-full h-full">
       <Header></Header>

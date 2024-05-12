@@ -6,9 +6,14 @@ import {
   presetUno,
   transformerAttributifyJsx
 } from 'unocss'
+import colors from './colors'
 
 export default defineConfig({
-  theme: {},
+  theme: {
+    colors: {
+      aaa: colors.slate[50]
+    }
+  },
   shortcuts: {
     // 全局公共样式
     'flex-col': 'flex flex-col'
