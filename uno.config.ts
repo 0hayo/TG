@@ -40,7 +40,7 @@ export default defineConfig({
           PrimaryDebit: colors.white,
           PrimaryDebitHover: colors.neutral[100]
         },
-        stroke: {
+        Stroke: {
           Stroke: colors.neutral[300],
           StrokeHover: colors.neutral[200],
           StrokeActive: colors.neutral[400],

@@ -1,13 +1,24 @@
 <template>
-  <div class="drag">
-    <div class="left">
-      <div class="icon font_family icon-side-bar"></div>
-      <p class="title text-aaa">工作台</p>
-      <!-- <p>></p> -->
-      <!-- <p class="subheading">监测方案一</p> -->
+  <div
+    class="drag h-12 flex justify-between items-center pr-8px border border-b-Neutral-Stroke-Stroke"
+  >
+    <div
+      class="flex h-12 items-center justify-between w-36.5rem px-4 border-r border-b-Neutral-Stroke-Stroke"
+    >
+      <div class="flex">
+        <p>sss</p>
+        五一方案
+      </div>
+      <tgButton text>
+        <el-icon><Plus /></el-icon>过滤</tgButton
+      >
     </div>
-    <div class="right">
-      <div class="time flex gap-24px">
+    <div class="flex-row gap-4">
+      <div class="flex">
+        <img src="" alt="" />
+        <p class="text-Neutral-Text-Primary">我是谁</p>
+      </div>
+      <div>
         <el-icon v-if="ringtones" class="cursor-pointer" @click="setRingtones(false)"
           ><Bell
         /></el-icon>
@@ -15,10 +26,16 @@
           <MuteNotification />
         </el-icon>
       </div>
-      <div class="window">
-        <div class="icon font_family icon-Subtract" @click="setWindowSize('min')"></div>
-        <div class="icon font_family icon-Maximize" @click="setWindowSize('max')"></div>
-        <div class="icon font_family icon-Dismiss" @click="setWindowSize('close')"></div>
+      <div class="flex">
+        <div @click="setWindowSize('min')">
+          <el-icon><Minus /></el-icon>
+        </div>
+        <div @click="setWindowSize('max')">
+          <el-icon><FullScreen /></el-icon>
+        </div>
+        <div @click="setWindowSize('close')">
+          <el-icon><Close /></el-icon>
+        </div>
       </div>
     </div>
   </div>
@@ -26,6 +43,7 @@
 
 <script setup lang="ts">
 import useMonitoringData from '@/store/common/monitoringData'
+import tgButton from '@/components/tgButton/index.vue'
 
 const monitoringData = useMonitoringData()
 

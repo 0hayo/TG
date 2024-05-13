@@ -188,7 +188,7 @@ section {
         right: 16px;
         top: 48px;
       }
-      font-size: 14px;
+      font-size: 3;
       line-height: 100%;
       background-color: @bg-color-2;
       padding: 16px;

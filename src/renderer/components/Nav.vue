@@ -3,11 +3,11 @@
     <div class="w-12.5rem h-3rem px-1rem line-height-3rem color-Neutral-Text-Primary drag">
       <div class="logo"><p>谛听巡查</p></div>
     </div>
-    <div class="flex py-1rem px-0.5rem color-Neutral-Text-Primary font-size-12px">
+    <div class="flex py-1rem px-2 color-Neutral-Text-Primary font-size-3.5">
       {{ time }}
     </div>
-    <div class="flex-col flex-auto flex-justify-between items-center self-stretch px-16px">
-      <div class="flex-col items-center self-stretch gap-0.5rem">
+    <div class="flex-col flex-auto flex-justify-between items-center self-stretch px-4 pb-4">
+      <div class="flex-col items-center self-stretch gap-2">
         <div class="flex-row flex-justify-between self-stretch">
           <p class="font-size-12px color-Neutral-Text-Tertiary">方案</p>
           <IconBtn @click="show"
@@ -15,13 +15,13 @@
           ></IconBtn>
         </div>
         <router-link
-          class="flex self-stretch items-center h-8 gap-0.25rem border-rd-0.25rem px-0.5rem font-size-14px hover:bg-Neutral-Fill-PrimaryDebitHover"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/MonitoringPlan/1' }"
         >
           <el-icon><Plus /></el-icon>方案1
         </router-link>
         <router-link
-          class="navitem icon font_family icon-telegram"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/MonitoringPlan/2' }"
         >
           方案2
@@ -50,32 +50,43 @@
           </div>
         </router-link> -->
       </div>
-      <div class="flex-col items-center self-stretch gap-0.5rem">
+      <div class="flex-col items-center self-stretch gap-2">
         <div class="self-start">
           <p class="font-size-12px color-Neutral-Text-Tertiary">系统管理</p>
         </div>
         <router-link
-          class="navitem icon font_family icon-telegram"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/MediaManagement' }"
         >
+          <el-icon><Plus /></el-icon>
           媒体管理
         </router-link>
         <router-link
-          class="navitem icon font_family icon-telegram"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/UserManagement' }"
         >
+          <el-icon><Plus /></el-icon>
           用户管理
         </router-link>
         <router-link
-          class="navitem icon font_family icon-telegram"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/PlanManagement' }"
         >
+          <el-icon><Plus /></el-icon>
           方案管理
         </router-link>
-        <router-link class="navitem icon font_family icon-telegram" :to="{ path: '/KeyWords' }">
+        <router-link
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          :to="{ path: '/KeyWords' }"
+        >
+          <el-icon><Plus /></el-icon>
           关键词管理
         </router-link>
-        <router-link class="navitem icon font_family icon-telegram" :to="{ path: '/Setting' }">
+        <router-link
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          :to="{ path: '/Setting' }"
+        >
+          <el-icon><Plus /></el-icon>
           设置
         </router-link>
         <!-- <p>数据库</p>
@@ -176,7 +187,8 @@ onUnmounted(() => {
 
 <style scoped lang="less">
 .router-link-exact-active {
-  @apply bg-Neutral-Fill-PrimaryDebitHover;
+  background: var(--Primary-Fill-FillActive, #3b82f6);
+  color: var(--Neutral-Text-PrimaryDebit, #fafafa);
 }
 .drag {
   -webkit-app-region: drag;

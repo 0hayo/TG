@@ -7,9 +7,9 @@
     >
       <div class="w-220px">
         <h2 class="text-24px line-height-32px">嗨！欢迎您使用谛听巡查系统</h2>
-        <p class="text-14px line-height-22px mt-32px!">用户名</p>
+        <p class="text-3 line-height-22px mt-32px!">用户名</p>
         <el-input placeholder="用户名"></el-input>
-        <p class="text-14px line-height-22px mt-24px!">密码</p>
+        <p class="text-3 line-height-22px mt-24px!">密码</p>
         <el-input placeholder="密码"></el-input>
 
         <el-button class="w-full mt-32px!" type="primary" @click="handle">登录</el-button>

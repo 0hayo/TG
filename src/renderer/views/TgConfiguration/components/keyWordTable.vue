@@ -132,7 +132,7 @@ defineExpose({
   height: 32px;
   line-height: 32px;
   background: @button-fill;
-  font-size: 14px;
+  font-size: 3;
   color: @Secondary-text;
   padding: 16px;
   border-radius: 4px;
