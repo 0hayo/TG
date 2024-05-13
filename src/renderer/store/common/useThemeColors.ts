@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia'
 import NAMES from '../types'
 // import colors from '@/constants/colors'
-import colorTheme from './colorTheme'
+import colorTheme from '@/constants/colorTheme'
 
 const useThemeColors = defineStore(NAMES.USE_STYLE, {
   state: () => {

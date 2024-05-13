@@ -7,7 +7,7 @@ import {
   transformerAttributifyJsx
 } from 'unocss'
 // import colors from './src/renderer/constants/colors'
-import colorTheme from './src/renderer/store/common/colorTheme'
+import colorTheme from './src/renderer/constants/colorTheme'
 
 export default defineConfig({
   theme: {
