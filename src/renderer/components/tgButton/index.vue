@@ -2,7 +2,6 @@
   <button
     :class="['flex-inline justify-center items-center  border-rd-1 gap-2', sizeClass, typeClass]"
     :disabled="disabled"
-    @click="$emit('click', $event)"
   >
     <i v-if="iconName" :class="`ri-${iconName}`"></i>
     <slot></slot>

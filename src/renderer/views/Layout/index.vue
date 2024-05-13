@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-row w-full h-100vh overflow-hidden bg-layout-cardbg">
+  <div class="flex-row w-full h-100vh overflow-hidden bg-Layout-cardbg">
     <Nav></Nav>
     <div class="flex flex-1 flex-col w-full h-full">
       <Header></Header>

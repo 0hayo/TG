@@ -8,32 +8,45 @@
       <div class="flex gap-1"><i class="ri-gps-line"></i>五一方案</div>
       <tgButton icon-name="filter-3-line" text>过滤</tgButton>
     </div>
-    <div class="flex-row gap-4">
-      <div class="flex">
-        <img src="" alt="" />
-        <p class="text-Neutral-Text-Primary">我是谁</p>
-      </div>
-      <div>
-        <el-icon v-if="ringtones" class="cursor-pointer" @click="setRingtones(false)"
-          ><Bell
-        /></el-icon>
-        <el-icon v-else class="cursor-pointer" @click="setRingtones(true)">
-          <MuteNotification />
-        </el-icon>
-      </div>
-      <div class="flex">
-        <div @click="setWindowSize('min')">
-          <el-icon><Minus /></el-icon>
+    <div class="flex-row flex-auto justify-between items-center">
+      <tgButton class="justify-start" text icon-name="draft-line">舆情上报编辑</tgButton>
+      <div class="flex-row gap-4">
+        <div class="flex">
+          <img src="" alt="" />
+          <p class="text-Neutral-Text-Primary">我是谁</p>
         </div>
-        <div @click="setWindowSize('max')">
-          <el-icon><FullScreen /></el-icon>
+        <div>
+          <el-icon v-if="ringtones" class="cursor-pointer" @click="setRingtones(false)"
+            ><Bell
+          /></el-icon>
+          <el-icon v-else class="cursor-pointer" @click="setRingtones(true)">
+            <MuteNotification />
+          </el-icon>
         </div>
-        <div @click="setWindowSize('close')">
-          <el-icon><Close /></el-icon>
+        <div class="flex">
+          <iconBtn
+            icon-name="subtract-line"
+            type="WindowsControls"
+            size="lg"
+            @click="setWindowSize('min')"
+          ></iconBtn>
+          <iconBtn
+            icon-name="checkbox-blank-line"
+            type="WindowsControls"
+            size="lg"
+            @click="setWindowSize('max')"
+          ></iconBtn>
+          <iconBtn
+            icon-name="close-line"
+            type="WindowsControls"
+            size="lg"
+            @click="setWindowSize('close')"
+          ></iconBtn>
         </div>
       </div>
     </div>
   </div>
+
   <el-drawer ref="drawerRef" v-model="showDrawer" title="看板过滤" :with-header="false" size="300">
     <div class="filterTitle">关键词过滤</div>
     <!-- <el-checkbox-group v-model="selectKeywordsList" class="listbox">
@@ -50,6 +63,7 @@ import useMonitoringData from '@/store/common/monitoringData'
 import { ElDrawer } from 'element-plus'
 import moment from 'moment'
 import tgButton from '@/components/tgButton/index.vue'
+import iconBtn from '@/components/iconbtn/index.vue'
 
 const route = useRoute()
 const monitoringData = useMonitoringData()
