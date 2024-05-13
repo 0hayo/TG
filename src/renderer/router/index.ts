@@ -41,7 +41,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'MonitoringPlan',
         component: () => import('@/views/MonitoringPlan/index.vue'),
         meta: {
-          title: 'MonitoringPlan',
+          title: '工作台',
           auth: false
         }
       },
@@ -68,7 +68,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'KeyWords',
         component: () => import('@/views/KeyWords/index.vue'),
         meta: {
-          title: 'KeyWords',
+          title: '关键词管理',
           auth: false
         }
       },
@@ -77,7 +77,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Setting',
         component: () => import('@/views/Setting/index.vue'),
         meta: {
-          title: 'Setting',
+          title: '设置',
           auth: false
         }
       },
@@ -86,7 +86,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'MediaManagement',
         component: () => import('@/views/MediaManagement/index.vue'),
         meta: {
-          title: 'Setting',
+          title: '媒体管理',
           auth: false
         }
       },
@@ -95,7 +95,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'UserManagement',
         component: () => import('@/views/UserManagement/index.vue'),
         meta: {
-          title: 'Setting',
+          title: '用户管理',
           auth: false
         }
       },
@@ -104,7 +104,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'PlanManagement',
         component: () => import('@/views/PlanManagement/index.vue'),
         meta: {
-          title: 'Setting',
+          title: '方案管理',
           auth: false
         }
       }

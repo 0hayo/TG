@@ -2,7 +2,8 @@
   <div class="header">
     <div class="left">
       <div class="icon font_family icon-side-bar"></div>
-      <p class="title text-aaa">工作台</p>
+      <p class="title text-aaa">{{ route.meta.title }}</p>
+      <el-button class="font_family icon-filter" @click="showDrawer = true">过滤</el-button>
       <!-- <p>></p> -->
       <!-- <p class="subheading">监测方案一</p> -->
     </div>
@@ -23,12 +24,23 @@
       </div>
     </div>
   </div>
+  <el-drawer ref="drawerRef" v-model="showDrawer" title="看板过滤" :with-header="false" size="300">
+    <div class="filterTitle">关键词过滤</div>
+    <!-- <el-checkbox-group v-model="selectKeywordsList" class="listbox">
+      <el-checkbox v-for="v in keywordsList" :key="v" :label="v" border />
+    </el-checkbox-group> -->
+    <div class="footer">
+      <el-button class="font_family icon-filter">保存</el-button>
+    </div>
+  </el-drawer>
 </template>
 
 <script setup lang="ts">
 import useMonitoringData from '@/store/common/monitoringData'
+import { ElDrawer } from 'element-plus'
 import moment from 'moment'
 
+const route = useRoute()
 const monitoringData = useMonitoringData()
 
 const time = ref('')
@@ -55,6 +67,10 @@ const setRingtones = (v: boolean) => {
     : document.documentElement.classList.remove('dark')
   monitoringData.setRingtones(v)
 }
+
+const showDrawer = ref(false)
+
+const drawerRef = ref<InstanceType<typeof ElDrawer>>()
 </script>
 
 <style scoped lang="less">

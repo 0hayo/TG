@@ -6,21 +6,17 @@ const useThemeColors = defineStore(NAMES.USE_STYLE, {
   state: () => {
     return {
       default: {
-        // '--tg-default-bg': '#000',
+        '--tg-default-bg': '#000',
         '--tg-login-bg': '#fff',
-        // '--tg-default-color': '#4a4a4a',
+        '--tg-default-color': '#4a4a4a',
         '--tg-border-color': '#4B4B4B',
-        '--tg-container-color': '#141414'
+        '--tg-container-color': '#141414',
+        '--el-color-primary': '#000'
       },
-      night: {
-        '--tg-default-bg': '#141414',
-        '--tg-default-color': '#fff'
+      theme1: {
+        '--el-color-primary': '#fff'
       },
-      daytime: {
-        '--tg-default-bg': '#FBFBFB',
-        '--tg-default-color': '#4a4a4a'
-      },
-      mode: 'night'
+      mode: 'theme1'
     }
   },
   getters: {},
