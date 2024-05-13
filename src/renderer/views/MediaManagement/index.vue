@@ -1,15 +1,27 @@
 <template>
-  <div class="w-full">
-    <div class="w-200px shrink-0 p-16px">
-      <p class="text-12px line-height-20px">社交软件</p>
-      <div class="mt-8px flex flex-col gap-8px">
-        <p class="media">Telegram</p>
-        <!-- <p>Twitter-x</p>
-        <p>Facebook</p> -->
+  <div class="w-full h-full flex-row">
+    <div class="w-200px p-16px flex-col gap-2 border-r border-b-Neutral-Stroke-Stroke">
+      <div class="self-start">
+        <p class="font-size-12px color-Neutral-Text-Tertiary">媒体</p>
       </div>
+      <nav
+        class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+      >
+        <i class="ri-telegram-fill"></i>Telegram
+      </nav>
+      <nav
+        class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+      >
+        <i class="ri-twitter-fill"></i>Twitter
+      </nav>
+      <nav
+        class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+      >
+        <i class="ri-facebook-box-fill"></i>facebook
+      </nav>
     </div>
-    <div class="w-350px shrink-0 p-16px groups">
-      <p class="text-16px line-height-24px">TG群组查询</p>
+    <div class="w-1rem shrink-0 p-16px groups">
+      <p>TG群组查询</p>
       <el-input v-model="input" placeholder="请在此输入你需要查询的群链接" class="mt-16px">
         <template #prefix>
           <el-icon class="el-input__icon"><search /></el-icon>
@@ -67,18 +79,3 @@ const input = ref('')
 const currentPage = ref(1)
 const pageSize = ref(10)
 </script>
-
-<style scoped lang="scss">
-.media {
-  height: 32px;
-  line-height: 32px;
-  border-radius: 2px;
-  background: #58acf2;
-  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.02);
-  color: #fff;
-}
-.groups {
-  border-left: 1px solid #e4e4e4;
-  border-right: 1px solid #e4e4e4;
-}
-</style>

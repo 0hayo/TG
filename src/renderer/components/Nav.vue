@@ -3,7 +3,7 @@
     <div class="w-12.5rem h-3rem px-1rem line-height-3rem color-Neutral-Text-Primary drag">
       <div class="logo"><p>谛听巡查</p></div>
     </div>
-    <div class="flex py-1rem px-2 color-Neutral-Text-Primary font-size-3.5">
+    <div class="flex py-1rem px-2 color-Neutral-Text-Primary text-sm">
       {{ time }}
     </div>
     <div class="flex-col flex-auto flex-justify-between items-center self-stretch px-4 pb-4">
@@ -13,16 +13,16 @@
           <IconBtn icon-name="add-line" @click="show"></IconBtn>
         </div>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/MonitoringPlan/1' }"
         >
-          <i class="ri-gps-line"></i>方案1
+          <i class="ri-gps-line"></i>五一方案
         </router-link>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/MonitoringPlan/2' }"
         >
-          <i class="ri-gps-line"></i>方案2
+          <i class="ri-gps-line"></i>六一方案
         </router-link>
         <!-- <router-link
           v-for="item in planList"
@@ -53,32 +53,32 @@
           <p class="font-size-12px color-Neutral-Text-Tertiary">系统管理</p>
         </div>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/PlanManagement' }"
         >
           <i class="ri-article-line"></i>方案管理
         </router-link>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/MediaManagement' }"
         >
           <i class="ri-rss-line"></i>媒体管理
         </router-link>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/KeyWords' }"
         >
           <i class="ri-t-box-line"></i>关键词管理
         </router-link>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/UserManagement' }"
         >
           <i class="ri-shield-user-line"></i>用户管理
         </router-link>
 
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/Setting' }"
         >
           <i class="ri-settings-line"></i>设置
