@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineStore } from 'pinia'
 import NAMES from '../types'
+import colors from '@/constants/colors'
 
 const useThemeColors = defineStore(NAMES.USE_STYLE, {
   state: () => {
@@ -15,7 +16,7 @@ const useThemeColors = defineStore(NAMES.USE_STYLE, {
         '--bg-sider-color': '#000000'
       },
       theme1: {
-        '--el-color-primary': '#fff'
+        '--el-color-primary': colors.white
       },
       mode: 'theme1'
     }
