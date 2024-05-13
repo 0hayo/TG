@@ -5,23 +5,19 @@
     <div
       class="flex h-12 items-center justify-between w-36.5rem px-4 border-r border-b-Neutral-Stroke-Stroke"
     >
-      <div class="flex gap-1"><i class="ri-gps-line"></i>五一方案</div>
-      <tgButton icon-name="filter-3-line" text>过滤</tgButton>
+      <h6 class="flex gap-1 text-h6-medium"><i class="ri-gps-line"></i>五一方案</h6>
+      <XButton icon-name="filter-3-line" text>过滤</XButton>
     </div>
     <div class="flex-row flex-auto justify-between items-center">
-      <tgButton class="justify-start" text icon-name="draft-line">舆情上报编辑</tgButton>
+      <XButton class="justify-start" text icon-name="draft-line">舆情上报编辑</XButton>
       <div class="flex-row gap-4">
         <div class="flex">
           <img src="" alt="" />
           <p class="text-Neutral-Text-Primary">我是谁</p>
         </div>
         <div>
-          <el-icon v-if="ringtones" class="cursor-pointer" @click="setRingtones(false)"
-            ><Bell
-          /></el-icon>
-          <el-icon v-else class="cursor-pointer" @click="setRingtones(true)">
-            <MuteNotification />
-          </el-icon>
+          <i v-if="ringtones" class="ri-moon-line cursor-pointer" @click="setRingtones(false)"></i>
+          <i v-else class="ri-sun-line cursor-pointer" @click="setRingtones(true)"></i>
         </div>
         <div class="flex">
           <iconBtn
@@ -62,7 +58,7 @@
 import useMonitoringData from '@/store/common/monitoringData'
 import { ElDrawer } from 'element-plus'
 import moment from 'moment'
-import tgButton from '@/components/tgButton/index.vue'
+import XButton from '@/components/XButton/index.vue'
 import iconBtn from '@/components/iconbtn/index.vue'
 
 const route = useRoute()

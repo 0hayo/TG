@@ -38,20 +38,20 @@
   </div>
 
   <div class="flex justify-end !py-10px !mt-10">
-    <TgButton
+    <XButton
       icon-name="add"
       class="w-25"
       :disabled="keywordList.length <= 0"
       @handle-btn="addKeyword"
     >
       完成
-    </TgButton>
+    </XButton>
   </div>
 </template>
 
 <script setup lang="ts">
 import { addKeywords } from '@/apis'
-import TgButton from '@/components/tgButton/index.vue'
+import XButton from '@/components/XButton/index.vue'
 import { SUCCESS_CODE } from '@/constants'
 import { getAllGroupKeyword } from '@/utils'
 

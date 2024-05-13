@@ -1,7 +1,7 @@
 <template>
   <div class="h-full flex flex-col gap-10px">
-    <TgButton class="w-full" @handle-btn="emit('handleBtn')"
-      ><el-icon><Plus /></el-icon>添加群</TgButton
+    <XButton class="w-full" @handle-btn="emit('handleBtn')"
+      ><el-icon><Plus /></el-icon>添加群</XButton
     >
     <div v-loading="groupLoading" class="grow h-0 overflow-y-auto">
       <Checkbox
@@ -29,7 +29,7 @@
 import { queryAllGroup } from '@/apis'
 import { GroupRes } from '@/apis/types'
 import Checkbox from '@/components/checkbox/index.vue'
-import TgButton from '@/components/tgButton/index.vue'
+import XButton from '@/components/XButton/index.vue'
 import { SUCCESS_CODE } from '@/constants'
 import { CheckboxValueType } from 'element-plus'
 

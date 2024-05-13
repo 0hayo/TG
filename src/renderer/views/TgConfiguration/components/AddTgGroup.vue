@@ -38,15 +38,15 @@
   </div>
 
   <div class="flex justify-end !py-10px !mt-10">
-    <TgButton icon-name="add" class="w-25" :disabled="chatUrls.length <= 0" @handle-btn="handleBtn">
+    <XButton icon-name="add" class="w-25" :disabled="chatUrls.length <= 0" @handle-btn="handleBtn">
       完成
-    </TgButton>
+    </XButton>
   </div>
 </template>
 
 <script setup lang="ts">
 import { createChannel } from '@/apis'
-import TgButton from '@/components/tgButton/index.vue'
+import XButton from '@/components/XButton/index.vue'
 import { SUCCESS_CODE } from '@/constants'
 import { getAllGroupKeyword } from '@/utils'
 

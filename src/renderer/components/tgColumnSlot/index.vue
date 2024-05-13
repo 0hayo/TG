@@ -6,16 +6,16 @@
     </div>
     <div class="flex justify-center items-center !px-16px footer">
       <slot name="footer">
-        <TgButton @handle-btn="emit('handleBtn')">
+        <XButton @handle-btn="emit('handleBtn')">
           <el-icon><Delete /></el-icon>{{ btnName }}
-        </TgButton>
+        </XButton>
       </slot>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import TgButton from '@/components/tgButton/index.vue'
+import XButton from '@/components/XButton/index.vue'
 
 withDefaults(
   defineProps<{

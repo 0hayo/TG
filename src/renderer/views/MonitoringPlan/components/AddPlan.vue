@@ -31,14 +31,14 @@
     </el-form>
   </div>
   <div class="flex justify-center !py-10px !mt-10">
-    <TgButton class="w-25" type="info" @click="emits('close')"> 取消 </TgButton>
-    <TgButton class="w-25" type="primary" @click="save(ruleFormRef)"> 完成 </TgButton>
+    <XButton class="w-25" type="info" @click="emits('close')"> 取消 </XButton>
+    <XButton class="w-25" type="primary" @click="save(ruleFormRef)"> 完成 </XButton>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ElMessage, FormRules, type FormProps, FormInstance } from 'element-plus'
-import TgButton from '@/components/tgButton/index.vue'
+import XButton from '@/components/XButton/index.vue'
 import { createPlan } from '@/apis'
 import { CreatePlanReq } from '@/apis/types'
 import mitts from '@/utils/mitts'

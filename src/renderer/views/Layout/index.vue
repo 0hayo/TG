@@ -1,7 +1,7 @@
 <template>
-  <div class="flex-row w-full h-100vh overflow-hidden bg-Layout-cardbg">
+  <div class="flex-row w-full h-100vh overflow-hidden bg-Layout-Card">
     <Nav></Nav>
-    <div class="flex flex-1 flex-col w-full h-full">
+    <div class="w-full" style="height: calc(100% - 3rem)">
       <Header></Header>
       <router-view v-slot="{ Component }">
         <keep-alive>

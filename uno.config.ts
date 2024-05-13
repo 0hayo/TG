@@ -16,8 +16,10 @@ export default defineConfig({
     }),
     colors: {
       Layout: {
+        white: colors.layout.white,
+        black: colors.layout.black,
         sidebar: colors.layout.sidebar,
-        cardbg: colors.layout.cardbg
+        Card: colors.layout.Card
       },
       Neutral: {
         Text: {
@@ -47,6 +49,122 @@ export default defineConfig({
         },
         Effects: {
           Effects: colors.Neutral.Effects.Effects
+        }
+      },
+      Primary: {
+        Text: {
+          Primary: colors.Primary.Text.Primary,
+          PrimaryDebit: colors.Primary.Text.PrimaryDebit,
+          Secondary: colors.Primary.Text.Secondary,
+          Tertiary: colors.Primary.Text.Tertiary,
+          Quaternary: colors.Primary.Text.Quaternary,
+          Placeholder: colors.Primary.Text.Placeholder,
+          Description: colors.Primary.Text.Description,
+          TextHover: colors.Primary.Text.TextHover,
+          TextActive: colors.Primary.Text.TextActive,
+          TextDisabled: colors.Primary.Text.TextDisabled
+        },
+        Fill: {
+          Fill: colors.Primary.Fill.Fill,
+          FillHover: colors.Primary.Fill.FillHover,
+          FillActive: colors.Primary.Fill.FillActive,
+          FillDisabled: colors.Primary.Fill.FillDisabled
+        },
+        Stroke: {
+          Stroke: colors.Primary.Stroke.Stroke,
+          StrokeHover: colors.Primary.Stroke.StrokeHover,
+          StrokeActive: colors.Primary.Stroke.StrokeActive,
+          StrokeDisabled: colors.Primary.Stroke.StrokeDisabled
+        },
+        Effects: {
+          Effects: colors.Primary.Effects.Effects
+        }
+      },
+      Success: {
+        Text: {
+          Primary: colors.Success.Text.Primary,
+          PrimaryDebit: colors.Success.Text.PrimaryDebit,
+          Secondary: colors.Success.Text.Secondary,
+          Tertiary: colors.Success.Text.Tertiary,
+          Quaternary: colors.Success.Text.Quaternary,
+          Placeholder: colors.Success.Text.Placeholder,
+          Description: colors.Success.Text.Description,
+          TextHover: colors.Success.Text.TextHover,
+          TextActive: colors.Success.Text.TextActive,
+          TextDisabled: colors.Success.Text.TextDisabled
+        },
+        Fill: {
+          Fill: colors.Success.Fill.Fill,
+          FillHover: colors.Success.Fill.FillHover,
+          FillActive: colors.Success.Fill.FillActive,
+          FillDisabled: colors.Success.Fill.FillDisabled
+        },
+        Stroke: {
+          Stroke: colors.Success.Stroke.Stroke,
+          StrokeHover: colors.Success.Stroke.StrokeHover,
+          StrokeActive: colors.Success.Stroke.StrokeActive,
+          StrokeDisabled: colors.Success.Stroke.StrokeDisabled
+        },
+        Effects: {
+          Effects: colors.Success.Effects.Effects
+        }
+      },
+      Warning: {
+        Text: {
+          Primary: colors.Warning.Text.Primary,
+          PrimaryDebit: colors.Warning.Text.PrimaryDebit,
+          Secondary: colors.Warning.Text.Secondary,
+          Tertiary: colors.Warning.Text.Tertiary,
+          Quaternary: colors.Warning.Text.Quaternary,
+          Placeholder: colors.Warning.Text.Placeholder,
+          Description: colors.Warning.Text.Description,
+          TextHover: colors.Warning.Text.TextHover,
+          TextActive: colors.Warning.Text.TextActive,
+          TextDisabled: colors.Warning.Text.TextDisabled
+        },
+        Fill: {
+          Fill: colors.Warning.Fill.Fill,
+          FillHover: colors.Warning.Fill.FillHover,
+          FillActive: colors.Warning.Fill.FillActive,
+          FillDisabled: colors.Warning.Fill.FillDisabled
+        },
+        Stroke: {
+          Stroke: colors.Warning.Stroke.Stroke,
+          StrokeHover: colors.Warning.Stroke.StrokeHover,
+          StrokeActive: colors.Warning.Stroke.StrokeActive,
+          StrokeDisabled: colors.Warning.Stroke.StrokeDisabled
+        },
+        Effects: {
+          Effects: colors.Warning.Effects.Effects
+        }
+      },
+      Danger: {
+        Text: {
+          Primary: colors.Danger.Text.Primary,
+          PrimaryDebit: colors.Danger.Text.PrimaryDebit,
+          Secondary: colors.Danger.Text.Secondary,
+          Tertiary: colors.Danger.Text.Tertiary,
+          Quaternary: colors.Danger.Text.Quaternary,
+          Placeholder: colors.Danger.Text.Placeholder,
+          Description: colors.Danger.Text.Description,
+          TextHover: colors.Danger.Text.TextHover,
+          TextActive: colors.Danger.Text.TextActive,
+          TextDisabled: colors.Danger.Text.TextDisabled
+        },
+        Fill: {
+          Fill: colors.Danger.Fill.Fill,
+          FillHover: colors.Danger.Fill.FillHover,
+          FillActive: colors.Danger.Fill.FillActive,
+          FillDisabled: colors.Danger.Fill.FillDisabled
+        },
+        Stroke: {
+          Stroke: colors.Danger.Stroke.Stroke,
+          StrokeHover: colors.Danger.Stroke.StrokeHover,
+          StrokeActive: colors.Danger.Stroke.StrokeActive,
+          StrokeDisabled: colors.Danger.Stroke.StrokeDisabled
+        },
+        Effects: {
+          Effects: colors.Danger.Effects.Effects
         }
       }
     },
@@ -106,5 +224,6 @@ export default defineConfig({
     }),
     presetTypography()
   ],
+
   transformers: [transformerAttributifyJsx()]
 })

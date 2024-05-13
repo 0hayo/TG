@@ -14,12 +14,12 @@
     <TgColumSlot class="flex-3/5" title="监测关键词">
       <KeyWordTable ref="keywordsRef" :chat-id="chatId" :select-group="selectGroup" />
       <template #footer>
-        <TgButton class="w-full" @handle-btn="addKeyWord">
+        <XButton class="w-full" @handle-btn="addKeyWord">
           <el-icon><Plus /></el-icon> 为所选栏目添加监测关键词
-        </TgButton>
-        <TgButton class="w-full" @handle-btn="delKeyWords">
+        </XButton>
+        <XButton class="w-full" @handle-btn="delKeyWords">
           <el-icon><Delete /></el-icon> 删除所选栏目关键词
-        </TgButton>
+        </XButton>
       </template>
     </TgColumSlot>
   </div>
@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { ADD_DIALOG } from '@/components/dialog'
-import TgButton from '@/components/tgButton/index.vue'
+import XButton from '@/components/XButton/index.vue'
 import TgColumSlot from '@/components/tgColumnSlot/index.vue'
 import AddTgAccount from './components/AddTgAccount.vue'
 import TgGroup from './components/tgGroup.vue'

@@ -2,8 +2,10 @@ import colors from './colors'
 
 export default {
   layout: {
+    white: colors.white,
+    black: colors.black,
     sidebar: colors.neutral[200],
-    cardbg: colors.neutral[50]
+    Card: colors.neutral[50]
   },
   Neutral: {
     Text: {

@@ -1,8 +1,8 @@
 <template>
   <div class="h-full flex flex-col gap-10px">
-    <TgButton class="w-full" @handle-btn="emit('handleBtn')"
+    <XButton class="w-full" @handle-btn="emit('handleBtn')"
       ><el-icon><Plus /></el-icon> 添加TG账户
-    </TgButton>
+    </XButton>
     <div v-loading="userLoading" class="grow h-0 overflow-y-auto">
       <div
         v-for="item in userList"
@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { queryAllUser } from '@/apis'
 import { UserRes } from '@/apis/types'
-import TgButton from '@/components/tgButton/index.vue'
+import XButton from '@/components/XButton/index.vue'
 import { SUCCESS_CODE } from '@/constants'
 
 const props = defineProps<{

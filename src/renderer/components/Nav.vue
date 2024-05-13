@@ -1,25 +1,25 @@
 <template>
   <div class="flex-col bg-Layout-sidebar">
-    <div class="w-12.5rem h-3rem px-1rem line-height-3rem color-Neutral-Text-Primary drag">
-      <div class="logo"><p>谛听巡查</p></div>
+    <div class="w-12.5rem h-12 px-4 line-height-3rem color-Neutral-Text-Primary drag">
+      <div class="logo"><p class="text-h6-medium">谛听巡查</p></div>
     </div>
-    <div class="flex py-1rem px-2 color-Neutral-Text-Primary text-sm">
+    <div class="flex items-center h-9 px-4 color-Neutral-Text-Primary text-sm-medium">
       {{ time }}
     </div>
     <div class="flex-col flex-auto flex-justify-between items-center self-stretch px-4 pb-4">
       <div class="flex-col items-center self-stretch gap-2">
-        <div class="flex-row flex-justify-between self-stretch">
-          <p class="font-size-12px color-Neutral-Text-Tertiary">方案</p>
+        <div class="flex-row flex-justify-between items-center self-stretch">
+          <p class="text-sm-medium color-Neutral-Text-Tertiary">方案</p>
           <IconBtn icon-name="add-line" @click="show"></IconBtn>
         </div>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/MonitoringPlan/1' }"
         >
           <i class="ri-gps-line"></i>五一方案
         </router-link>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/MonitoringPlan/2' }"
         >
           <i class="ri-gps-line"></i>六一方案
@@ -49,36 +49,36 @@
         </router-link> -->
       </div>
       <div class="flex-col items-center self-stretch gap-2">
-        <div class="self-start">
-          <p class="font-size-12px color-Neutral-Text-Tertiary">系统管理</p>
+        <div class="self-start h-6">
+          <p class="text-sm-medium color-Neutral-Text-Tertiary">系统管理</p>
         </div>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/PlanManagement' }"
         >
           <i class="ri-article-line"></i>方案管理
         </router-link>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/MediaManagement' }"
         >
           <i class="ri-rss-line"></i>媒体管理
         </router-link>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/KeyWords' }"
         >
           <i class="ri-t-box-line"></i>关键词管理
         </router-link>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/UserManagement' }"
         >
           <i class="ri-shield-user-line"></i>用户管理
         </router-link>
 
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/Setting' }"
         >
           <i class="ri-settings-line"></i>设置
