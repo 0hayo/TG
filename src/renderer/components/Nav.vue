@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-col bg-layout-sidebar">
+  <div class="flex-col bg-Layout-sidebar">
     <div class="w-12.5rem h-3rem px-1rem line-height-3rem color-Neutral-Text-Primary drag">
       <div class="logo"><p>谛听巡查</p></div>
     </div>
@@ -10,21 +10,19 @@
       <div class="flex-col items-center self-stretch gap-2">
         <div class="flex-row flex-justify-between self-stretch">
           <p class="font-size-12px color-Neutral-Text-Tertiary">方案</p>
-          <IconBtn @click="show"
-            ><el-icon><Plus /></el-icon
-          ></IconBtn>
+          <IconBtn icon-name="add-line" @click="show"></IconBtn>
         </div>
         <router-link
           class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/MonitoringPlan/1' }"
         >
-          <el-icon><Plus /></el-icon>方案1
+          <i class="ri-gps-line"></i>方案1
         </router-link>
         <router-link
           class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/MonitoringPlan/2' }"
         >
-          方案2
+          <i class="ri-gps-line"></i>方案2
         </router-link>
         <!-- <router-link
           v-for="item in planList"
@@ -56,38 +54,34 @@
         </div>
         <router-link
           class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
-          :to="{ path: '/MediaManagement' }"
-        >
-          <el-icon><Plus /></el-icon>
-          媒体管理
-        </router-link>
-        <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
-          :to="{ path: '/UserManagement' }"
-        >
-          <el-icon><Plus /></el-icon>
-          用户管理
-        </router-link>
-        <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/PlanManagement' }"
         >
-          <el-icon><Plus /></el-icon>
-          方案管理
+          <i class="ri-article-line"></i>方案管理
+        </router-link>
+        <router-link
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          :to="{ path: '/MediaManagement' }"
+        >
+          <i class="ri-rss-line"></i>媒体管理
         </router-link>
         <router-link
           class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/KeyWords' }"
         >
-          <el-icon><Plus /></el-icon>
-          关键词管理
+          <i class="ri-t-box-line"></i>关键词管理
         </router-link>
+        <router-link
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          :to="{ path: '/UserManagement' }"
+        >
+          <i class="ri-shield-user-line"></i>用户管理
+        </router-link>
+
         <router-link
           class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/Setting' }"
         >
-          <el-icon><Plus /></el-icon>
-          设置
+          <i class="ri-settings-line"></i>设置
         </router-link>
         <!-- <p>数据库</p>
         <router-link class="navitem icon font_family icon-add" :to="{ path: '/DataCenter' }">
@@ -99,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import IconBtn from '/components/iconbtn/index.vue'
+import IconBtn from '@/components/iconbtn/index.vue'
 import { ADD_DIALOG } from '@/components/dialog'
 import AddPlan from '@/views/MonitoringPlan/components/AddPlan.vue'
 import { delPlan, queryAllPlan } from '@/apis'

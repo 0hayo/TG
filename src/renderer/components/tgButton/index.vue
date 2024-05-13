@@ -4,6 +4,7 @@
     :disabled="disabled"
     @click="$emit('click', $event)"
   >
+    <i v-if="iconName" :class="`ri-${iconName}`"></i>
     <slot></slot>
   </button>
 </template>
@@ -14,6 +15,10 @@ import { defineComponent, PropType } from 'vue'
 export default defineComponent({
   name: 'TgButton',
   props: {
+    iconName: {
+      type: String,
+      default: ''
+    },
     type: {
       type: String as PropType<'default' | 'primary' | 'Success' | 'Warning' | 'Danger'>,
       default: 'default'

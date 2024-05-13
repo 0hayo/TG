@@ -15,7 +15,7 @@ export default defineConfig({
       auto: 'auto'
     }),
     colors: {
-      layout: {
+      Layout: {
         sidebar: colors.layout.sidebar,
         cardbg: colors.layout.cardbg
       },

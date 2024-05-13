@@ -1,5 +1,6 @@
 import '@/common/styles/index.less'
 import '@/assets/icon/iconfont/iconfont.css'
+import 'remixicon/fonts/remixicon.css'
 import 'element-plus/dist/index.css'
 import 'uno.css'
 import router from '@/router'

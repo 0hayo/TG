@@ -1,17 +1,12 @@
 <template>
   <div
-    class="drag h-12 flex justify-between items-center pr-8px border border-b-Neutral-Stroke-Stroke"
+    class="drag h-12 flex justify-between items-center pr-8px border-b border-b-Neutral-Stroke-Stroke"
   >
     <div
       class="flex h-12 items-center justify-between w-36.5rem px-4 border-r border-b-Neutral-Stroke-Stroke"
     >
-      <div class="flex">
-        <p>sss</p>
-        五一方案
-      </div>
-      <tgButton text>
-        <el-icon><Plus /></el-icon>过滤</tgButton
-      >
+      <div class="flex gap-1"><i class="ri-gps-line"></i>五一方案</div>
+      <tgButton icon-name="filter-3-line" text>过滤</tgButton>
     </div>
     <div class="flex-row gap-4">
       <div class="flex">

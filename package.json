@@ -38,6 +38,7 @@
     "html-docx-js-typescript": "^0.1.5",
     "moment": "^2.29.4",
     "pinia-plugin-persistedstate": "^3.2.0",
+    "remixicon": "^4.2.0",
     "socket.io-client": "^4.7.2",
     "uuid": "^9.0.1",
     "vue-router": "^4.2.5",
