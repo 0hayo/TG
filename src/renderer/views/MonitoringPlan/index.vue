@@ -3,7 +3,7 @@
     <div class="img"></div>
     <div>暂无无监测方案，<a @click="show"> 请点我添加</a>监测方案</div>
   </div>
-  <div v-else class="flex layout">
+  <div v-else class="flex-row flex-1">
     <!-- <DetailListVue
       v-for="i in planCount"
       :ref="(ref) => detailListRef && (detailListRef[i] = ref)"
@@ -11,14 +11,14 @@
       :count="i"
       @save="save"
     /> -->
-    <div class="w-480px bg-[var(--tg-default-bg)] shrink-0"></div>
+    <div class="w-36.5rem border-r border-b-Neutral-Stroke-Stroke"></div>
     <div class="flex-1">
       <webview
         class="w-full h-100%"
         src="https://web.telegram.org/a/#?tgaddr=tg%3A%2F%2Fresolve%3Fdomain%3DTGcsdome&post=30"
       ></webview>
     </div>
-    <div class="w-480px bg-[var(--tg-default-bg)] shrink-0">
+    <div class="w-30rem">
       <div style="border: 1px solid #ccc">
         <Toolbar
           style="border-bottom: 1px solid #ccc"
@@ -146,31 +146,4 @@ const show = () => {
 // }
 </script>
 
-<style scoped lang="less">
-.layout {
-  flex: 1;
-  display: flex;
-  height: calc(100vh - 64px);
-  overflow-y: hidden;
-  overflow-x: auto;
-}
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .img {
-    width: 800px;
-    height: 600px;
-    background: url(../../assets/img/kong.png) no-repeat center;
-  }
-
-  div {
-    font-weight: normal !important;
-  }
-  a {
-    color: @primary;
-    display: inline-block;
-  }
-}
-</style>
+<style scoped lang="less"></style>

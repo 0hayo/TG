@@ -11,7 +11,8 @@ const useThemeColors = defineStore(NAMES.USE_STYLE, {
         '--tg-default-color': '#4a4a4a',
         '--tg-border-color': '#4B4B4B',
         '--tg-container-color': '#141414',
-        '--el-color-primary': '#000'
+        '--el-color-primary': '#000',
+        '--bg-sider-color': '#000000'
       },
       theme1: {
         '--el-color-primary': '#fff'

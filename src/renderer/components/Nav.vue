@@ -1,22 +1,27 @@
 <template>
-  <div class="siderbar">
-    <div class="logobox">
-      <div class="logo"><p>TG信息监测平台</p></div>
+  <div class="flex-col bg-layout-sidebar">
+    <div class="w-12.5rem h-3rem px-1rem line-height-3rem color-Neutral-Text-Primary drag">
+      <div class="logo"><p>谛听巡查</p></div>
     </div>
-    <div class="navbox">
-      <div class="box-1 box">
-        <p>工作台</p>
-        <div class="navitem" @click="show">
-          <el-icon><Plus /></el-icon>新增监测方案
+    <div class="flex py-1rem px-2 color-Neutral-Text-Primary font-size-3.5">
+      {{ time }}
+    </div>
+    <div class="flex-col flex-auto flex-justify-between items-center self-stretch px-4 pb-4">
+      <div class="flex-col items-center self-stretch gap-2">
+        <div class="flex-row flex-justify-between self-stretch">
+          <p class="font-size-12px color-Neutral-Text-Tertiary">方案</p>
+          <IconBtn @click="show"
+            ><el-icon><Plus /></el-icon
+          ></IconBtn>
         </div>
         <router-link
-          class="navitem icon font_family icon-telegram"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/MonitoringPlan/1' }"
         >
-          方案1
+          <el-icon><Plus /></el-icon>方案1
         </router-link>
         <router-link
-          class="navitem icon font_family icon-telegram"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/MonitoringPlan/2' }"
         >
           方案2
@@ -45,30 +50,43 @@
           </div>
         </router-link> -->
       </div>
-      <div class="box-2 box">
-        <p>系统管理</p>
+      <div class="flex-col items-center self-stretch gap-2">
+        <div class="self-start">
+          <p class="font-size-12px color-Neutral-Text-Tertiary">系统管理</p>
+        </div>
         <router-link
-          class="navitem icon font_family icon-telegram"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/MediaManagement' }"
         >
+          <el-icon><Plus /></el-icon>
           媒体管理
         </router-link>
         <router-link
-          class="navitem icon font_family icon-telegram"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/UserManagement' }"
         >
+          <el-icon><Plus /></el-icon>
           用户管理
         </router-link>
         <router-link
-          class="navitem icon font_family icon-telegram"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
           :to="{ path: '/PlanManagement' }"
         >
+          <el-icon><Plus /></el-icon>
           方案管理
         </router-link>
-        <router-link class="navitem icon font_family icon-telegram" :to="{ path: '/KeyWords' }">
+        <router-link
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          :to="{ path: '/KeyWords' }"
+        >
+          <el-icon><Plus /></el-icon>
           关键词管理
         </router-link>
-        <router-link class="navitem icon font_family icon-telegram" :to="{ path: '/Setting' }">
+        <router-link
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 font-size-3.5 hover:bg-Neutral-Fill-PrimaryDebitHover"
+          :to="{ path: '/Setting' }"
+        >
+          <el-icon><Plus /></el-icon>
           设置
         </router-link>
         <!-- <p>数据库</p>
@@ -81,6 +99,7 @@
 </template>
 
 <script setup lang="ts">
+import IconBtn from '/components/iconbtn/index.vue'
 import { ADD_DIALOG } from '@/components/dialog'
 import AddPlan from '@/views/MonitoringPlan/components/AddPlan.vue'
 import { delPlan, queryAllPlan } from '@/apis'
@@ -88,6 +107,7 @@ import { PlansRes } from '@/apis/types'
 import mitts from '@/utils/mitts'
 import usePlanStore from '@/store/common/usePlan'
 import { SUCCESS_CODE } from '@/constants'
+import moment from 'moment'
 
 const usePlan = usePlanStore()
 
@@ -147,80 +167,30 @@ const deletePlan = async (id: number) => {
   })
 }
 
-const handlePlan = (item: PlansRes) => {
-  usePlan.setPlan(item)
-}
+// const handlePlan = (item: PlansRes) => {
+//   usePlan.setPlan(item)
+// }
+
+const time = ref('')
+let timer
+
+onMounted(() => {
+  timer = setInterval(() => {
+    time.value = moment().format('YYYY-MM-DD h:mm:ss')
+  }, 1000)
+})
+
+onUnmounted(() => {
+  clearInterval(timer)
+})
 </script>
 
 <style scoped lang="less">
-.siderbar {
-  display: flex;
-  flex-direction: column;
-  width: 240px;
-  min-width: 240px;
-  border-right: 1px solid @border-hr;
-  .logobox {
-    height: 64px;
-    padding: 16px;
-    .logo {
-      width: 204px;
-      height: 32px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 16px;
-      border: 1px solid #1f2023;
-      box-shadow: 2px 4px 6px 0px rgba(0, 0, 0, 0.3) inset;
-      font-size: 16px;
-      font-family: 500;
-      p {
-        background: linear-gradient(270deg, #4ea7fc 0%, #fff 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-    }
-  }
-  .navbox {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
-
-    p {
-      font-size: 12px;
-      font-weight: 500;
-      color: @Secondary-text;
-    }
-    .box {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .box-2 {
-      margin-top: auto;
-      padding-bottom: 48px;
-    }
-  }
-  .navitem {
-    color: @primary-text;
-    cursor: pointer;
-    display: flex;
-    padding: 5px 8px;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 500;
-
-    &:hover {
-      border-radius: 4px;
-      background: @nav-hover;
-    }
-    &.active {
-      // color: red;
-      border-radius: 4px;
-      background: @nav-hover;
-    }
-  }
+.router-link-exact-active {
+  background: var(--Primary-Fill-FillActive, #3b82f6);
+  color: var(--Neutral-Text-PrimaryDebit, #fafafa);
+}
+.drag {
+  -webkit-app-region: drag;
 }
 </style>

@@ -20,7 +20,7 @@
         class="h-58px border-solid border-1px border-[var(--tg-border-color)] rounded-4px mt-16px flex items-center justify-between px-16px"
       >
         <div>
-          <p class="text-14px line-height-22px">方子舟读者交流群</p>
+          <p class="text-3 line-height-22px">方子舟读者交流群</p>
           <p class="text-12px text-#A6A6A6 line-height-20px">https://t.me/fangshimin_tg</p>
         </div>
         <el-button :icon="Plus">启用</el-button>
