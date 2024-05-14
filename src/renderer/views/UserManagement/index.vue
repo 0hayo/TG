@@ -10,7 +10,7 @@
         <i class="ri-user-line"></i>管理员
       </nav>
       <div class="self-start">
-        <p class="font-size-12px color-Neutral-Text-Tertiary">单位</p>
+        <p class="font-size-12px color-Neutral-Text-Tertiary">用户单位</p>
       </div>
       <nav
         class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"

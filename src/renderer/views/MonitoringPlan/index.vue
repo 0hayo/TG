@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$route.params.planCount == '0'" class="content">
+  <div v-if="$route.params.planCount == '0'" class="w-full h-full">
     <div class="img"></div>
     <div>暂无无监测方案，<a @click="show"> 请点我添加</a>监测方案</div>
   </div>
@@ -14,7 +14,7 @@
     <div class="w-36.5rem border-r border-b-Neutral-Stroke-Stroke"></div>
     <div class="flex-1">
       <webview
-        class="w-full h-100%"
+        class="w-full h-full"
         src="https://web.telegram.org/a/#?tgaddr=tg%3A%2F%2Fresolve%3Fdomain%3DTGcsdome&post=30"
       ></webview>
     </div>

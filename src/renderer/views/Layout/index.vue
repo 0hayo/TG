@@ -1,9 +1,9 @@
 <template>
   <div class="flex-row w-full h-100vh overflow-hidden bg-Layout-Card">
     <Nav></Nav>
-    <div class="w-full" style="height: calc(100% - 3rem)">
+    <div class="w-full">
       <Header></Header>
-      <router-view v-slot="{ Component }">
+      <router-view v-slot="{ Component }" style="height: calc(100% - 3rem)">
         <keep-alive>
           <component :is="Component" :key="$route.fullPath" />
         </keep-alive>
