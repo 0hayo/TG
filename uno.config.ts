@@ -179,7 +179,7 @@ export default defineConfig({
       h6: ['1rem', { lineHeight: '1.5rem' }],
       h5: ['1.25rem', { lineHeight: '1.75rem' }],
       h4: ['1.5rem', { lineHeight: '2rem' }],
-      h3: ['1.75', { lineHeight: '2.25rem' }],
+      h3: ['1.75rem', { lineHeight: '2.25rem' }],
       h2: ['2rem', { lineHeight: '2.5rem' }],
       h1: ['8rem', { lineHeight: '8rem' }]
     },

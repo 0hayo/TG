@@ -29,7 +29,7 @@
         <template #append><i class="ri-corner-down-left-line"></i></template>
       </el-input>
       <h6 class="inline-flex items-center text-h6-medium">查询结果</h6>
-      <div class="scroll-smooth overflow-y-auto">
+      <div class="scroll-smooth overflow-y-auto grid gap-3">
         <LinkCard></LinkCard>
         <LinkCard></LinkCard>
         <LinkCard></LinkCard>

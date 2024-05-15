@@ -27,7 +27,7 @@
             @click="setWindowSize('min')"
           ></iconBtn>
           <iconBtn
-            icon-name="checkbox-blank-line"
+            icon-name="aspect-ratio-line"
             type="WindowsControls"
             size="lg"
             @click="setWindowSize('max')"

@@ -6,7 +6,7 @@
       typeClass
     ]"
   >
-    <i v-if="iconName" :class="`ri-${iconName}`"></i>
+    <i v-if="iconName" :class="[`ri-${iconName}`, icon]"></i>
   </div>
 </template>
 
@@ -16,6 +16,10 @@ import { defineComponent, PropType } from 'vue'
 export default defineComponent({
   name: 'IconBtn',
   props: {
+    iconClass: {
+      type: String,
+      default: ''
+    },
     iconName: {
       type: String,
       default: ''
@@ -30,6 +34,9 @@ export default defineComponent({
     }
   },
   computed: {
+    icon(): string {
+      return this.iconClass
+    },
     sizeClass(): string {
       let baseSize = ''
       switch (this.size) {

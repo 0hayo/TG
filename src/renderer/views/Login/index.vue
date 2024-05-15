@@ -1,26 +1,50 @@
 <template>
-  <div
-    class="bg-[var(--tg-default-bg)] h-full flex justify-center items-center color-[var(--tg-default-color)]"
-  >
+  <div class="flex justify-center items-center p-20">
     <div
-      class="login-box w-800px h-450px bg-[var(--tg-login-bg)] flex justify-center items-center gap-150px"
+      class="w-200 h-112.5 bg-Layout-Card border-rd-4 border-2 border-Layout-white flex-col justify-center shadow-2xl"
     >
-      <div class="w-220px">
-        <h2 class="text-24px line-height-32px">嗨！欢迎您使用谛听巡查系统</h2>
-        <p class="text-3 line-height-22px mt-32px!">用户名</p>
-        <el-input placeholder="用户名"></el-input>
-        <p class="text-3 line-height-22px mt-24px!">密码</p>
-        <el-input placeholder="密码"></el-input>
-
-        <el-button class="w-full mt-32px!" type="primary" @click="handle">登录</el-button>
+      <div class="self-end flex p-3">
+        <iconBtn
+          icon-name="subtract-line"
+          type="WindowsControls"
+          size="lg"
+          @click="setWindowSize('min')"
+        ></iconBtn>
+        <iconBtn
+          icon-name="aspect-ratio-line"
+          type="WindowsControls"
+          size="lg"
+          @click="setWindowSize('max')"
+        ></iconBtn>
+        <iconBtn
+          icon-name="close-line"
+          type="WindowsControls"
+          size="lg"
+          @click="setWindowSize('close')"
+        ></iconBtn>
       </div>
-      <div class="w-192px h-192px login-img"></div>
+      <div class="flex flex-1">
+        <div class="w-63 p-4 ml-20 grid gap-8">
+          <h2 class="text-h4-medium">嗨！欢迎您使用谛听巡查系统</h2>
+          <div>
+            <p class="text-base-regular">用户名</p>
+            <el-input placeholder="用户名"></el-input>
+            <p class="text-base-regular">密码</p>
+            <el-input placeholder="密码"></el-input>
+          </div>
+
+          <XButton class="w-full" type="Primary" @click="handle">登 录</XButton>
+        </div>
+        <div class="w-192px h-192px login-img"></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import useUser from '@/store/common/useUser'
+import iconBtn from '@/components/iconbtn/index.vue'
+import XButton from '@/components/XButton/index.vue'
 
 const router = useRouter()
 
@@ -28,19 +52,13 @@ const handle = () => {
   useUser().setUser('1')
   router.push('/MonitoringPlan/0')
 }
+
+const setWindowSize = (type: string) => {
+  window.electronApi.setWindowSize(type)
+}
 </script>
 
 <style scoped lang="less">
-.login-box {
-  border-radius: 16px;
-  border: 2px solid var(--Colors-Neutral-Border-colorSplit, #fff);
-  background: var(--Colors-Neutral-Bg-colorBgLayout, #fbfbfb);
-  /* boxShadowSecondary */
-  box-shadow:
-    0px 6px 16px 0px rgba(0, 0, 0, 0.08),
-    0px 3px 6px -4px rgba(0, 0, 0, 0.12),
-    0px 9px 28px 8px rgba(0, 0, 0, 0.05);
-}
 .login-img {
   background: url('../../assets/img/LOGO.png') no-repeat;
   background-size: 100% 100%;
