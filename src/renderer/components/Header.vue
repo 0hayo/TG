@@ -3,7 +3,7 @@
     class="h-12 flex justify-between items-center pr-8px border-b border-b-Neutral-Stroke-Stroke"
   >
     <div
-      class="flex h-12 items-center justify-between w-36.5% px-4 border-r border-b-Neutral-Stroke-Stroke"
+      class="flex h-12 items-center justify-between w-120 px-4 border-r border-b-Neutral-Stroke-Stroke"
     >
       <h6 class="flex gap-1 text-h6-medium"><i class="ri-gps-line"></i>五一方案</h6>
       <div class="drag flex-1 h-full"></div>

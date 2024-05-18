@@ -1,33 +1,36 @@
 <template>
-  <div class="list">
+  <div class="h-full scroll-smooth overflow-y-auto grid px-4 py-2 gap-2">
     <!-- <transition-group name="el-zoom-in-center"> -->
     <div
       v-for="item in monitoringData"
       :key="item.sender_id"
-      class="descriptions"
+      :class="[
+        'flex-col gap-1 px-4 py-2 rounded text-base-regular hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit hover:shadow-2xl cursor-pointer'
+      ]"
       @click="emits('handleMsg', item)"
     >
-      <div class="descriptions__cell_group">
-        <div class="descriptions__cell">
-          <div class="descriptions_label">命中词</div>
-          <div class="descriptions_content">{{ item.hit_keyword }}</div>
+      <div class="flex justify-between">
+        <div class="flex-inline gap-2">
+          <div class="">命中词</div>
+          <div class="">{{ item.hit_keyword }}</div>
         </div>
-        <div class="time">{{ item.message_time }}</div>
+        <div class="">{{ item.message_time }}</div>
       </div>
-      <div class="descriptions__cell">
+      <!-- <div class="descriptions__cell">
         <div class="descriptions_label">群名</div>
         <div class="descriptions_content">{{ item.channel_name }}</div>
-      </div>
-      <div class="descriptions__cell">
-        <div class="descriptions_label">发言人</div>
-        <div class="descriptions_content">{{ item.sender_name }}</div>
+      </div> -->
+      <div class="flex-inline gap-2">
+        <div class="">发言人</div>
+        <div class="">{{ item.sender_name }}</div>
       </div>
       <hr />
-      <div class="descriptions__cell column">
-        <div class="descriptions_label">言论</div>
-        <div class="descriptions_content box" v-html="item.message_text"></div>
+      <div class="flex">
+        <div class="h-20 text-clip overflow-hidden" v-html="item.message_text"></div>
       </div>
-      <div class="button">
+      <!-- <div class="">{{ item.message_link }}</div> -->
+      <!-- <div class="">{{ item.msg_online_link }}</div> -->
+      <!-- <div class="button">
         <el-button
           class="font_family icon-Frame"
           @click="
@@ -37,13 +40,13 @@
           "
           >复制举证
         </el-button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { handleCopy } from '@/utils'
+// import { handleCopy } from '@/utils'
 import { MessagesRes, latestKeyMessages } from '@/apis/monitoringPlan'
 
 const emits = defineEmits<{
@@ -75,76 +78,4 @@ const queryLatestMessages = async () => {
 }
 </script>
 
-<style scoped lang="less">
-.list {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
-  flex: 1;
-  // padding: 0 24px;
-  gap: 12px;
-  border-radius: 8px;
-  .descriptions {
-    position: relative;
-
-    &:hover {
-      box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.2);
-      .button {
-        display: flex;
-      }
-    }
-    .button {
-      position: absolute;
-      display: none;
-      flex-direction: column;
-      width: 92px;
-      right: 16px;
-      top: 48px;
-    }
-    font-size: 3;
-    line-height: 100%;
-    background-color: @bg-color-2;
-    padding: 16px;
-    border-radius: 8px;
-    border: 0.5px solid @border-hr;
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    .descriptions__cell_group {
-      display: flex;
-      justify-content: space-between;
-    }
-    hr {
-      border: 0.5px solid @border-hr;
-    }
-    .descriptions__cell {
-      display: flex;
-      gap: 16px;
-
-      &.column {
-        flex-direction: column;
-      }
-    }
-    .descriptions_label {
-      color: @Secondary-text;
-    }
-    .descriptions_content {
-      flex: 1;
-      color: @primary-text;
-      &.box {
-        padding: 8px;
-        background-color: @bg-color-1;
-        border-radius: 4px;
-        box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25) inset;
-        line-height: 18px;
-        .tag {
-          font-weight: normal;
-          color: @Danger;
-        }
-      }
-    }
-  }
-}
-</style>
+<style scoped lang="less"></style>

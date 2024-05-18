@@ -4,7 +4,7 @@
     <div>暂无无监测方案，<a @click="show"> 请点我添加</a>监测方案</div>
   </div>
   <div v-else class="flex-row flex-1">
-    <div class="w-36.5% border-r border-b-Neutral-Stroke-Stroke">
+    <div class="w-120 border-r border-b-Neutral-Stroke-Stroke">
       <DetailListVue @handle-msg="handleMsg" />
     </div>
     <div class="flex-1">
