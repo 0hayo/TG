@@ -6,14 +6,14 @@ const usePlanStore = defineStore(NAMES.USER, {
   state: () => {
     return {
       userInfo: {
-        id: ''
+        token: ''
       }
     }
   },
   getters: {},
   actions: {
     setUser(data) {
-      this.$state.userInfo.id = data
+      this.$state.userInfo.token = data
     }
   },
   //开启数据缓存

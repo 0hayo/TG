@@ -72,7 +72,7 @@ export default defineConfig({
       proxy: {
         '/aps': {
           autoRewrite: true,
-          target: 'http://43.134.107.71:10002',
+          target: 'http://121.5.139.110:5000',
           changeOrigin: true,
           ws: true,
           rewrite: (path) => path.replace(/^\/aps/, '')

@@ -4,21 +4,13 @@
     <div>暂无无监测方案，<a @click="show"> 请点我添加</a>监测方案</div>
   </div>
   <div v-else class="flex-row flex-1">
-    <!-- <DetailListVue
-      v-for="i in planCount"
-      :ref="(ref) => detailListRef && (detailListRef[i] = ref)"
-      :key="i"
-      :count="i"
-      @save="save"
-    /> -->
-    <div class="w-36.5rem border-r border-b-Neutral-Stroke-Stroke"></div>
-    <div class="flex-1">
-      <webview
-        class="w-full h-full"
-        src="https://web.telegram.org/a/#?tgaddr=tg%3A%2F%2Fresolve%3Fdomain%3DTGcsdome&post=30"
-      ></webview>
+    <div class="w-36.5% border-r border-b-Neutral-Stroke-Stroke">
+      <DetailListVue @handle-msg="handleMsg" />
     </div>
-    <div class="w-30rem">
+    <div class="flex-1">
+      <webview ref="webviewRef" class="w-full h-full" :src="tgSrc"></webview>
+    </div>
+    <div :class="showEditor ? 'w-30%' : 'w-0'" class="transition-all delay-500">
       <div style="border: 1px solid #ccc">
         <Toolbar
           style="border-bottom: 1px solid #ccc"
@@ -48,7 +40,7 @@
 
 <script setup lang="ts">
 import { ADD_DIALOG } from '@/components/dialog'
-// import DetailListVue from './components/DetailList.vue'
+import DetailListVue from './components/DetailList.vue'
 import AddPlan from './components/AddPlan.vue'
 // import usePlanStore from '@/store/common/usePlan'
 // import { updatePlan } from '@/apis'
@@ -58,6 +50,8 @@ import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { asBlob } from 'html-docx-js-typescript'
 import { saveAs } from 'file-saver'
+import { MessagesRes } from '@/apis/monitoringPlan'
+import mitts from '@/utils/mitts'
 
 const saveDocx = () => {
   asBlob(valueHtml.value).then((data) => {
@@ -67,6 +61,7 @@ const saveDocx = () => {
 
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef()
+const showEditor = ref(false)
 
 // 内容 HTML
 const valueHtml = ref(
@@ -75,6 +70,13 @@ const valueHtml = ref(
 
 const toolbarConfig = {}
 const editorConfig = { placeholder: '请输入内容...' }
+
+onMounted(() => {
+  console.log(route.params)
+  mitts.on('editor', () => {
+    showEditor.value = !showEditor.value
+  })
+})
 
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
@@ -100,10 +102,6 @@ const getImg = function (base64: string) {
 
 const route = useRoute()
 // const usePlan = usePlanStore()
-
-onMounted(() => {
-  console.log(route.params)
-})
 
 // const planCount = computed(() => Number(usePlan.$state.planType))
 
@@ -144,6 +142,22 @@ const show = () => {
 //     ElMessage.warning(res.message)
 //   }
 // }
+
+const webviewRef = ref()
+const tgSrc = ref('')
+const handleMsg = async (msg: MessagesRes) => {
+  tgSrc.value = msg.msg_online_link
+  await nextTick()
+  webviewRef.value.reload()
+  valueHtml.value = `用户：${msg.sender_name}；用户ID：${msg.sender_id}；时间：${msg.message_time}；群名：${msg.channel_name}；言论：${msg.message_text}；`
+  // webviewRef.value.loadURL(msg.msg_online_link)
+  // const webview = document.querySelector('webview')
+  // console.log(11111, webview?.reload)
+
+  // webview?.addEventListener('dom-ready', () => {
+  //   webview?.reload()
+  // })
+}
 </script>
 
 <style scoped lang="less"></style>

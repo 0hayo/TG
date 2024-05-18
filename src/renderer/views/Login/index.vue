@@ -45,12 +45,26 @@
 import useUser from '@/store/common/useUser'
 import iconBtn from '@/components/iconbtn/index.vue'
 import XButton from '@/components/XButton/index.vue'
+import { login } from '@/apis/login'
 
 const router = useRouter()
 
-const handle = () => {
-  useUser().setUser('1')
-  router.push('/MonitoringPlan/0')
+const handle = async () => {
+  try {
+    const res = await login({
+      username: 'j2024',
+      password: 'aaa123123'
+    })
+    if (res.IsSuccess) {
+      ElMessage.success(res.Message)
+      useUser().setUser(res.Data.access_token)
+      router.push('/MonitoringPlan/0')
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const setWindowSize = (type: string) => {

@@ -1,7 +1,7 @@
+import NAMES from '@/store/types'
 import axios, { InternalAxiosRequestConfig } from 'axios'
 import { ElMessage } from 'element-plus'
 
-// const data = await window.getConfig()
 const service = axios.create({
   baseURL: `http://127.0.0.1:6060/aps`,
   // baseURL: data.url,
@@ -11,7 +11,10 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    // config.headers['token'] = ''
+    const user = JSON.parse(localStorage.getItem(NAMES.USER) || '{}')
+    if (user?.userInfo?.token) {
+      config.headers.Authorization = `Bearer ${user.userInfo.token}`
+    }
     config.headers['Access-Control-Allow-Origin'] = '*'
     return config
   },

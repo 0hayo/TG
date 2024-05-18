@@ -1,7 +1,8 @@
 export interface ApiResponse<T> {
-  code: 0 | -1
-  data: T
-  message: string
+  IsSuccess: string
+  Message: string
+  Data: T
+  Status: string
 }
 
 export interface PlansRes {

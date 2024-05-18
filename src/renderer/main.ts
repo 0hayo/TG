@@ -33,7 +33,7 @@ useThemeColors().setDefaultTheme()
 app.config.globalProperties.$mitts = mitts
 
 router.beforeEach((to, _, next) => {
-  if (userInfo.id || to.name === 'Login') {
+  if (userInfo.token || to.name === 'Login') {
     next()
   } else {
     next('/login')

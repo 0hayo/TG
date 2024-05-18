@@ -1,15 +1,19 @@
 <template>
   <div
-    class="drag h-12 flex justify-between items-center pr-8px border-b border-b-Neutral-Stroke-Stroke"
+    class="h-12 flex justify-between items-center pr-8px border-b border-b-Neutral-Stroke-Stroke"
   >
     <div
-      class="flex h-12 items-center justify-between w-36.5rem px-4 border-r border-b-Neutral-Stroke-Stroke"
+      class="flex h-12 items-center justify-between w-36.5% px-4 border-r border-b-Neutral-Stroke-Stroke"
     >
       <h6 class="flex gap-1 text-h6-medium"><i class="ri-gps-line"></i>五一方案</h6>
-      <XButton icon-name="filter-3-line" text>过滤</XButton>
+      <div class="drag flex-1 h-full"></div>
+      <XButton icon-name="filter-3-line" text @click="showDrawer = true">过滤</XButton>
     </div>
-    <div class="flex-row flex-auto justify-between items-center">
-      <XButton class="justify-start" text icon-name="draft-line">舆情上报编辑</XButton>
+    <div class="flex-row flex-auto justify-between items-center h-full">
+      <XButton class="justify-start" text icon-name="draft-line" @click="handleEditor">
+        舆情上报编辑
+      </XButton>
+      <div class="drag flex-1 h-full"></div>
       <div class="flex-row gap-4">
         <div class="flex">
           <img src="" alt="" />
@@ -60,6 +64,7 @@ import { ElDrawer } from 'element-plus'
 import moment from 'moment'
 import XButton from '@/components/XButton/index.vue'
 import iconBtn from '@/components/iconbtn/index.vue'
+import mitts from '@/utils/mitts'
 
 const route = useRoute()
 const monitoringData = useMonitoringData()
@@ -79,6 +84,12 @@ const setRingtones = (v: boolean) => {
 const showDrawer = ref(false)
 
 const drawerRef = ref<InstanceType<typeof ElDrawer>>()
+
+const handleEditor = () => {
+  console.log(111111)
+
+  mitts.emit('editor')
+}
 </script>
 
 <style scoped lang="less">
