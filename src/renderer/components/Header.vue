@@ -7,7 +7,7 @@
     >
       <h6 class="flex gap-1 text-h6-medium"><i class="ri-gps-line"></i>五一方案</h6>
       <div class="drag flex-1 h-full"></div>
-      <XButton icon-name="filter-3-line" text @click="showDrawer = true">过滤</XButton>
+      <iconBtn icon-name="list-settings-line" text @click="showDrawer = true" />
     </div>
     <div class="flex-row flex-auto justify-between items-center h-full">
       <XButton class="justify-start" text icon-name="draft-line" @click="handleEditor">

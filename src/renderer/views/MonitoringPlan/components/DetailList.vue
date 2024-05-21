@@ -5,7 +5,7 @@
       v-for="item in monitoringData"
       :key="item.sender_id"
       :class="[
-        'flex-col gap-1 px-4 py-2 rounded text-base-regular hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit hover:shadow-2xl cursor-pointer'
+        'flex-col gap-1 px-4 py-2 rounded text-base-regular border border-transparent hover:bg-Neutral-Fill-PrimaryDebit  hover:shadow-2xl cursor-pointer  hover:border-Layout-white'
       ]"
       @click="emits('handleMsg', item)"
     >

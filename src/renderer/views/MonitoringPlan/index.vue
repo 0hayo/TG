@@ -10,24 +10,24 @@
     <div class="flex-1">
       <webview ref="webviewRef" class="w-full h-full" :src="tgSrc"></webview>
     </div>
-    <div :class="showEditor ? 'w-30%' : 'w-0'" class="transition-all delay-500">
+    <div :class="showEditor ? 'w-120' : 'w-0'" class="transition-all duration-700 ease-in-out">
       <div style="border: 1px solid #ccc">
         <Toolbar
-          style="border-bottom: 1px solid #ccc"
+          style="border-bottom: 1px solid #ccc; height: calc(10vh - 48px)"
           :editor="editorRef"
           :default-config="toolbarConfig"
           mode="default"
         />
         <Editor
           v-model="valueHtml"
-          style="height: 500px; overflow-y: hidden"
+          style="height: 80vh; overflow-y: hidden"
           :default-config="editorConfig"
           mode="default"
           @onCreated="handleCreated"
         />
       </div>
-      <el-button type="primary" @click="saveDocx"> 生成HTML文件 </el-button>
-      <el-button type="primary" @click="screenshotStatus = true"> 截图 </el-button>
+      <XButton type="Primary" @click="saveDocx">导出word</XButton>
+      <iconBtn icon-name="screenshot-line" @click="screenshotStatus = true"></iconBtn>
       <!--截图组件-->
       <screen-short
         v-if="screenshotStatus"
@@ -52,6 +52,8 @@ import { asBlob } from 'html-docx-js-typescript'
 import { saveAs } from 'file-saver'
 import { MessagesRes } from '@/apis/monitoringPlan'
 import mitts from '@/utils/mitts'
+import XButton from '@/components/XButton/index.vue'
+import iconBtn from '@/components/iconbtn/index.vue'
 
 const saveDocx = () => {
   asBlob(valueHtml.value).then((data) => {

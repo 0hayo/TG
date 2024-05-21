@@ -30,9 +30,9 @@
       </el-form-item>
     </el-form>
   </div>
-  <div class="flex justify-center !py-10px !mt-10">
-    <XButton class="w-25" type="info" @click="emits('close')"> 取消 </XButton>
-    <XButton class="w-25" type="primary" @click="save(ruleFormRef)"> 完成 </XButton>
+  <div class="flex justify-end !py-10px !mt-10">
+    <XButton class="w-25" type="Warning" @click="emits('close')"> 取消 </XButton>
+    <XButton class="w-25" type="Primary" @click="save(ruleFormRef)"> 完成 </XButton>
   </div>
 </template>
 

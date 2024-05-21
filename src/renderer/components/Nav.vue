@@ -116,7 +116,7 @@ onMounted(async () => {
 
 const show = () => {
   addDialog({
-    title: '新增监测方案',
+    title: '新增方案',
     width: '500px',
     component: shallowRef(AddPlan)
   })
