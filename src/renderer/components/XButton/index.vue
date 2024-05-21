@@ -1,6 +1,10 @@
 <template>
   <button
-    :class="['flex-inline justify-center items-center  border-rd-1 gap-2', sizeClass, typeClass]"
+    :class="[
+      'flex-inline justify-center items-center  border-rd-1 gap-2 text-base-regular',
+      sizeClass,
+      typeClass
+    ]"
     :disabled="disabled"
   >
     <i v-if="iconName" :class="`ri-${iconName}`"></i>

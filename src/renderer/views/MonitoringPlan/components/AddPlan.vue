@@ -3,16 +3,59 @@
     <el-form
       ref="ruleFormRef"
       :label-position="labelPosition"
-      label-width="100px"
+      label-width="auto"
       :model="formLabelAlign"
       :rules="rules"
       style="max-width: 460px"
       onsubmit="return false"
     >
-      <el-form-item label="方案名称" prop="planName">
-        <el-input v-model="formLabelAlign.planName" />
+      <el-form-item
+        label="方案名称"
+        prop="planName"
+        :rules="[
+          {
+            required: true,
+            message: 'Please input email address',
+            trigger: 'blur'
+          },
+          {
+            type: 'email',
+            message: 'Please input correct email address',
+            trigger: ['blur', 'change']
+          }
+        ]"
+      >
+        <el-input v-model="formLabelAlign.planName" placeholder="输入方案名称" class="">
+          <template #prefix> <i class="ri-gps-line"></i> </template>
+          <template #append><i class="ri-corner-down-left-line"></i></template>
+        </el-input>
       </el-form-item>
-      <el-form-item prop="planType">
+      <el-form-item>
+        <el-switch v-model="value1">
+          <template #active-action>
+            <span class="custom-active-action"><i class="ri-notification-4-line"></i></span>
+          </template>
+          <template #inactive-action>
+            <span class="custom-inactive-action"><i class="ri-notification-off-line"></i></span>
+          </template>
+        </el-switch>
+        <span>系统通知</span>
+      </el-form-item>
+      <el-form-item label="选择媒体">
+        <el-checkbox-group v-model="formLabelAlign">
+          <el-checkbox value="Online activities" name="type">Telegram </el-checkbox>
+          <el-checkbox value="Promotion activities" name="type"> Twitter </el-checkbox>
+          <el-checkbox value="Offline activities" name="type"> Offline activities </el-checkbox>
+        </el-checkbox-group>
+      </el-form-item>
+      <el-form-item label="选择关键词">
+        <el-checkbox-group v-model="formLabelAlign">
+          <el-checkbox value="Online activities" name="type">Telegram </el-checkbox>
+          <el-checkbox value="Promotion activities" name="type"> Twitter </el-checkbox>
+          <el-checkbox value="Offline activities" name="type"> Offline activities </el-checkbox>
+        </el-checkbox-group>
+      </el-form-item>
+      <!-- <el-form-item prop="planType">
         <el-radio-group v-model="formLabelAlign.planType" class="radio">
           <div class="radiobox">
             <img src="@/assets/img/radio1.png" alt="" />
@@ -27,21 +70,23 @@
             <el-radio label="3" size="large">三看板</el-radio>
           </div>
         </el-radio-group>
-      </el-form-item>
+      </el-form-item> -->
     </el-form>
   </div>
-  <div class="flex justify-end !py-10px !mt-10">
-    <XButton class="w-25" type="Warning" @click="emits('close')"> 取消 </XButton>
-    <XButton class="w-25" type="Primary" @click="save(ruleFormRef)"> 完成 </XButton>
-  </div>
+  <!-- <div class="flex justify-end gap-4">
+    <XButton class="w-25" type="Primary" @click="save(ruleFormRef)">新增方案</XButton>
+    <XButton class="w-25" type="Warning" @click="emits('close')">取消</XButton>
+  </div> -->
 </template>
 
 <script setup lang="ts">
 import { ElMessage, FormRules, type FormProps, FormInstance } from 'element-plus'
-import XButton from '@/components/XButton/index.vue'
+// import XButton from '@/components/XButton/index.vue'
 import { createPlan } from '@/apis'
 import { CreatePlanReq } from '@/apis/types'
 import mitts from '@/utils/mitts'
+
+const value1 = ref(false)
 
 const emits = defineEmits<{
   close: []
@@ -74,24 +119,4 @@ const save = async (formEl: FormInstance | undefined) => {
 }
 </script>
 
-<style scoped lang="less">
-.content {
-  display: flex;
-  justify-content: center;
-
-  .el-radio-group {
-    margin-top: 24px;
-    gap: 48px;
-  }
-  .radiobox {
-    img {
-      width: 100%;
-      height: 100%;
-    }
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-}
-</style>
+<style scoped lang="less"></style>

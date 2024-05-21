@@ -118,7 +118,8 @@ const show = () => {
   addDialog({
     title: '新增方案',
     width: '500px',
-    component: shallowRef(AddPlan)
+    component: shallowRef(AddPlan),
+    showfooter: true
   })
 }
 

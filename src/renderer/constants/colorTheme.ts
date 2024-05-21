@@ -5,7 +5,7 @@ export default {
     white: colors.white,
     black: colors.black,
     sidebar: colors.neutral[200],
-    Card: colors.neutral[50]
+    Card: colors.neutral[100]
   },
   Neutral: {
     Text: {

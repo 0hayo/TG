@@ -1,6 +1,8 @@
 // element变量
 @import './global.less';
 
+
+
 :root {
   // --el-color-primary: @primary !important;
   // --el-text-color-primary: @title-text !important;
@@ -13,28 +15,30 @@
   // --el-bg: #000;
 }
 
-// .el-dialog {
-//   --el-bg-color: rgba(39, 40, 43, 0.9) !important;
-//   border-radius: 8px !important;
-//   box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.2) !important;
-//   backdrop-filter: blur(10px) !important;
-//   .el-dialog__header {
-//     border-bottom: 1px solid @border-hr;
-//     margin-right: 0;
-//     padding: 13px 24px;
+.el-dialog {
+  border-radius: 12px !important;
+  overflow: hidden;
+  .el-dialog__header {
+    padding: 8px 12px 8px 16px;
+    height: 48px;
+    margin: 0;
+    background-color: #e5e5e5;
+    // display: flex;
+    border-bottom: 1px solid #d4d4d4;
 
-//     .el-dialog__headerbtn {
-//       top: 0;
-//     }
-//   }
-//   .el-dialog__body {
-//     padding-bottom: 0;
-//   }
-//   .el-dialog__footer {
-//     border-top: 1px solid @border-hr;
-//     padding: 10px 24px;
-//   }
-// }
+    .el-dialog__headerbtn {
+      display: none;
+    }
+  }
+  .el-dialog__body {
+    padding: 0;
+  }
+  .el-dialog__footer {
+    border-top: 1px solid #d4d4d4;
+    height: 48px;
+    padding: 8px 16px;
+  }
+}
 
 // .el-input {
 //   --el-fill-color-blank: @bg-color-1 !important;
@@ -145,3 +149,4 @@
 // .el-notification {
 //   background: @bg-color-2;
 // }
+
