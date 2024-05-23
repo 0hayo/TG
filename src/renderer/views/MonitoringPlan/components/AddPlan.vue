@@ -2,53 +2,55 @@
   <div class="content">
     <el-form
       ref="ruleFormRef"
+      class="flex gap-24px px-12px"
       :label-position="labelPosition"
       label-width="auto"
       :model="formLabelAlign"
       :rules="rules"
-      style="max-width: 460px"
       onsubmit="return false"
     >
-      <el-form-item
-        label="方案名称"
-        prop="planName"
-        :rules="[
-          {
-            required: true,
-            message: 'Please input email address',
-            trigger: 'blur'
-          },
-          {
-            type: 'email',
-            message: 'Please input correct email address',
-            trigger: ['blur', 'change']
-          }
-        ]"
-      >
-        <el-input v-model="formLabelAlign.planName" placeholder="输入方案名称" class="">
-          <template #prefix> <i class="ri-gps-line"></i> </template>
-          <template #append><i class="ri-corner-down-left-line"></i></template>
-        </el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-switch v-model="value1">
-          <template #active-action>
-            <span class="custom-active-action"><i class="ri-notification-4-line"></i></span>
-          </template>
-          <template #inactive-action>
-            <span class="custom-inactive-action"><i class="ri-notification-off-line"></i></span>
-          </template>
-        </el-switch>
-        <span>系统通知</span>
-      </el-form-item>
-      <el-form-item label="选择媒体">
-        <el-checkbox-group v-model="formLabelAlign">
-          <el-checkbox value="Online activities" name="type">Telegram </el-checkbox>
-          <el-checkbox value="Promotion activities" name="type"> Twitter </el-checkbox>
-          <el-checkbox value="Offline activities" name="type"> Offline activities </el-checkbox>
-        </el-checkbox-group>
-      </el-form-item>
-      <el-form-item label="选择关键词">
+      <div>
+        <el-form-item
+          label="方案名称"
+          prop="planName"
+          :rules="[
+            {
+              required: true,
+              message: 'Please input email address',
+              trigger: 'blur'
+            },
+            {
+              type: 'email',
+              message: 'Please input correct email address',
+              trigger: ['blur', 'change']
+            }
+          ]"
+        >
+          <el-input v-model="formLabelAlign.planName" placeholder="输入方案名称" class="">
+            <template #prefix> <i class="ri-gps-line"></i> </template>
+            <template #append><i class="ri-corner-down-left-line"></i></template>
+          </el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-switch v-model="value1">
+            <template #active-action>
+              <span class="custom-active-action"><i class="ri-notification-4-line"></i></span>
+            </template>
+            <template #inactive-action>
+              <span class="custom-inactive-action"><i class="ri-notification-off-line"></i></span>
+            </template>
+          </el-switch>
+          <span>系统通知</span>
+        </el-form-item>
+        <el-form-item label="选择媒体">
+          <el-checkbox-group v-model="formLabelAlign">
+            <el-checkbox value="Online activities" name="type">Telegram </el-checkbox>
+            <el-checkbox value="Promotion activities" name="type"> Twitter </el-checkbox>
+            <el-checkbox value="Offline activities" name="type"> Offline activities </el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+      </div>
+      <el-form-item label="选择关键词" class="flex-1">
         <el-checkbox-group v-model="formLabelAlign">
           <el-checkbox value="Online activities" name="type">Telegram </el-checkbox>
           <el-checkbox value="Promotion activities" name="type"> Twitter </el-checkbox>

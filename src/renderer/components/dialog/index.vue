@@ -35,8 +35,12 @@
           <el-button type="primary" @click="item.callBack?.('confirm')">
             {{ item.confirmName || '确认' }}
           </el-button> -->
-          <XButton class="w-25" type="Primary">新增方案</XButton>
-          <XButton class="w-25" type="Warning">取消</XButton>
+          <XButton class="w-25" type="Primary" @click="item.callBack?.('confirm')">
+            新增方案
+          </XButton>
+          <XButton class="w-25" type="Warning" @click="closeDialog(item, index, false)"
+            >取消</XButton
+          >
         </span>
       </template>
     </el-dialog>

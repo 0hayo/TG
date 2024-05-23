@@ -3,14 +3,26 @@
     class="h-12 flex justify-between items-center pr-8px border-b border-b-Neutral-Stroke-Stroke"
   >
     <div
-      class="flex h-12 items-center justify-between w-120 px-4 border-r border-b-Neutral-Stroke-Stroke"
+      class="flex h-12 items-center justify-between w-120 px-4 border-b-Neutral-Stroke-Stroke"
+      :class="{ 'border-r': route.name === 'MonitoringPlan' }"
     >
-      <h6 class="flex gap-1 text-h6-medium"><i class="ri-gps-line"></i>五一方案</h6>
+      <h6 class="flex gap-1 text-h6-medium"><i class="ri-gps-line"></i>{{ route.meta.title }}</h6>
       <div class="drag flex-1 h-full"></div>
-      <iconBtn icon-name="list-settings-line" text @click="showDrawer = true" />
+      <iconBtn
+        v-if="route.name === 'MonitoringPlan'"
+        icon-name="list-settings-line"
+        text
+        @click="showDrawer = true"
+      />
     </div>
     <div class="flex-row flex-auto justify-between items-center h-full">
-      <XButton class="justify-start" text icon-name="draft-line" @click="handleEditor">
+      <XButton
+        v-if="route.name === 'MonitoringPlan'"
+        class="justify-start"
+        text
+        icon-name="draft-line"
+        @click="handleEditor"
+      >
         舆情上报编辑
       </XButton>
       <div class="drag flex-1 h-full"></div>

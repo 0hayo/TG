@@ -112,7 +112,7 @@ const addDialog = inject(ADD_DIALOG)
 const show = () => {
   addDialog?.({
     title: '新增监测方案',
-    width: '500px',
+    width: '600px',
     component: shallowRef(AddPlan)
   })
 }
