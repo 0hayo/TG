@@ -6,7 +6,5 @@ export interface LoginRes {
   access_token: string
 }
 export function login(params: { username: string; password: string }) {
-  return service.get<void, ApiResponse<LoginRes>>('/login', {
-    params
-  })
+  return service.post<void, ApiResponse<LoginRes>>('/auth/login', params)
 }

@@ -25,15 +25,20 @@
         <XButton type="Primary" icon-name="add-line">新增用户</XButton>
       </div>
       <div class="relative w-full grow">
-        <el-table :data="[]" stripe height="100%" style="position: absolute; width: 100%">
+        <el-table :data="tableData" stripe height="100%" style="position: absolute; width: 100%">
           <el-table-column label="序号" width="60" type="index" />
-          <el-table-column prop="" label="关键词" />
-          <el-table-column prop="" label="状态" />
-          <el-table-column prop="" label="启用时间" />
-          <el-table-column prop="" label="启用人" />
+          <el-table-column prop="name" label="姓名" />
+          <el-table-column prop="account_level" label="角色" />
+          <el-table-column prop="username" label="登录账号" />
+          <el-table-column prop="city_category" label="所属单位" />
+          <el-table-column prop="expiration_date" label="生效时间" />
+          <el-table-column prop="is_login_blocked" label="禁止登录">
+            <template #default="{ row }"> {{ row.is_login_blocked ? '是' : '否' }}</template>
+          </el-table-column>
           <el-table-column fixed="right" label="操作" width="120">
             <template #default>
-              <el-button link type="primary" size="small">取消监测</el-button>
+              <el-button link type="primary" size="small">编辑</el-button>
+              <el-button link type="danger" size="small">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -51,8 +56,12 @@
 </template>
 
 <script setup lang="ts">
-import { Plus } from '@element-plus/icons-vue'
 import XButton from '@/components/XButton/index.vue'
+import { UserInfo, getAllUsers } from '@/apis/user'
+
+onMounted(() => {
+  queryAllUsers()
+})
 
 interface Tree {
   label: string
@@ -87,6 +96,18 @@ const defaultProps = {
 
 const currentPage = ref(1)
 const pageSize = ref(10)
+
+const tableData = ref<UserInfo[]>()
+const queryAllUsers = async () => {
+  try {
+    const res = await getAllUsers()
+    if (res.IsSuccess) {
+      tableData.value = res.Data
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 </script>
 
 <style scoped></style>

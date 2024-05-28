@@ -152,13 +152,6 @@ const handleMsg = async (msg: MessagesRes) => {
   await nextTick()
   webviewRef.value.reload()
   valueHtml.value = `用户：${msg.sender_name}；用户ID：${msg.sender_id}；时间：${msg.message_time}；群名：${msg.channel_name}；言论：${msg.message_text}；`
-  // webviewRef.value.loadURL(msg.msg_online_link)
-  // const webview = document.querySelector('webview')
-  // console.log(11111, webview?.reload)
-
-  // webview?.addEventListener('dom-ready', () => {
-  //   webview?.reload()
-  // })
 }
 </script>
 

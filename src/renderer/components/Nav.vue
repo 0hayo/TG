@@ -149,13 +149,13 @@ const deletePlan = async (id: number) => {
     type: 'warning'
   }).then(async () => {
     try {
-      const res = await delPlan(id)
-      if (res.code === SUCCESS_CODE) {
-        ElMessage.success(res.message)
-        getPlan()
-      } else {
-        ElMessage.warning(res.message)
-      }
+      // const res = await delPlan(id)
+      // if (res.code === SUCCESS_CODE) {
+      //   ElMessage.success(res.message)
+      //   getPlan()
+      // } else {
+      //   ElMessage.warning(res.message)
+      // }
     } catch (error) {
       console.log(error)
     }

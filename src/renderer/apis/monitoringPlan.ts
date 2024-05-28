@@ -16,7 +16,7 @@ export interface MessagesRes {
   hit_keyword: string
 }
 export function latestKeyMessages(params: { channel_name: string; keywords: string }) {
-  return service.get<void, ApiResponse<MessagesRes[]>>('/latest_key_messages', {
+  return service.get<void, ApiResponse<MessagesRes[]>>('/tgmsg/latest_messages', {
     params
   })
 }
