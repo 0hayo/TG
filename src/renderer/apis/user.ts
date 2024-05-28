@@ -17,7 +17,24 @@ export interface UserInfo {
   theme: string
   theme_mode: string
   username: string
+  password: string
+  account_type: string
 }
 export function getAllUsers() {
   return service.get<void, ApiResponse<UserInfo[]>>('/admin/all_users')
+}
+
+// 创建用户
+export function createUser(params: {
+  username: string
+  password: string
+  organization: string
+  account_type: string
+}) {
+  return service.post<void, ApiResponse<null>>('/admin/create_user', params)
+}
+
+// 更新用户
+export function updateUser(params: UserInfo) {
+  return service.post<void, ApiResponse<null>>('/admin/update_user', params)
 }

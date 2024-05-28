@@ -22,7 +22,7 @@
     <div class="flex-1 flex flex-col p-16px">
       <div class="flex items-center gap-2">
         <h6 class="inline-flex items-center h-12 text-h6-medium">管理员用户列表</h6>
-        <XButton type="Primary" icon-name="add-line">新增用户</XButton>
+        <XButton type="Primary" icon-name="add-line" @click="addUserRef?.show()">新增用户</XButton>
       </div>
       <div class="relative w-full grow">
         <el-table :data="tableData" stripe height="100%" style="position: absolute; width: 100%">
@@ -36,8 +36,10 @@
             <template #default="{ row }"> {{ row.is_login_blocked ? '是' : '否' }}</template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="120">
-            <template #default>
-              <el-button link type="primary" size="small">编辑</el-button>
+            <template #default="{ row }">
+              <el-button link type="primary" size="small" @click="addUserRef?.show(row)">
+                编辑
+              </el-button>
               <el-button link type="danger" size="small">删除</el-button>
             </template>
           </el-table-column>
@@ -53,11 +55,14 @@
       />
     </div>
   </div>
+
+  <AddUser ref="addUserRef" :query-all-users="queryAllUsers" />
 </template>
 
 <script setup lang="ts">
 import XButton from '@/components/XButton/index.vue'
 import { UserInfo, getAllUsers } from '@/apis/user'
+import AddUser from './components/AddUser.vue'
 
 onMounted(() => {
   queryAllUsers()
@@ -108,6 +113,8 @@ const queryAllUsers = async () => {
     console.log(error)
   }
 }
+
+const addUserRef = ref<InstanceType<typeof AddUser>>()
 </script>
 
 <style scoped></style>
