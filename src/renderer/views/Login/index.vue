@@ -28,9 +28,9 @@
           <h2 class="text-h4-medium">嗨！欢迎您使用谛听巡查系统</h2>
           <div>
             <p class="text-base-regular">用户名</p>
-            <el-input placeholder="用户名"></el-input>
+            <el-input v-model="params.username" placeholder="用户名"></el-input>
             <p class="text-base-regular">密码</p>
-            <el-input placeholder="密码"></el-input>
+            <el-input v-model="params.password" type="password" placeholder="密码"></el-input>
           </div>
 
           <XButton class="w-full" type="Primary" @click="handle">登 录</XButton>
@@ -49,15 +49,18 @@ import { login } from '@/apis/login'
 
 const router = useRouter()
 
+const params = reactive({
+  username: 'j20241',
+  password: 'aaa123123'
+})
+
 const handle = async () => {
   try {
-    const res = await login({
-      username: 'j2024',
-      password: 'aaa123123'
-    })
+    const res = await login(params)
     if (res.IsSuccess) {
       ElMessage.success(res.Message)
-      useUser().setUser(res.Data.access_token)
+      useUser().setToken(res.Data.access_token)
+      useUser().setUserInfo(res.Data.user_info)
       router.push('/MonitoringPlan/0')
     } else {
       ElMessage.warning(res.Message)

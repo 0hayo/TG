@@ -1,19 +1,26 @@
 import { defineStore } from 'pinia'
 import NAMES from '../types'
+import { UserInfo } from '@/apis/user'
 
 // 监测数据
 const usePlanStore = defineStore(NAMES.USER, {
   state: () => {
     return {
-      userInfo: {
-        token: ''
-      }
+      token: '',
+      userInfo: {} as UserInfo
     }
   },
-  getters: {},
+  getters: {
+    getAccountLevel(state) {
+      return state.userInfo.account_level
+    }
+  },
   actions: {
-    setUser(data) {
-      this.$state.userInfo.token = data
+    setToken(data) {
+      this.$state.token = data
+    },
+    setUserInfo(data) {
+      this.$state.userInfo = data
     }
   },
   //开启数据缓存

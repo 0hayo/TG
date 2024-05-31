@@ -18,7 +18,6 @@ export interface UserInfo {
   theme_mode: string
   username: string
   password: string
-  account_type: string
 }
 export function getAllUsers() {
   return service.get<void, ApiResponse<UserInfo[]>>('/admin/all_users')
@@ -29,7 +28,9 @@ export function createUser(params: {
   username: string
   password: string
   organization: string
-  account_type: string
+  account_level: string
+  city_category: string
+  expiration_date: string
 }) {
   return service.post<void, ApiResponse<null>>('/admin/create_user', params)
 }

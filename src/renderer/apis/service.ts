@@ -12,8 +12,8 @@ const service = axios.create({
 service.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const user = JSON.parse(localStorage.getItem(NAMES.USER) || '{}')
-    if (user?.userInfo?.token) {
-      config.headers.Authorization = `Bearer ${user.userInfo.token}`
+    if (user?.token) {
+      config.headers.Authorization = `Bearer ${user.token}`
     }
     config.headers['Access-Control-Allow-Origin'] = '*'
     return config
@@ -28,13 +28,13 @@ service.interceptors.response.use(
   (response) => {
     const data = response.data
     if (response.status !== 200) {
-      Promise.reject(ElMessage.error(data.msg))
+      Promise.reject(ElMessage.error(data.Message))
     } else {
       return data
     }
   },
   (error) => {
-    return Promise.reject(error)
+    return Promise.reject(ElMessage.error(error.response.data.Message))
   }
 )
 

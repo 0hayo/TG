@@ -54,7 +54,9 @@
         <div>
           <p>生效时间</p>
           <el-date-picker
+            v-model="userInfo.expiration_date"
             type="date"
+            value-format="YYYY-MM-DD"
             placeholder="请选择生效时间"
             style="width: 200px"
           ></el-date-picker>
@@ -84,15 +86,14 @@ const props = defineProps<{
 const visible = ref(false)
 const type = ref<'add' | 'edit'>('add')
 
-const userInfo = reactive<UserInfo>({
+const userInfo = reactive({
   username: 'j2024334',
   password: 'aaa123123',
   organization: '中国联通五一路营业部',
-  account_type: '普通用户',
-  account_level: '',
-  city_category: '',
-  created_at: '',
+  account_level: '普通用户',
+  city_category: '岳阳',
   expiration_date: '',
+  created_at: '',
   font_size: '',
   is_delete: false,
   is_login_blocked: false,
@@ -105,7 +106,14 @@ const userInfo = reactive<UserInfo>({
 
 const confirm = async () => {
   try {
-    const res = await createUser(userInfo)
+    const res = await createUser({
+      username: userInfo.username,
+      password: userInfo.password,
+      account_level: userInfo.account_level,
+      organization: userInfo.organization,
+      city_category: userInfo.city_category,
+      expiration_date: userInfo.expiration_date
+    })
     if (res.IsSuccess) {
       props.queryAllUsers()
       ElMessage.success(res.Message)

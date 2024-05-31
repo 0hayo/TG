@@ -27,14 +27,14 @@ app.use(router)
 app.use(screenShort, { enableWebRtc: false })
 app.mount('#app')
 
-const userInfo = useUser().userInfo
+const user = useUser()
 useThemeColors().setDefaultTheme()
 
 // 全局注入mitts
 app.config.globalProperties.$mitts = mitts
 
 router.beforeEach((to, _, next) => {
-  if (userInfo.token || to.name === 'Login') {
+  if (user.token || to.name === 'Login') {
     next()
   } else {
     next('/login')

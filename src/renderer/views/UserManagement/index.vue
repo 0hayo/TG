@@ -108,6 +108,8 @@ const queryAllUsers = async () => {
     const res = await getAllUsers()
     if (res.IsSuccess) {
       tableData.value = res.Data
+    } else {
+      ElMessage.warning(res.Message)
     }
   } catch (error) {
     console.log(error)
