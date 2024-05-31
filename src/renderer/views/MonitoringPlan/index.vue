@@ -4,11 +4,12 @@
     <div>暂无无监测方案，<a @click="show"> 请点我添加</a>监测方案</div>
   </div>
   <div v-else class="flex-row flex-1">
-    <div class="w-120 border-r border-b-Neutral-Stroke-Stroke">
+    <div class="w-120 border-r border-Neutral-Stroke-Stroke">
       <DetailListVue @handle-msg="handleMsg" />
     </div>
     <div class="flex-1">
       <webview ref="webviewRef" class="w-full h-full" :src="tgSrc"></webview>
+      <TelegramPost />
     </div>
     <div :class="showEditor ? 'w-120' : 'w-0'" class="transition-all duration-700 ease-in-out">
       <div style="border: 1px solid #ccc">
@@ -42,6 +43,7 @@
 import { ADD_DIALOG } from '@/components/dialog'
 import DetailListVue from './components/DetailList.vue'
 import AddPlan from './components/AddPlan.vue'
+import TelegramPost from './components/TelegramPost.vue'
 // import usePlanStore from '@/store/common/usePlan'
 // import { updatePlan } from '@/apis'
 // import { SUCCESS_CODE } from '@/constants'
@@ -147,8 +149,10 @@ const show = () => {
 
 const webviewRef = ref()
 const tgSrc = ref('')
+const tgWight = ref('')
 const handleMsg = async (msg: MessagesRes) => {
   tgSrc.value = msg.msg_online_link
+  tgWight.value = msg.message_link
   await nextTick()
   webviewRef.value.reload()
   valueHtml.value = `用户：${msg.sender_name}；用户ID：${msg.sender_id}；时间：${msg.message_time}；群名：${msg.channel_name}；言论：${msg.message_text}；`
