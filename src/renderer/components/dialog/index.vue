@@ -5,7 +5,7 @@
       v-for="(item, index) in dialogList"
       :key="index"
       v-model="item.visible"
-      class="border border-Layout-white"
+      class="border border-Layout-White"
       :title="item.title"
       :width="item.width"
       destroy-on-close

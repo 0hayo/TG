@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-col bg-Layout-sidebar">
+  <div class="flex-col bg-Layout-Sidebar">
     <div class="w-12.5rem h-12 px-4 line-height-3rem color-Neutral-Text-Primary drag">
       <div class="logo"><p class="text-h6-medium">谛听巡查</p></div>
     </div>

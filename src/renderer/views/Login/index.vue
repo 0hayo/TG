@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center items-center p-20">
     <div
-      class="w-200 h-112.5 bg-Layout-Card border-rd-4 border-2 border-Layout-white flex-col justify-center shadow-2xl"
+      class="w-200 h-112.5 bg-Layout-Card border-rd-4 border-2 border-Layout-White flex-col justify-center shadow-2xl"
     >
       <div class="self-end flex p-3">
         <iconBtn

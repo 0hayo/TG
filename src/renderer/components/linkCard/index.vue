@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mb-12px transition ease-in-out delay-150 duration-500 h-14.5 rounded-1 flex items-center justify-between px-16px border border-Neutral-Stroke-Stroke hover:border-Layout-white hover:shadow-lg"
+    class="mb-12px transition ease-in-out delay-150 duration-500 h-14.5 rounded-1 flex items-center justify-between px-16px border border-Neutral-Stroke-Stroke hover:border-Layout-White hover:shadow-lg"
   >
     <div>
       <p class="text-base-medium">{{ type === 'group' ? groupName : keyword }}</p>

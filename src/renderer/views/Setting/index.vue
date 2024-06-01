@@ -32,7 +32,7 @@
           <p class="text-base-regular color-Danger-Text-Primary">仅调节方案展示字体大小</p>
         </h6>
         <div
-          class="flex-col gap-1 px-4 py-2 rounded text-base-regular border border-transparent hover:bg-Neutral-Fill-PrimaryDebit hover:shadow-2xl cursor-pointer hover:border-Layout-white"
+          class="flex-col gap-1 px-4 py-2 rounded text-base-regular border border-transparent hover:bg-Neutral-Fill-PrimaryDebit hover:shadow-2xl cursor-pointer hover:border-Layout-White"
         >
           <div class="flex justify-between">
             <div class="flex-inline gap-2">

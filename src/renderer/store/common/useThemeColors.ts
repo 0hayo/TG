@@ -2,24 +2,24 @@
 import { defineStore } from 'pinia'
 import NAMES from '../types'
 // import colors from '@/constants/colors'
-import colorTheme from '@/constants/colorTheme'
+import colors from '@/constants/colorTheme'
 
 const useThemeColors = defineStore(NAMES.USE_STYLE, {
   state: () => {
     return {
       default: {
-        '--el-bg-color': colorTheme.layout.Card,
-        '--tg-default-bg': '#000',
-        '--tg-login-bg': '#fff',
-        '--tg-default-color': '#4a4a4a',
-        '--tg-border-color': '#000',
-        '--tg-container-color': '#141414',
-        '--el-color-primary': '#000',
-        '--bg-sider-color': '#000000',
-        '--el-dialog-bg-color': colorTheme.layout.Card,
-        aa: '#000'
+        '--Layout-White': colors.Layout.White,
+        '--Layout-Black': colors.Layout.Black,
+        '--Layout-Sidebar': colors.Layout.Sidebar,
+        '--Layout-Card': colors.Layout.Card,
+        '--Neutral-Text-Primary': colors.Neutral.Text.Primary
       },
-      theme1: {},
+      theme1: {
+        '--layout-White': '#000',
+        '--el-table-bg-color': 'red',
+        '--aa': '#000',
+        aaa: 'red'
+      },
       mode: 'theme1'
     }
   },

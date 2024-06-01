@@ -3,7 +3,7 @@
     class="h-12 flex justify-between items-center pr-8px border-b border-b-Neutral-Stroke-Stroke"
   >
     <div
-      class="flex h-12 items-center justify-between w-120 px-4 border-b-Neutral-Stroke-Stroke"
+      class="flex h-12 items-center justify-between w-120 px-4 border-Neutral-Stroke-Stroke"
       :class="{ 'border-r': route.name === 'MonitoringPlan' }"
     >
       <h6 class="flex gap-1 text-h6-medium"><i class="ri-gps-line"></i>{{ route.meta.title }}</h6>

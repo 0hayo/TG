@@ -16,10 +16,10 @@ export default defineConfig({
     }),
     colors: {
       Layout: {
-        white: colors.layout.white,
-        black: colors.layout.black,
-        sidebar: colors.layout.sidebar,
-        Card: colors.layout.Card
+        White: colors.Layout.White,
+        Black: colors.Layout.Black,
+        Sidebar: colors.Layout.Sidebar,
+        Card: colors.Layout.Card
       },
       Neutral: {
         Text: {
@@ -38,8 +38,7 @@ export default defineConfig({
           Fill: colors.Neutral.Fill.Fill,
           FillHover: colors.Neutral.Fill.FillHover,
           FillActive: colors.Neutral.Fill.FillActive,
-          FillDisabled: colors.Neutral.Fill.FillDisabled,
-          PrimaryDebit: colors.Neutral.Fill.PrimaryDebit
+          FillDisabled: colors.Neutral.Fill.FillDisabled
         },
         Stroke: {
           Stroke: colors.Neutral.Stroke.Stroke,

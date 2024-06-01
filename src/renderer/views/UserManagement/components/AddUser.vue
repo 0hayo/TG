@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-model="visible"
-    class="border border-Layout-white"
+    class="border border-Layout-White"
     :title="`${type === 'add' ? '创建' : '修改'}用户`"
     width="500"
     destroy-on-close

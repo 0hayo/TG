@@ -8,7 +8,7 @@
       <DetailListVue @handle-msg="handleMsg" />
     </div>
     <div class="flex-1">
-      <webview ref="webviewRef" class="w-full h-full" :src="tgSrc"></webview>
+      <webview ref="webviewRef" :key="tgSrc" class="w-full h-full" :src="tgSrc"></webview>
       <TelegramPost />
     </div>
     <div :class="showEditor ? 'w-120' : 'w-0'" class="transition-all duration-700 ease-in-out">
