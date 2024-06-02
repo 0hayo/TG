@@ -4,10 +4,14 @@
     <div
       v-for="item in monitoringData"
       :key="item.sender_id"
-      :class="[
-        'flex-col gap-1 px-4 py-2 rounded text-base-regular border border-transparent hover:bg-Neutral-Fill-PrimaryDebit  hover:shadow-2xl cursor-pointer  hover:border-Layout-White'
-      ]"
-      @click="emits('handleMsg', item)"
+      class="'flex-col gap-1 px-4 py-2 rounded text-base-regular border border-transparent hover:bg-Neutral-Fill-PrimaryDebit hover:shadow-2xl cursor-pointer hover:border-Layout-White'"
+      :class="{ msg_active: activeMsgId === item.message_id }"
+      @click="
+        () => {
+          activeMsgId = item.message_id
+          emits('handleMsg', item)
+        }
+      "
     >
       <div class="flex justify-between">
         <div class="flex-inline gap-2">
@@ -55,6 +59,8 @@ const emits = defineEmits<{
 
 const usePlan = usePlanStore()
 
+const activeMsgId = ref('')
+
 const monitoringData = ref<MessagesRes[]>([])
 const queryLatestMessages = async (v: string[]) => {
   try {
@@ -64,7 +70,15 @@ const queryLatestMessages = async (v: string[]) => {
     })
     if (res.IsSuccess) {
       monitoringData.value = res.Data
-      monitoringData.value.length > 0 && emits('handleMsg', monitoringData.value[0])
+      monitoringData.value.forEach((item) => {
+        item.hit_keyword.forEach((v) => {
+          item.message_text = item.message_text.replaceAll(v, `<b style="color: #eb5757">${v}</b>`)
+        })
+      })
+      if (monitoringData.value.length > 0) {
+        activeMsgId.value = monitoringData.value[0].message_id
+        emits('handleMsg', monitoringData.value[0])
+      }
     } else {
       ElMessage.warning(res.Message)
     }
@@ -85,4 +99,8 @@ watch(
 )
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.msg_active {
+  border: 1px solid red;
+}
+</style>

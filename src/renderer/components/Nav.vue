@@ -50,6 +50,7 @@
           <i class="ri-t-box-line"></i>关键词管理
         </router-link>
         <router-link
+          v-if="user.getAccountLevel !== UserType.general"
           class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/UserManagement' }"
         >
@@ -62,10 +63,6 @@
         >
           <i class="ri-settings-line"></i>设置
         </router-link>
-        <!-- <p>数据库</p>
-        <router-link class="navitem icon font_family icon-add" :to="{ path: '/DataCenter' }">
-          数据中心
-        </router-link> -->
       </div>
     </div>
   </div>

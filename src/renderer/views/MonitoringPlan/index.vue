@@ -8,8 +8,8 @@
       <DetailListVue @handle-msg="handleMsg" />
     </div>
     <div class="flex-1">
-      <webview ref="webviewRef" class="w-full h-full" :src="tgSrc"></webview>
-      <TelegramPost />
+      <webview v-if="isElectron" ref="webviewRef" class="w-full h-full" :src="tgSrc"></webview>
+      <TelegramPost v-else-if="currentMsg" :key="tgSrc" :current-msg="currentMsg" />
     </div>
     <div :class="showEditor ? 'w-120' : 'w-0'" class="transition-all duration-700 ease-in-out">
       <div style="border: 1px solid #ccc">
@@ -24,7 +24,7 @@
           style="height: 80vh; overflow-y: hidden"
           :default-config="editorConfig"
           mode="default"
-          @onCreated="handleCreated"
+          @on-created="handleCreated"
         />
       </div>
       <XButton type="Primary" @click="saveDocx">导出word</XButton>
@@ -56,6 +56,11 @@ import { MessagesRes } from '@/apis/monitoringPlan'
 import mitts from '@/utils/mitts'
 import XButton from '@/components/XButton/index.vue'
 import iconBtn from '@/components/iconbtn/index.vue'
+
+const isElectron = ref(false)
+onBeforeMount(() => {
+  isElectron.value = !!window.electronApi
+})
 
 const saveDocx = () => {
   asBlob(valueHtml.value).then((data) => {
@@ -117,7 +122,9 @@ const show = () => {
 const webviewRef = ref()
 const tgSrc = ref('')
 const tgWight = ref('')
+const currentMsg = ref<MessagesRes>()
 const handleMsg = async (msg: MessagesRes) => {
+  currentMsg.value = msg
   tgSrc.value = msg.msg_online_link
   tgWight.value = msg.message_link
   valueHtml.value = `用户：${msg.sender_name}；用户ID：${msg.sender_id}；时间：${msg.message_time}；群名：${msg.channel_name}；言论：${msg.message_text}；`

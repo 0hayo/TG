@@ -13,7 +13,7 @@ export interface MessagesRes {
   msg_online_link: string
   sender_id: string
   sender_name: string
-  hit_keyword: string
+  hit_keyword: string[]
 }
 // 查询频道所有消息
 export function latestMessages(params: { channel_name?: string; keywords: string }) {
