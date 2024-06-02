@@ -76,7 +76,6 @@ const toolbarConfig = {}
 const editorConfig = { placeholder: '请输入内容...' }
 
 onMounted(() => {
-  console.log(route.params)
   mitts.on('editor', () => {
     showEditor.value = !showEditor.value
   })
@@ -104,11 +103,6 @@ const getImg = function (base64: string) {
   valueHtml.value = valueHtml.value + `<img src='${base64}' />`
 }
 
-const route = useRoute()
-// const usePlan = usePlanStore()
-
-// const planCount = computed(() => Number(usePlan.$state.planType))
-
 const addDialog = inject(ADD_DIALOG)
 
 const show = () => {
@@ -120,42 +114,12 @@ const show = () => {
   })
 }
 
-// const detailListRef = ref<(Element | ComponentPublicInstance | null)[]>()
-// const save = async (data: string[], i: number) => {
-//   const planData = usePlan.$state
-//   if (!planData.filters) {
-//     planData.filters = []
-//   }
-//   if (!planData.filters[i - 1]) {
-//     planData.filters[i - 1] = {
-//       groupList: [],
-//       keyWordsList: []
-//     }
-//   }
-//   planData.filters[i - 1].keyWordsList = data.map((v) => {
-//     return {
-//       groupId: '',
-//       id: v
-//     }
-//   })
-//   const res = await updatePlan(usePlan.$state.id, planData)
-//   if (res.code === SUCCESS_CODE) {
-//     mitts.emit('updatePlanList')
-//     usePlan.setPlan(planData)
-//     ElMessage.success('保存成功')
-//   } else {
-//     ElMessage.warning(res.message)
-//   }
-// }
-
 const webviewRef = ref()
 const tgSrc = ref('')
 const tgWight = ref('')
 const handleMsg = async (msg: MessagesRes) => {
   tgSrc.value = msg.msg_online_link
   tgWight.value = msg.message_link
-  // await nextTick()
-  // webviewRef.value.reload()
   valueHtml.value = `用户：${msg.sender_name}；用户ID：${msg.sender_id}；时间：${msg.message_time}；群名：${msg.channel_name}；言论：${msg.message_text}；`
 }
 </script>

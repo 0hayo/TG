@@ -21,6 +21,10 @@ const usePlanStore = defineStore(NAMES.USER, {
     },
     setUserInfo(data) {
       this.$state.userInfo = data
+    },
+    setReset() {
+      this.$state.token = ''
+      this.$state.userInfo = {} as UserInfo
     }
   },
   //开启数据缓存

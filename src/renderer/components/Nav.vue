@@ -7,7 +7,10 @@
       {{ time }}
     </div>
     <div class="flex-col flex-auto flex-justify-between items-center self-stretch px-4 pb-4">
-      <div class="flex-col items-center self-stretch gap-2">
+      <div
+        v-if="user.getAccountLevel == UserType.general"
+        class="flex-col items-center self-stretch gap-2"
+      >
         <div class="flex-row flex-justify-between items-center self-stretch">
           <p class="text-sm-medium color-Neutral-Text-Tertiary">方案</p>
           <IconBtn icon-name="add-line" @click="show"></IconBtn>
@@ -27,6 +30,7 @@
           <p class="text-sm-medium color-Neutral-Text-Tertiary">系统管理</p>
         </div>
         <router-link
+          v-if="user.getAccountLevel == UserType.general"
           class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/PlanManagement' }"
         >
@@ -39,6 +43,7 @@
           <i class="ri-rss-line"></i>媒体管理
         </router-link>
         <router-link
+          v-if="user.getAccountLevel == UserType.general"
           class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
           :to="{ path: '/KeyWords' }"
         >
@@ -74,7 +79,10 @@ import mitts from '@/utils/mitts'
 import usePlanStore from '@/store/common/usePlan'
 import moment from 'moment'
 import { PlanInfo, getUserPlans } from '@/apis/monitoringPlan'
+import useUser from '@/store/common/useUser'
+import { UserType } from '@/common/types'
 
+const user = useUser()
 const usePlan = usePlanStore()
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

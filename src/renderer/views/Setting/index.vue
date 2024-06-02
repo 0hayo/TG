@@ -61,18 +61,38 @@
       <div class="flex-col gap-2">
         <h6 class="text-h6-medium">账户设置</h6>
         <XButton class="self-start" icon-name="draft-line"> 修改密码 </XButton>
+        <XButton class="self-start" icon-name="draft-line" @click="handleLogout">
+          注销登录
+        </XButton>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { User } from '@element-plus/icons-vue'
 import XButton from '@/components/XButton/index.vue'
+import { logout } from '@/apis/login'
+import router from '@/router'
+import useUser from '@/store/common/useUser'
 
 const radio = ref()
 const radio2 = ref()
 const radio3 = ref()
+
+const handleLogout = async () => {
+  try {
+    const res = await logout()
+    if (res.IsSuccess) {
+      router.push('/login')
+      useUser().setReset()
+      ElMessage.success(res.Message)
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 </script>
 
 <style scoped></style>

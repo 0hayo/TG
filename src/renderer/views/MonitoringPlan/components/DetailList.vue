@@ -55,10 +55,6 @@ const emits = defineEmits<{
 
 const usePlan = usePlanStore()
 
-// onMounted(() => {
-//   queryLatestMessages()
-// })
-
 const monitoringData = ref<MessagesRes[]>([])
 const queryLatestMessages = async (v: string[]) => {
   try {

@@ -10,3 +10,8 @@ export interface LoginRes {
 export function login(params: { username: string; password: string }) {
   return service.post<void, ApiResponse<LoginRes>>('/auth/login', params)
 }
+
+// 账号退出
+export function logout() {
+  return service.get<void, ApiResponse<null>>('/auth/logout')
+}

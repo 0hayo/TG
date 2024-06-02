@@ -22,7 +22,7 @@
         <div>
           <p>姓名</p>
           <el-input
-            v-model="userInfo.username"
+            v-model="userInfo.name"
             placeholder="请输入姓名"
             style="width: 200px"
           ></el-input>
@@ -62,6 +62,15 @@
           ></el-date-picker>
         </div>
       </el-form-item>
+      <el-form-item>
+        <div>
+          <p>账户角色</p>
+          <el-radio-group v-model="userInfo.account_level" style="width: 200px">
+            <el-radio :label="UserType.admin">管理员</el-radio>
+            <el-radio :label="UserType.general">普通用户</el-radio>
+          </el-radio-group>
+        </div>
+      </el-form-item>
     </el-form>
     <template #footer>
       <XButton v-if="type === 'add'" class="w-25" type="Primary" @click="confirm">
@@ -78,6 +87,7 @@ import { ref } from 'vue'
 import XButton from '@/components/XButton/index.vue'
 import { UserInfo, createUser, updateUser } from '@/apis/user'
 import lodash from 'lodash'
+import { UserType } from '@/common/types'
 
 const props = defineProps<{
   queryAllUsers: () => void
@@ -87,11 +97,11 @@ const visible = ref(false)
 const type = ref<'add' | 'edit'>('add')
 
 const userInfo = reactive({
-  username: 'j2024334',
-  password: 'aaa123123',
-  organization: '中国联通五一路营业部',
-  account_level: '普通用户',
-  city_category: '岳阳',
+  username: '',
+  password: '',
+  organization: '1',
+  account_level: UserType.general,
+  city_category: '2',
   expiration_date: '',
   created_at: '',
   font_size: '',
@@ -107,6 +117,7 @@ const userInfo = reactive({
 const confirm = async () => {
   try {
     const res = await createUser({
+      name: userInfo.name,
       username: userInfo.username,
       password: userInfo.password,
       account_level: userInfo.account_level,

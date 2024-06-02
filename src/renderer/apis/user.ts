@@ -25,6 +25,7 @@ export function getAllUsers() {
 
 // 创建用户
 export function createUser(params: {
+  name: string
   username: string
   password: string
   organization: string

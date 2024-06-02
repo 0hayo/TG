@@ -37,9 +37,13 @@
       </div>
       <el-form-item label="选择关键词" class="flex-1">
         <el-checkbox-group v-model="formLabelAlign.inspect_keys">
-          <el-checkbox value="Online activities" name="type">Telegram </el-checkbox>
-          <el-checkbox value="Promotion activities" name="type"> Twitter </el-checkbox>
-          <el-checkbox value="Offline activities" name="type"> Offline activities </el-checkbox>
+          <el-checkbox
+            v-for="item in keywordsList"
+            :key="item.id"
+            :value="item.keyword"
+            :label="item.keyword"
+          >
+          </el-checkbox>
         </el-checkbox-group>
       </el-form-item>
     </el-form>
@@ -55,6 +59,11 @@ import { ElMessage, FormRules, type FormProps, FormInstance } from 'element-plus
 import XButton from '@/components/XButton/index.vue'
 import mitts from '@/utils/mitts'
 import { addPlan } from '@/apis/monitoringPlan'
+import { getAllKey, keywordData } from '@/apis/KeyWords'
+
+onMounted(() => {
+  getAllKeyword()
+})
 
 const value1 = ref(false)
 
@@ -65,9 +74,9 @@ const emits = defineEmits<{
 const labelPosition = ref<FormProps['labelPosition']>('top')
 
 const formLabelAlign = reactive({
-  plan_name: '学校监测方案',
+  plan_name: '',
   tg_user_group_id: 'Telegram',
-  inspect_keys: ['微信', '学校', '集团', '银行']
+  inspect_keys: []
 })
 
 const rules = ref<FormRules<typeof formLabelAlign>>({
@@ -75,6 +84,20 @@ const rules = ref<FormRules<typeof formLabelAlign>>({
 })
 
 const ruleFormRef = ref<FormInstance>()
+
+const keywordsList = ref<keywordData[]>()
+const getAllKeyword = async () => {
+  try {
+    const res = await getAllKey()
+    if (res.IsSuccess) {
+      keywordsList.value = res.Data
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (_) {
+    console.log(_)
+  }
+}
 
 const save = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
