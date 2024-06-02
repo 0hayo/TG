@@ -38,8 +38,19 @@
           @del-keyword="
             () => {
               newGroupList.splice(i, 1)
+              console.log(111)
             }
           "
+        ></LinkCard>
+      </div>
+      <h6 class="inline-flex items-center text-h6-medium">可监测群组</h6>
+      <div class="scroll-smooth overflow-y-auto grid gap-3">
+        <LinkCard
+          v-for="(item, i) in allActiveList"
+          :key="i"
+          :keyword="item.group_link"
+          :group-id="item.group_id"
+          type="group"
         ></LinkCard>
       </div>
     </div>
@@ -64,8 +75,43 @@
           <el-table-column prop="added_at" min-width="100" label="添加时间" />
           <el-table-column prop="added_by" min-width="100" label="添加人" />
           <el-table-column fixed="right" label="操作" width="120">
-            <template #default>
-              <el-button link type="primary" size="small">取消监测</el-button>
+            <template #default="{ row }">
+              <el-button
+                v-if="user.getAccountLevel === '3'"
+                link
+                type="primary"
+                size="small"
+                @click="setUserMonitoreds(row, false)"
+              >
+                取消监测
+              </el-button>
+              <el-button
+                v-if="user.getAccountLevel === '3'"
+                link
+                type="primary"
+                size="small"
+                @click="addGroups(row)"
+              >
+                重新申请
+              </el-button>
+              <el-button
+                v-if="user.getAccountLevel !== '3'"
+                link
+                type="primary"
+                size="small"
+                @click="updateTgStatus(row)"
+              >
+                通过
+              </el-button>
+              <el-button
+                v-if="user.getAccountLevel !== '3'"
+                link
+                type="danger"
+                size="small"
+                @click="deleteGroups(row)"
+              >
+                删除
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -83,14 +129,24 @@
 </template>
 
 <script setup lang="ts">
-import { GroupInfo, adminGetAllGroups, getUserMonitored } from '@/apis/mediaManagement'
+import {
+  GroupInfo,
+  addTgGroup,
+  adminGetAllGroups,
+  deleteGroup,
+  getAllActive,
+  getUserMonitored,
+  updateTggroupStatus
+} from '@/apis/mediaManagement'
 import LinkCard from '@/components/linkCard/index.vue'
 import useUser from '@/store/common/useUser'
+import { setUserMonitored } from '@/apis/mediaManagement'
 
 const user = useUser()
 
 onMounted(() => {
-  console.log(groupTableData[user.getAccountLevel]())
+  groupTableData[user.getAccountLevel]?.()
+  queryAllActive()
 })
 
 const tableData = reactive({
@@ -138,6 +194,88 @@ const groupTableData = {
     } catch (error) {
       console.log(error)
     }
+  }
+}
+
+const allActiveList = ref<GroupInfo[]>()
+const queryAllActive = async () => {
+  try {
+    const res = await getAllActive()
+    if (res.IsSuccess) {
+      allActiveList.value = res.Data
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const setUserMonitoreds = async (row: GroupInfo, b: boolean) => {
+  try {
+    const res = await setUserMonitored({
+      group_url: row.group_link,
+      new_status: b
+    })
+    if (res.IsSuccess) {
+      groupTableData[user.getAccountLevel]?.()
+      ElMessage.success(res.Message)
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const updateTgStatus = async (row: GroupInfo) => {
+  try {
+    const res = await updateTggroupStatus({
+      group_url: row.group_link,
+      new_status: '2'
+    })
+    if (res.IsSuccess) {
+      groupTableData[user.getAccountLevel]?.()
+      ElMessage.success(res.Message)
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const deleteGroups = async (row: GroupInfo) => {
+  try {
+    const res = await deleteGroup({
+      group_url: row.group_link
+    })
+    if (res.IsSuccess) {
+      groupTableData[user.getAccountLevel]?.()
+      ElMessage.success(res.Message)
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const addGroups = async (row: GroupInfo) => {
+  try {
+    const res = await addTgGroup({
+      group_url: row.group_link,
+      group_id: row.group_id,
+      group_name: row.group_name
+    })
+    if (res.IsSuccess) {
+      groupTableData[user.getAccountLevel]?.()
+      ElMessage.success(res.Message)
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
 </script>

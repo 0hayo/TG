@@ -41,8 +41,16 @@
           <el-table-column prop="added_by" label="启用人" />
           <el-table-column fixed="right" label="操作" width="120">
             <template #default="{ row }">
-              <el-button link type="primary" size="small" @click="editStatus">
+              <el-button
+                link
+                type="primary"
+                size="small"
+                @click="editStatus(row, row.is_enabled ? 1 : 2)"
+              >
                 {{ row.is_enabled ? '停用' : '启用' }}
+              </el-button>
+              <el-button link type="primary" size="small" @click="editStatus(row, 9)">
+                删除
               </el-button>
             </template>
           </el-table-column>
@@ -63,7 +71,7 @@
 <script setup lang="ts">
 // import { Delete, Plus } from '@element-plus/icons-vue'
 import LinkCard from '@/components/linkCard/index.vue'
-import { addKey, getAllKey, keywordData } from '@/apis/KeyWords'
+import { addKey, getAllKey, keywordData, updateStatusKey } from '@/apis/KeyWords'
 
 onMounted(() => {
   getAllKeyword()
@@ -108,7 +116,22 @@ const getAllKeyword = async () => {
   }
 }
 
-const editStatus = () => {}
+const editStatus = async (row: keywordData, status: 1 | 2 | 9) => {
+  try {
+    const res = await updateStatusKey({
+      keyword: row.keyword,
+      status
+    })
+    if (res.IsSuccess) {
+      getAllKeyword()
+      ElMessage.success(res.Message)
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 </script>
 
 <style scoped></style>

@@ -46,25 +46,25 @@
 </template>
 
 <script setup lang="ts">
-// import { handleCopy } from '@/utils'
 import { MessagesRes, latestKeyMessages } from '@/apis/monitoringPlan'
+import usePlanStore from '@/store/common/usePlan'
 
 const emits = defineEmits<{
   handleMsg: [MessagesRes]
 }>()
 
-onMounted(() => {
-  // setInterval(() => {
-  queryLatestMessages()
-  // }, 1000)
-})
+const usePlan = usePlanStore()
+
+// onMounted(() => {
+//   queryLatestMessages()
+// })
 
 const monitoringData = ref<MessagesRes[]>([])
-const queryLatestMessages = async () => {
+const queryLatestMessages = async (v: string[]) => {
   try {
     const res = await latestKeyMessages({
-      channel_name: 'EG521',
-      keywords: '微信,集团'
+      channel_name: 'EG521,11123',
+      keywords: v.join(',')
     })
     if (res.IsSuccess) {
       monitoringData.value = res.Data
@@ -76,6 +76,17 @@ const queryLatestMessages = async () => {
     console.log(error)
   }
 }
+
+watch(
+  () => usePlan.getKeywords,
+  (v) => {
+    queryLatestMessages(v)
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
 </script>
 
 <style scoped lang="less"></style>

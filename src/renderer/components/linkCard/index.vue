@@ -3,7 +3,7 @@
     class="mb-12px transition ease-in-out delay-150 duration-500 h-14.5 rounded-1 flex items-center justify-between px-16px border border-Neutral-Stroke-Stroke hover:border-Layout-White hover:shadow-lg"
   >
     <div>
-      <p class="text-base-medium">{{ type === 'group' ? groupName : keyword }}</p>
+      <p class="text-base-medium">{{ type === 'group' ? groupName || groupId : keyword }}</p>
       <p v-if="type === 'group'" class="text-sm-regular text-Neutral-Text-Secondary">
         {{ keyword }}
       </p>
@@ -21,6 +21,7 @@ import { searchTitle, addUserMonitored } from '@/apis/mediaManagement'
 
 const props = defineProps<{
   keyword: string
+  groupId?: string
   type: 'group' | 'keyword'
 }>()
 
@@ -29,7 +30,7 @@ const emits = defineEmits<{
 }>()
 
 onMounted(() => {
-  props.type === 'group' && getGroupName()
+  props.type === 'group' && !props.groupId && getGroupName()
 })
 
 const groupName = ref('')
@@ -79,9 +80,10 @@ const getGroupName = async () => {
       emits('delKeyword', true)
     } else {
       ElMessage.warning(res.Message)
+      emits('delKeyword')
     }
-  } catch (error) {
-    console.log(error)
+  } catch (_) {
+    emits('delKeyword')
   }
 }
 </script>

@@ -59,13 +59,29 @@
     </div>
   </div>
 
-  <el-drawer ref="drawerRef" v-model="showDrawer" title="看板过滤" :with-header="false" size="300">
+  <el-drawer
+    ref="drawerRef"
+    v-model="showDrawer"
+    v-loading="keyParams.loading"
+    title="看板过滤"
+    :with-header="false"
+    size="300"
+    @open="openKeyword"
+  >
     <div class="filterTitle">关键词过滤</div>
-    <!-- <el-checkbox-group v-model="selectKeywordsList" class="listbox">
-      <el-checkbox v-for="v in keywordsList" :key="v" :label="v" border />
-    </el-checkbox-group> -->
+    <el-checkbox-group v-model="keyParams.keywords" class="listbox">
+      <el-checkbox
+        v-for="v in keyParams.keywordsList"
+        :key="v.id"
+        :value="v.keyword"
+        :label="v.keyword"
+        :border="true"
+        class="mt-8px"
+        style="width: 100%"
+      />
+    </el-checkbox-group>
     <div class="footer">
-      <el-button class="font_family icon-filter">保存</el-button>
+      <el-button class="font_family icon-filter" @click="saveKeyword">保存</el-button>
     </div>
   </el-drawer>
 </template>
@@ -73,12 +89,14 @@
 <script setup lang="ts">
 import useMonitoringData from '@/store/common/monitoringData'
 import { ElDrawer } from 'element-plus'
-import moment from 'moment'
 import XButton from '@/components/XButton/index.vue'
 import iconBtn from '@/components/iconbtn/index.vue'
 import mitts from '@/utils/mitts'
+import { getAllKey, keywordData } from '@/apis/KeyWords'
+import usePlanStore from '@/store/common/usePlan'
 
 const route = useRoute()
+const usePlan = usePlanStore()
 const monitoringData = useMonitoringData()
 
 const setWindowSize = (type: string) => {
@@ -97,9 +115,35 @@ const showDrawer = ref(false)
 
 const drawerRef = ref<InstanceType<typeof ElDrawer>>()
 
-const handleEditor = () => {
-  console.log(111111)
+const keyParams = reactive({
+  keywordsList: [] as keywordData[],
+  loading: false,
+  keywords: [] as string[]
+})
+const getAllKeyword = async () => {
+  try {
+    keyParams.loading = true
+    const res = await getAllKey()
+    if (res.IsSuccess) {
+      keyParams.keywordsList = res.Data
+    } else {
+      keyParams.loading = false
+      ElMessage.warning(res.Message)
+    }
+  } catch (_) {
+    keyParams.loading = false
+  }
+}
+const openKeyword = () => {
+  keyParams.keywords = usePlan.getKeywords
+  getAllKeyword()
+}
 
+const saveKeyword = () => {
+  usePlan.setKeywords(keyParams.keywords)
+}
+
+const handleEditor = () => {
   mitts.emit('editor')
 }
 </script>
@@ -107,5 +151,30 @@ const handleEditor = () => {
 <style scoped lang="less">
 .drag {
   -webkit-app-region: drag;
+}
+.listbox {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1px;
+  position: relative;
+  padding-bottom: 50px;
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 12px;
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 52px;
+    left: -24px;
+    width: 300px;
+    height: 1px;
+    border-bottom: 1px solid var(--Layout-Black);
+  }
 }
 </style>

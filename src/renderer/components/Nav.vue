@@ -13,40 +13,14 @@
           <IconBtn icon-name="add-line" @click="show"></IconBtn>
         </div>
         <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
-          :to="{ path: '/MonitoringPlan/1' }"
-        >
-          <i class="ri-gps-line"></i>五一方案
-        </router-link>
-        <router-link
-          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
-          :to="{ path: '/MonitoringPlan/2' }"
-        >
-          <i class="ri-gps-line"></i>六一方案
-        </router-link>
-        <!-- <router-link
           v-for="item in planList"
-          :key="item.id"
-          class="navitem"
-          :class="{ active: usePlan.$state.id === item.id }"
-          :to="{
-            path: `/MonitoringPlan/${item.planType}`,
-            query: {
-              planType: item.planType,
-              filters: JSON.stringify(item.filters)
-            }
-          }"
+          :key="item.plan_id"
+          class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+          :to="{ path: `/MonitoringPlan/${item.plan_id}` }"
           @click="handlePlan(item)"
         >
-          <div class="flex justify-between grow">
-            <div class="flex items-center gap-2px">
-              <el-icon><Memo /></el-icon>
-              {{ item.planName }}
-            </div>
-
-            <el-icon @click="deletePlan(item.id)"><Delete /></el-icon>
-          </div>
-        </router-link> -->
+          <i class="ri-gps-line"></i>{{ item.plan_name }}
+        </router-link>
       </div>
       <div class="flex-col items-center self-stretch gap-2">
         <div class="self-start h-6">
@@ -96,12 +70,10 @@
 import IconBtn from '@/components/iconbtn/index.vue'
 import { ADD_DIALOG } from '@/components/dialog'
 import AddPlan from '@/views/MonitoringPlan/components/AddPlan.vue'
-import { delPlan, queryAllPlan } from '@/apis'
-import { PlansRes } from '@/apis/types'
 import mitts from '@/utils/mitts'
 import usePlanStore from '@/store/common/usePlan'
-import { SUCCESS_CODE } from '@/constants'
 import moment from 'moment'
+import { PlanInfo, getUserPlans } from '@/apis/monitoringPlan'
 
 const usePlan = usePlanStore()
 
@@ -111,7 +83,6 @@ const addDialog = inject(ADD_DIALOG)!
 onMounted(async () => {
   mitts.on('updatePlanList', getPlan)
   await getPlan()
-  usePlan.setPlan(planList[0])
 })
 
 const show = () => {
@@ -119,52 +90,51 @@ const show = () => {
     title: '新增方案',
     width: '600px',
     component: shallowRef(AddPlan),
-    showfooter: true
+    showfooter: false
   })
 }
 
-const planList = ref<PlansRes[]>()
+const planList = ref<PlanInfo[]>()
 const getPlan = async () => {
-  // try {
-  //   const res = await queryAllPlan()
-  //   if (res.code === 0) {
-  //     planList.value = res.data
-  //     // planList.value.length > 0 && usePlan.setPlan(planList.value[0])
-  //   } else {
-  //     ElMessage.warning(res.message)
-  //   }
-  // } catch (error) {
-  //   console.log(error)
-  // }
-}
-
-const deletePlan = async (id: number) => {
-  if (usePlan.$state.id === id) {
-    ElMessage.warning('选中方案无法删除')
-    return
-  }
-  ElMessageBox.confirm('删除此方案?', '提示', {
-    confirmButtonText: '确认',
-    cancelButtonText: '取消',
-    type: 'warning'
-  }).then(async () => {
-    try {
-      // const res = await delPlan(id)
-      // if (res.code === SUCCESS_CODE) {
-      //   ElMessage.success(res.message)
-      //   getPlan()
-      // } else {
-      //   ElMessage.warning(res.message)
-      // }
-    } catch (error) {
-      console.log(error)
+  try {
+    const res = await getUserPlans()
+    if (res.IsSuccess) {
+      planList.value = res.Data
+    } else {
+      ElMessage.warning(res.Message)
     }
-  })
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-// const handlePlan = (item: PlansRes) => {
-//   usePlan.setPlan(item)
+// const deletePlan = async (id: number) => {
+//   if (usePlan.$state.id === id) {
+//     ElMessage.warning('选中方案无法删除')
+//     return
+//   }
+//   ElMessageBox.confirm('删除此方案?', '提示', {
+//     confirmButtonText: '确认',
+//     cancelButtonText: '取消',
+//     type: 'warning'
+//   }).then(async () => {
+//     try {
+//       // const res = await delPlan(id)
+//       // if (res.code === SUCCESS_CODE) {
+//       //   ElMessage.success(res.message)
+//       //   getPlan()
+//       // } else {
+//       //   ElMessage.warning(res.message)
+//       // }
+//     } catch (error) {
+//       console.log(error)
+//     }
+//   })
 // }
+
+const handlePlan = (item: PlanInfo) => {
+  usePlan.setPlan(item)
+}
 
 const time = ref('')
 let timer

@@ -8,7 +8,7 @@
       <DetailListVue @handle-msg="handleMsg" />
     </div>
     <div class="flex-1">
-      <webview ref="webviewRef" :key="tgSrc" class="w-full h-full" :src="tgSrc"></webview>
+      <webview ref="webviewRef" class="w-full h-full" :src="tgSrc"></webview>
       <TelegramPost />
     </div>
     <div :class="showEditor ? 'w-120' : 'w-0'" class="transition-all duration-700 ease-in-out">
@@ -115,6 +115,7 @@ const show = () => {
   addDialog?.({
     title: '新增监测方案',
     width: '600px',
+    showfooter: false,
     component: shallowRef(AddPlan)
   })
 }
@@ -153,8 +154,8 @@ const tgWight = ref('')
 const handleMsg = async (msg: MessagesRes) => {
   tgSrc.value = msg.msg_online_link
   tgWight.value = msg.message_link
-  await nextTick()
-  webviewRef.value.reload()
+  // await nextTick()
+  // webviewRef.value.reload()
   valueHtml.value = `用户：${msg.sender_name}；用户ID：${msg.sender_id}；时间：${msg.message_time}；群名：${msg.channel_name}；言论：${msg.message_text}；`
 }
 </script>
