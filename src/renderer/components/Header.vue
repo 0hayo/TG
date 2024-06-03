@@ -29,13 +29,13 @@
       <div class="flex-row gap-4">
         <div class="flex">
           <img src="" alt="" />
-          <p class="text-Neutral-Text-Primary">我是谁</p>
+          <p class="text-Neutral-Text-Primary">{{ user.getUserInfo.name }}</p>
         </div>
         <div>
           <i v-if="ringtones" class="ri-moon-line cursor-pointer" @click="setRingtones(false)"></i>
           <i v-else class="ri-sun-line cursor-pointer" @click="setRingtones(true)"></i>
         </div>
-        <div class="flex">
+        <div v-if="isElectron" class="flex">
           <iconBtn
             icon-name="subtract-line"
             type="WindowsControls"
@@ -94,10 +94,17 @@ import iconBtn from '@/components/iconbtn/index.vue'
 import mitts from '@/utils/mitts'
 import { getAllKey, keywordData } from '@/apis/KeyWords'
 import usePlanStore from '@/store/common/usePlan'
+import useUser from '@/store/common/useUser'
 
 const route = useRoute()
 const usePlan = usePlanStore()
+const user = useUser()
 const monitoringData = useMonitoringData()
+
+const isElectron = ref(false)
+onBeforeMount(() => {
+  isElectron.value = !!window.electronApi
+})
 
 const setWindowSize = (type: string) => {
   window.electronApi.setWindowSize(type)

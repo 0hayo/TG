@@ -10,7 +10,7 @@ export function searchTitle(params: { group_url: string }) {
 }
 
 // 用户_添加监测群组
-export function addUserMonitored(params: { group_id: string }) {
+export function addUserMonitored(params: { group_url: string }) {
   return service.post<void, ApiResponse<null>>('/tggroup/add_user_monitored', params)
 }
 

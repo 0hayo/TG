@@ -68,7 +68,7 @@ onMounted(() => {
 const value1 = ref(false)
 
 const emits = defineEmits<{
-  close: []
+  close: [string?]
 }>()
 
 const labelPosition = ref<FormProps['labelPosition']>('top')
@@ -106,7 +106,7 @@ const save = async (formEl: FormInstance | undefined) => {
       await addPlan(formLabelAlign)
       ElMessage.success('新增成功')
       mitts.emit('updatePlanList')
-      emits('close')
+      emits('close', 'update')
     }
   })
 }

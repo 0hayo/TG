@@ -13,6 +13,9 @@ const usePlanStore = defineStore(NAMES.USER, {
   getters: {
     getAccountLevel(state) {
       return state.userInfo.account_level
+    },
+    getUserInfo(state) {
+      return state.userInfo
     }
   },
   actions: {

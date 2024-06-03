@@ -36,6 +36,7 @@
 import { PlanInfo, deletePlan, getUserPlans } from '@/apis/monitoringPlan'
 import XButton from '@/components/XButton/index.vue'
 import { addDialog } from '@/components/dialog'
+import mitts from '@/utils/mitts'
 import AddPlan from '@/views/MonitoringPlan/components/AddPlan.vue'
 
 onMounted(async () => {
@@ -50,7 +51,12 @@ const show = () => {
     title: '新增方案',
     width: '600px',
     component: shallowRef(AddPlan),
-    showfooter: false
+    showfooter: false,
+    callBack(name: string) {
+      if (name === 'update') {
+        getPlan()
+      }
+    }
   })
 }
 
@@ -80,6 +86,7 @@ const deletePlans = async (plan_id: number) => {
     })
     if (res.IsSuccess) {
       getPlan()
+      mitts.emit('updatePlanList')
       ElMessage.success(res.Message)
     } else {
       ElMessage.warning(res.Message)

@@ -39,11 +39,11 @@ const handleAdd = {
   group: async () => {
     try {
       const res = await addUserMonitored({
-        group_id: props.keyword
+        group_url: props.keyword
       })
       if (res.IsSuccess) {
         ElMessage.success(res.Message)
-        emits('delKeyword')
+        emits('delKeyword', true)
       } else {
         ElMessage.warning(res.Message)
       }
@@ -77,7 +77,6 @@ const getGroupName = async () => {
     if (res.IsSuccess) {
       groupName.value = res.Data.group_title
       ElMessage.success(res.Message)
-      emits('delKeyword', true)
     } else {
       ElMessage.warning(res.Message)
       emits('delKeyword')

@@ -38,7 +38,6 @@
           @del-keyword="
             () => {
               newGroupList.splice(i, 1)
-              console.log(111)
             }
           "
         ></LinkCard>
@@ -49,8 +48,14 @@
           v-for="(item, i) in allActiveList"
           :key="i"
           :keyword="item.group_link"
-          :group-id="item.group_id"
+          :group-id="item.group_name"
           type="group"
+          @del-keyword="
+            () => {
+              queryAllActive()
+              groupTableData[user.getAccountLevel]?.()
+            }
+          "
         ></LinkCard>
       </div>
     </div>
@@ -141,6 +146,7 @@ import {
 import LinkCard from '@/components/linkCard/index.vue'
 import useUser from '@/store/common/useUser'
 import { setUserMonitored } from '@/apis/mediaManagement'
+import { UserType } from '@/common/types'
 
 const user = useUser()
 
@@ -167,23 +173,26 @@ const addGroup = () => {
   groupInput.value = ''
 }
 
-const groupTableData = {
-  管理员: async () => {
-    try {
-      const res = await adminGetAllGroups({
-        page: tableData.pageNum,
-        per_page: tableData.pageSize
-      })
-      if (res.IsSuccess) {
-        tableData.data = res.Data
-      } else {
-        ElMessage.warning(res.Message)
-      }
-    } catch (error) {
-      console.log(error)
+const getAdminGetAllGroups = async () => {
+  try {
+    const res = await adminGetAllGroups({
+      page: tableData.pageNum,
+      per_page: tableData.pageSize
+    })
+    if (res.IsSuccess) {
+      tableData.data = res.Data
+    } else {
+      ElMessage.warning(res.Message)
     }
-  },
-  普通用户: async () => {
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const groupTableData = {
+  [UserType.root]: getAdminGetAllGroups,
+  [UserType.admin]: getAdminGetAllGroups,
+  [UserType.general]: async () => {
     try {
       const res = await getUserMonitored()
       if (res.IsSuccess) {

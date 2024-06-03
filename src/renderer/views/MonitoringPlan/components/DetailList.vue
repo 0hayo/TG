@@ -63,12 +63,24 @@ const usePlan = usePlanStore()
 
 const activeMsgId = ref('')
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+let timer
+onMounted(() => {
+  timer = setInterval(() => {
+    queryLatestMessages()
+  }, 1000)
+})
+
+onUnmounted(() => {
+  clearInterval(timer)
+})
+
 const monitoringData = ref<MessagesRes[]>([])
-const queryLatestMessages = async (v: string[]) => {
+const queryLatestMessages = async () => {
   try {
     const res = await latestKeyMessages({
       channel_name: 'EG521,11123',
-      keywords: v.join(',')
+      keywords: usePlan.getKeywords.join(',')
     })
     if (res.IsSuccess) {
       monitoringData.value = res.Data
@@ -88,17 +100,6 @@ const queryLatestMessages = async (v: string[]) => {
     console.log(error)
   }
 }
-
-watch(
-  () => usePlan.getKeywords,
-  (v) => {
-    queryLatestMessages(v)
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
 </script>
 
 <style scoped lang="less">
