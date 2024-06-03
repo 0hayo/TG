@@ -2,7 +2,7 @@ import service from '@/apis/service'
 import { ApiResponse } from '@/apis/types'
 
 // 群组ID查群组名
-export function searchTitle(params: { tg_group_id: string }) {
+export function searchTitle(params: { group_url: string }) {
   return service.post<void, ApiResponse<{ group_id: string; group_title: string }>>(
     '/tggroup/search_title',
     params

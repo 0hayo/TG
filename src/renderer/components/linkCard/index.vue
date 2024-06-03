@@ -72,7 +72,7 @@ const handleAdd = {
 const getGroupName = async () => {
   try {
     const res = await searchTitle({
-      tg_group_id: props.keyword
+      group_url: props.keyword
     })
     if (res.IsSuccess) {
       groupName.value = res.Data.group_title
