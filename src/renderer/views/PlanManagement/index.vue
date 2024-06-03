@@ -49,7 +49,7 @@ const pageSize = ref(10)
 const show = () => {
   addDialog({
     title: '新增方案',
-    width: '600px',
+    width: '',
     component: shallowRef(AddPlan),
     showfooter: false,
     callBack(name: string) {
