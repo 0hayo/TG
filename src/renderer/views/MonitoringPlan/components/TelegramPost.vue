@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full overflow-y-auto pb-6 gap-2 relative">
-    <div class="sticky top-0 py-4 bg-Layout-Card/90 backdrop-blur-sm flex-col items-center">
+    <div class="sticky top-0 py-4 bg-Layout-Card/80 backdrop-blur-sm flex-col items-center">
       <div class="w-125 pl-9">
         <h2 class="text-h2-medium">{{ currentMsg.channel_name }}</h2>
         <p class="text-xl-regular underline">{{ currentMsg.message_link }}</p>
@@ -34,7 +34,7 @@ const insertTelegramScript = () => {
   script.setAttribute('data-telegram-post', props.currentMsg.message_link.split('https://t.me/')[1])
   script.setAttribute('data-width', '100%')
   script.setAttribute('data-color', '')
-  script.setAttribute('data-dark', '1')
+  script.setAttribute('data-dark', '')
   script.setAttribute('data-dark-color', '')
   telegramContainer.value.appendChild(script)
 }

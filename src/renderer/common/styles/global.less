@@ -5,4 +5,37 @@ font-style: normal;
 font-weight: 700;
 text-decoration-line: underline;
 padding: 0 4px;
+font-size: 20px;
+animation: heart  infinite;
+display: inline-block;
+
+  animation-duration: calc(2s * 1.3);
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes heart {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  14% {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+  }
+
+  28% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  42% {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+  }
+
+  70% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }
