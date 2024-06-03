@@ -1,5 +1,7 @@
 <template>
-  <div class="flex-row w-full h-100vh overflow-hidden bg-Layout-Card color-Neutral-Text-Primary">
+  <div
+    class="flex-row w-full min-w-1440px h-100vh overflow-hidden bg-Layout-Card color-Neutral-Text-Primary"
+  >
     <Nav></Nav>
     <div class="w-full">
       <Header></Header>
