@@ -47,8 +47,10 @@ import iconBtn from '@/components/iconbtn/index.vue'
 import XButton from '@/components/XButton/index.vue'
 import { login } from '@/apis/login'
 import { UserType } from '@/common/types'
+import usePlanStore from '@/store/common/usePlan'
 
 const router = useRouter()
+const planStore = usePlanStore()
 
 const params = reactive({
   username: 'j20241',
@@ -63,7 +65,8 @@ const handle = async () => {
       useUser().setToken(res.Data.access_token)
       useUser().setUserInfo(res.Data.user_info)
       if (res.Data.user_info.account_level === UserType.general) {
-        router.push('/MonitoringPlan/0')
+        const id = planStore.getPlanInfo.plan_id || 0
+        router.push(`/MonitoringPlan/${id}`)
       } else {
         router.push('/MediaManagement')
       }

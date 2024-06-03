@@ -130,7 +130,7 @@ const handleMsg = async (msg: MessagesRes) => {
   valueHtml.value = `用户：${msg.sender_name}；用户ID：${msg.sender_id}；时间：${msg.message_time}；群名：${msg.channel_name}；言论：${msg.message_text}；`
 
   const image = await webviewRef.value.capturePage()
-  console.log(image)
+  console.log(image.toDataURL())
   // const appIcon = image.toDataURL()
   // console.log(appIcon)
 }

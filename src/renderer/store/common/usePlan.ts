@@ -12,6 +12,9 @@ const usePlanStore = defineStore(NAMES.USE_PLAN, {
   getters: {
     getKeywords(state) {
       return state.planInfo?.inspect_keys || []
+    },
+    getPlanInfo(state) {
+      return state.planInfo
     }
   },
   actions: {
