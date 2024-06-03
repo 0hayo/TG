@@ -32,7 +32,7 @@
       <div class="scroll-smooth overflow-y-auto grid gap-3">
         <LinkCard
           v-for="(item, i) in newGroupList"
-          :key="i"
+          :key="item"
           :keyword="item"
           type="group"
           @del-keyword="

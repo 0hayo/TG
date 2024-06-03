@@ -30,6 +30,8 @@ const emits = defineEmits<{
 }>()
 
 onMounted(() => {
+  console.log(props.keyword)
+
   props.type === 'group' && !props.groupId && getGroupName()
 })
 

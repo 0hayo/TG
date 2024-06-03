@@ -89,7 +89,7 @@ const queryLatestMessages = async () => {
           item.message_text = item.message_text.replaceAll(v, `<p id="keyword">${v}</p>`)
         })
       })
-      if (monitoringData.value.length > 0) {
+      if (monitoringData.value.length > 0 && !activeMsgId.value) {
         activeMsgId.value = monitoringData.value[0].message_id
         emits('handleMsg', monitoringData.value[0])
       }

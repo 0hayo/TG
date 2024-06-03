@@ -128,6 +128,11 @@ const handleMsg = async (msg: MessagesRes) => {
   tgSrc.value = msg.msg_online_link
   tgWight.value = msg.message_link
   valueHtml.value = `用户：${msg.sender_name}；用户ID：${msg.sender_id}；时间：${msg.message_time}；群名：${msg.channel_name}；言论：${msg.message_text}；`
+
+  const image = await webviewRef.value.capturePage()
+  console.log(image)
+  // const appIcon = image.toDataURL()
+  // console.log(appIcon)
 }
 </script>
 
