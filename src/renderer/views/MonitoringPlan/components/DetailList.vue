@@ -1,10 +1,12 @@
 <template>
-  <div class="h-full scroll-smooth overflow-y-auto grid px-4 py-2 gap-2">
+  <div
+    class="h-full scroll-smooth overflow-y-auto grid grid-flow-row auto-rows-max px-4 py-2 gap-3"
+  >
     <!-- <transition-group name="el-zoom-in-center"> -->
     <div
       v-for="item in monitoringData"
       :key="item.sender_id"
-      class="'flex-col gap-1 px-4 py-2 rounded text-base-regular border border-transparent hover:bg-Neutral-Fill-PrimaryDebit hover:shadow-2xl cursor-pointer hover:border-Layout-White'"
+      class="'flex-col gap-1 px-4 py-2 rounded text-base-regular border-2 border-transparent cursor-pointer msg_hover"
       :class="{ msg_active: activeMsgId === item.message_id }"
       @click="
         () => {
@@ -30,7 +32,7 @@
       </div>
       <hr />
       <div class="flex">
-        <div class="h-20 text-clip overflow-hidden" v-html="item.message_text"></div>
+        <div class="" v-html="item.message_text"></div>
       </div>
       <!-- <div class="">{{ item.message_link }}</div> -->
       <!-- <div class="">{{ item.msg_online_link }}</div> -->
@@ -72,7 +74,7 @@ const queryLatestMessages = async (v: string[]) => {
       monitoringData.value = res.Data
       monitoringData.value.forEach((item) => {
         item.hit_keyword.forEach((v) => {
-          item.message_text = item.message_text.replaceAll(v, `<b style="color: #eb5757">${v}</b>`)
+          item.message_text = item.message_text.replaceAll(v, `<b id="keyword">${v}</b>`)
         })
       })
       if (monitoringData.value.length > 0) {
@@ -101,6 +103,17 @@ watch(
 
 <style scoped lang="less">
 .msg_active {
-  border: 1px solid red;
+  border-color: #fff;
+  box-shadow:
+    0px 0px 18px 0 rgba(59, 130, 246, 0.35),
+    0px 0px 12px 0 rgba(59, 130, 246, 0.25),
+    0px 0px 6px 0 rgba(59, 130, 246, 0.15);
+}
+.msg_hover:hover {
+  border-color: #fff;
+  box-shadow:
+    0px 0px 18px 0 rgba(59, 130, 246, 0.35),
+    0px 0px 12px 0 rgba(59, 130, 246, 0.25),
+    0px 0px 6px 0 rgba(59, 130, 246, 0.15);
 }
 </style>
