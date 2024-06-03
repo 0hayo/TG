@@ -8,7 +8,7 @@
         </template>
         <template #append><i class="ri-corner-down-left-line" @click="keydownEnter"></i></template>
       </el-input>
-      <h6 class="inline-flex items-center text-h6-medium mt-16px">可用关键词</h6>
+      <h6 class="inline-flex items-center text-h6-medium mt-16px">曾用关键词</h6>
       <div class="scroll-smooth overflow-y-auto">
         <!-- <div
           class="h-58px border-solid border-1px border-[var(--tg-border-color)] rounded-4px mt-16px flex items-center justify-between px-16px"
