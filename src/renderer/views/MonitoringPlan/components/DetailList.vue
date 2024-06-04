@@ -1,12 +1,12 @@
 <template>
   <div
-    class="h-full scroll-smooth overflow-y-auto grid grid-flow-row auto-rows-max px-4 py-2 gap-3"
+    class="h-full scroll-smooth overflow-y-auto overflow-x-clip grid grid-flow-row auto-rows-max px-4 py-2 gap-3"
   >
     <!-- <transition-group name="el-zoom-in-center"> -->
     <div
       v-for="item in monitoringData"
       :key="item.sender_id"
-      class="flex-col gap-1 px-4 py-2 rounded text-base-regular border-2 border-transparent cursor-pointer msg_hover"
+      class="w-112 flex-col gap-2 px-4 py-2 rounded text-base-regular border-2 border-transparent cursor-pointer msg_hover"
       :class="{ msg_active: activeMsgId === item.message_id }"
       @click="
         () => {
@@ -32,7 +32,10 @@
       </div>
       <hr />
       <div class="flex">
-        <div class="color-Neutral-Text-Secondary" v-html="item.message_text"></div>
+        <div
+          class="color-Neutral-Text-Secondary text-wrap text-ellipsis overflow-hidden"
+          v-html="item.message_text"
+        ></div>
       </div>
       <!-- <div class="">{{ item.message_link }}</div> -->
       <!-- <div class="">{{ item.msg_online_link }}</div> -->
