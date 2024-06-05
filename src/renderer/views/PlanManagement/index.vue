@@ -9,6 +9,7 @@
         <el-table-column label="序号" width="60" type="index" />
         <el-table-column prop="plan_name" label="方案名称" />
         <el-table-column prop="tg_user_group_id" label="监测媒体" />
+        <el-table-column prop="inspect_keys" label="关键词" />
         <el-table-column prop="is_active" label="状态" />
         <el-table-column prop="created_at" label="生效时间" />
         <el-table-column prop="" label="创建人" />
