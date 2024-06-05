@@ -24,7 +24,7 @@
     margin: 0;
     background-color: #e5e5e5;
     // display: flex;
-    border-bottom: 1px solid #d4d4d4;
+    border-bottom: 1px solid var(--Neutral-Stroke-Stroke);
 
     .el-dialog__headerbtn {
       display: none;
@@ -34,7 +34,7 @@
     padding: 0;
   }
   .el-dialog__footer {
-    border-top: 1px solid #d4d4d4;
+    border-top: 1px solid var(--Neutral-Stroke-Stroke);
     height: 48px;
     padding: 8px 16px;
   }
@@ -42,7 +42,49 @@
 
 
 .el-table{
-  background-color: var() !important;
+  background-color: var(--Layout-Card) !important;
+
+  .el-table__inner-wrapper{
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  thead{
+    color:var(--Neutral-Text-Tertiary) !important;
+  }
+  
+  th{
+    background-color: var(--Layout-White) !important;
+    border-color: var(--Neutral-Stroke-Stroke) !important;
+  }
+  tr {
+
+    &:hover{
+      td{
+        background-color: var(--Neutral-Text-PrimaryDebit) !important;
+        // color:white;
+      }
+    }
+
+    td{
+      background-color: var(--Layout-Sidebar) !important;
+      border-color: var(--Neutral-Stroke-Stroke) !important;
+    }
+    // &:nth-child(odd){
+    //   td{
+    //     background-color: var(--Layout-White) !important;
+    //     border-color: var(--Neutral-Stroke-Stroke) !important;
+    //   }
+    // }
+
+    // &:nth-child(even){
+    //   td{
+    //     background-color: var(--Layout-Sidebar) !important;
+    //     border-color: var(--Neutral-Stroke-Stroke) !important;
+    //   }
+    // }
+ 
+  }
 }
 
 // .el-input {

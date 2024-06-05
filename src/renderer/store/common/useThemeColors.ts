@@ -12,7 +12,28 @@ const useThemeColors = defineStore(NAMES.USE_STYLE, {
         '--Layout-Black': colors.Layout.Black,
         '--Layout-Sidebar': colors.Layout.Sidebar,
         '--Layout-Card': colors.Layout.Card,
-        '--Neutral-Text-Primary': colors.Neutral.Text.Primary
+        '--Neutral-Text-Primary': colors.Neutral.Text.Primary,
+        '--Neutral-Text-PrimaryDebit': colors.Neutral.Text.PrimaryDebit,
+        '--Neutral-Text-Secondary': colors.Neutral.Text.Secondary,
+        '--Neutral-Text-Tertiary': colors.Neutral.Text.Tertiary,
+        '--Neutral-Text-Quaternary': colors.Neutral.Text.Quaternary,
+        '--Neutral-Text-Placeholder': colors.Neutral.Text.Placeholder,
+        '--Neutral-Text-Description': colors.Neutral.Text.Description,
+        '--Neutral-Text-TextHover': colors.Neutral.Text.TextHover,
+        '--Neutral-Text-TextActive': colors.Neutral.Text.TextActive,
+        '--Neutral-Text-TextDisabled': colors.Neutral.Text.TextDisabled,
+
+        '--Neutral-Fill-Fill': colors.Neutral.Fill.Fill,
+        '--Neutral-Fill-FillHover': colors.Neutral.Fill.FillHover,
+        '--Neutral-Fill-FillActive': colors.Neutral.Fill.FillActive,
+        '--Neutral-Text-FillDisabled': colors.Neutral.Fill.FillDisabled,
+
+        '--Neutral-Stroke-Stroke': colors.Neutral.Stroke.Stroke,
+        '--Neutral-Stroke-StrokeHover': colors.Neutral.Stroke.StrokeHover,
+        '--Neutral-Stroke-StrokeActive': colors.Neutral.Stroke.StrokeActive,
+        '--Neutral-Stroke-StrokeDisabled': colors.Neutral.Stroke.StrokeDisabled,
+
+        '--Neutral-Effects-Effects': colors.Neutral.Effects.Effects
       },
       theme1: {
         '--layout-White': '#000',
@@ -39,7 +60,7 @@ const useThemeColors = defineStore(NAMES.USE_STYLE, {
         '--w-e-modal-button-bg-color': '#fafafa',
         '--w-e-modal-button-border-color': '#d9d9d9'
       },
-      mode: 'theme1'
+      mode: 'default'
     }
   },
   getters: {},
