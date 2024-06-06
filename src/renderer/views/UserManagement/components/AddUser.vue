@@ -166,7 +166,7 @@ defineExpose({
       })
     } else {
       type.value = 'add'
-      userInfo.organization = props.selectSites?.organizations ? '' : props.selectSites!.name
+      userInfo.organization = props.selectSites?.organizations ? '' : props.selectSites?.name || ''
       userInfo.city_category = props.cityCategory
     }
     visible.value = true

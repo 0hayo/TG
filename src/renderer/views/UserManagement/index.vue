@@ -39,7 +39,7 @@
           <el-table-column prop="name" label="姓名" />
           <el-table-column prop="account_level" label="角色" />
           <el-table-column prop="username" label="登录账号" />
-          <el-table-column prop="city_category" label="所属单位" />
+          <el-table-column prop="organization" label="所属单位" />
           <el-table-column prop="expiration_date" label="生效时间" />
           <el-table-column prop="is_login_blocked" label="禁止登录">
             <template #default="{ row }"> {{ row.is_login_blocked ? '是' : '否' }}</template>
