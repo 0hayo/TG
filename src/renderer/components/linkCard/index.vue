@@ -50,8 +50,8 @@ const handleAdd = {
     try {
       const res = await addUserMonitored({
         group_url: props.keyword,
-        group_name: groupName.value,
-        group_id: group_id.value
+        group_name: groupName.value || props.groupId || '',
+        group_id: group_id.value || props.keyword.split('https://t.me/')[1]
       })
       if (res.IsSuccess) {
         ElMessage.success(res.Message)

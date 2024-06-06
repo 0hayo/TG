@@ -74,7 +74,7 @@
         <el-table :data="tableData.data" stripe style="position: absolute; width: 100%">
           <el-table-column label="序号" width="60" type="index" />
           <el-table-column prop="" min-width="100" label="单位" />
-          <el-table-column prop="group_id" min-width="100" label="名称" />
+          <el-table-column prop="group_name" min-width="100" label="名称" />
           <el-table-column prop="group_url" min-width="100" label="链接" />
           <el-table-column prop="status" min-width="100" label="状态">
             <template #default="{ row }">
