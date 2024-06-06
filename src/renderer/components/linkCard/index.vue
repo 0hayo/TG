@@ -41,12 +41,15 @@ onMounted(() => {
 })
 
 const groupName = ref('')
+const group_id = ref('')
 
 const handleAdd = {
   group: async () => {
     try {
       const res = await addUserMonitored({
-        group_url: props.keyword
+        group_url: props.keyword,
+        group_name: groupName.value,
+        group_id: group_id.value
       })
       if (res.IsSuccess) {
         ElMessage.success(res.Message)
@@ -83,6 +86,7 @@ const getGroupName = async () => {
     })
     if (res.IsSuccess) {
       groupName.value = res.Data.group_title
+      group_id.value = res.Data.group_id
       ElMessage.success(res.Message)
     } else {
       ElMessage.warning(res.Message)

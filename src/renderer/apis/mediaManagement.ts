@@ -10,8 +10,12 @@ export function searchTitle(params: { group_url: string }) {
 }
 
 // 用户_添加监测群组
-export function addUserMonitored(params: { group_url: string }) {
-  return service.post<void, ApiResponse<null>>('/tggroup/add_user_monitored', params)
+export function addUserMonitored(params: {
+  group_url: string
+  group_id: string
+  group_name: string
+}) {
+  return service.post<void, ApiResponse<null>>('/tggroup/add_group', params)
 }
 
 // 管理员_查询所有群组
@@ -19,7 +23,7 @@ export interface GroupInfo {
   added_at: string
   added_by: string
   group_id: string
-  group_link: string
+  group_url: string
   group_name: string
   id: number
   media_type: string
@@ -34,7 +38,7 @@ export interface GroupInfo {
   added_at: string
   added_by: string
   group_id: string
-  group_link: string
+  group_url: string
   group_name: string
   id: number
   media_type: string

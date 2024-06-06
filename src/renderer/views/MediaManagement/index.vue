@@ -52,7 +52,7 @@
         <LinkCard
           v-for="(item, i) in allActiveList"
           :key="i"
-          :keyword="item.group_link"
+          :keyword="item.group_url"
           :group-id="item.group_name"
           type="group"
           @del-keyword="
@@ -74,8 +74,8 @@
         <el-table :data="tableData.data" stripe style="position: absolute; width: 100%">
           <el-table-column label="序号" width="60" type="index" />
           <el-table-column prop="" min-width="100" label="单位" />
-          <el-table-column prop="group_name" min-width="100" label="名称" />
-          <el-table-column prop="group_link" min-width="100" label="链接" />
+          <el-table-column prop="group_id" min-width="100" label="名称" />
+          <el-table-column prop="group_url" min-width="100" label="链接" />
           <el-table-column prop="status" min-width="100" label="状态" />
           <el-table-column prop="added_at" min-width="100" label="添加时间" />
           <el-table-column prop="added_by" min-width="100" label="添加人" />
@@ -223,7 +223,7 @@ const queryAllActive = async () => {
 const setUserMonitoreds = async (row: GroupInfo, b: boolean) => {
   try {
     const res = await setUserMonitored({
-      group_url: row.group_link,
+      group_url: row.group_url,
       new_status: b
     })
     if (res.IsSuccess) {
@@ -240,7 +240,7 @@ const setUserMonitoreds = async (row: GroupInfo, b: boolean) => {
 const updateTgStatus = async (row: GroupInfo) => {
   try {
     const res = await updateTggroupStatus({
-      group_url: row.group_link,
+      group_url: row.group_url,
       new_status: '2'
     })
     if (res.IsSuccess) {
@@ -257,7 +257,7 @@ const updateTgStatus = async (row: GroupInfo) => {
 const deleteGroups = async (row: GroupInfo) => {
   try {
     const res = await deleteGroup({
-      group_url: row.group_link
+      group_url: row.group_url
     })
     if (res.IsSuccess) {
       groupTableData[user.getAccountLevel]?.()
@@ -273,7 +273,7 @@ const deleteGroups = async (row: GroupInfo) => {
 const addGroups = async (row: GroupInfo) => {
   try {
     const res = await addTgGroup({
-      group_url: row.group_link,
+      group_url: row.group_url,
       group_id: row.group_id,
       group_name: row.group_name
     })
