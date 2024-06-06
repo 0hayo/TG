@@ -1,35 +1,40 @@
 <template>
   <div class="w-full h-full flex-row">
-    <div class="w-200px p-4 flex-col gap-2 border-r border-b-Neutral-Stroke-Stroke">
+    <div class="w-200px p-4 flex-col gap-2 border-r border-r-Neutral-Stroke-Stroke">
       <div class="self-start">
         <p class="font-size-12px color-Neutral-Text-Tertiary">媒体</p>
       </div>
       <nav
-        class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+        class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium bg-Primary-Fill-Fill color-neutral-50"
       >
         <i class="ri-telegram-fill"></i>Telegram
       </nav>
       <nav
-        class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+        class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium color-Neutral-Text-Tertiary cursor-not-allowed"
       >
         <i class="ri-twitter-fill"></i>Twitter
       </nav>
       <nav
-        class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+        class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium color-Neutral-Text-Tertiary cursor-not-allowed"
       >
         <i class="ri-facebook-box-fill"></i>facebook
       </nav>
     </div>
-    <div class="w-90 flex-col shrink-0 gap-2 p-16px border-r border-b-Neutral-Stroke-Stroke">
-      <h6 class="inline-flex items-center h-12 text-h6-medium">TG群组查询</h6>
-      <el-input v-model="groupInput" placeholder="输入需要查询的群链接" @keydown.enter="addGroup">
+    <div class="w-90 flex-col gap-2 pt-4 border-r border-r-Neutral-Stroke-Stroke">
+      <h6 class="px-4 inline-flex items-center h-12 text-h6-medium">TG群组查询</h6>
+      <el-input
+        v-model="groupInput"
+        class="px-4"
+        placeholder="输入需要查询的群链接"
+        @keydown.enter="addGroup"
+      >
         <template #prefix>
           <i class="ri-link-m"></i>
         </template>
         <template #append><i class="ri-corner-down-left-line" @click="addGroup"></i></template>
       </el-input>
-      <h6 class="inline-flex items-center text-h6-medium">查询结果</h6>
-      <div class="scroll-smooth overflow-y-auto grid gap-3">
+      <h6 class="px-4 inline-flex items-center text-h6-medium">查询结果</h6>
+      <div class="px-4 scroll-smooth grid gap-2 content-start">
         <LinkCard
           v-for="(item, i) in newGroupList"
           :key="item"
@@ -40,10 +45,10 @@
               newGroupList.splice(i, 1)
             }
           "
-        ></LinkCard>
+        />
       </div>
-      <h6 class="inline-flex items-center text-h6-medium">可监测群组</h6>
-      <div class="scroll-smooth overflow-y-auto grid gap-3">
+      <h6 class="px-4 inline-flex items-center text-h6-medium">可监测群组</h6>
+      <div class="px-4 pb-4 grow scroll-smooth overflow-y-auto grid gap-2 content-start">
         <LinkCard
           v-for="(item, i) in allActiveList"
           :key="i"
@@ -56,7 +61,7 @@
               groupTableData[user.getAccountLevel]?.()
             }
           "
-        ></LinkCard>
+        />
       </div>
     </div>
     <div class="grow p-16px flex flex-col">
@@ -66,12 +71,7 @@
         <el-select placeholder="监测中"> </el-select>
       </div>
       <div class="w-full grow relative">
-        <el-table
-          :data="tableData.data"
-          stripe
-          height="100%"
-          style="position: absolute; width: 100%"
-        >
+        <el-table :data="tableData.data" stripe style="position: absolute; width: 100%">
           <el-table-column label="序号" width="60" type="index" />
           <el-table-column prop="" min-width="100" label="单位" />
           <el-table-column prop="group_name" min-width="100" label="名称" />

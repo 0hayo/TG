@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="pt-6 px-12">
     <el-form
       ref="ruleFormRef"
       class="flex gap-24px px-12px"
@@ -9,7 +9,7 @@
       :rules="rules"
       onsubmit="return false"
     >
-      <div>
+      <div class="w-80 flex-none">
         <el-form-item label="方案名称" prop="plan_name">
           <el-input v-model="formLabelAlign.plan_name" placeholder="输入方案名称" class="">
             <template #prefix> <i class="ri-gps-line"></i> </template>
@@ -28,15 +28,18 @@
           <span>系统通知</span>
         </el-form-item>
         <el-form-item label="选择媒体">
-          <el-radio-group v-model="formLabelAlign.tg_user_group_id">
+          <el-radio-group v-model="formLabelAlign.tg_user_group_id" class="items-start! flex-col">
             <el-radio value="Telegram" label="Telegram">Telegram </el-radio>
-            <el-radio value="Twitter" label="Twitter"> Twitter </el-radio>
-            <el-radio value="facebook" label="facebook"> facebook </el-radio>
+            <el-radio disabled value="Twitter" label="Twitter"> Twitter </el-radio>
+            <el-radio disabled value="facebook" label="facebook"> facebook </el-radio>
           </el-radio-group>
         </el-form-item>
       </div>
       <el-form-item label="选择关键词" class="flex-1">
-        <el-checkbox-group v-model="formLabelAlign.inspect_keys">
+        <el-checkbox-group
+          v-model="formLabelAlign.inspect_keys"
+          class="grid grid-cols-[180px_180px] gap-2 grid-rows-8 content-start"
+        >
           <el-checkbox
             v-for="item in keywordsList"
             :key="item.id"
@@ -48,9 +51,11 @@
       </el-form-item>
     </el-form>
   </div>
-  <div class="flex justify-end gap-4">
-    <XButton class="w-25" type="Primary" @click="save(ruleFormRef)">新增方案</XButton>
-    <XButton class="w-25" type="Warning" @click="emits('close')">取消</XButton>
+  <div class="flex justify-end items-center gap-4 h-12 border-t border-Neutral-Stroke-Stroke px-4">
+    <XButton type="Primary" @click="save(ruleFormRef)"
+      ><i class="ri-check-line"></i>新增方案</XButton
+    >
+    <XButton type="Warning" @click="emits('close')"><i class="ri-close-line"></i>取消</XButton>
   </div>
 </template>
 

@@ -167,6 +167,7 @@ export default defineConfig({
         }
       }
     },
+
     fontFamily: {
       myLocalFont: ['MiSans VF']
     },

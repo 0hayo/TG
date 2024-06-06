@@ -17,25 +17,32 @@
       ></webview>
       <TelegramPost v-else-if="currentMsg" :key="tgSrc" :current-msg="currentMsg" />
     </div>
-    <div :class="showEditor ? 'w-120' : 'w-0'" class="transition-all duration-700 ease-in-out">
-      <div style="border: 1px solid #ccc">
+    <div :class="showEditor ? 'w-140' : 'w-0'" class="transition-all duration-150 ease-in-out">
+      <div
+        class="w-140 flex justify-between items-center border-b-Neutral-Stroke-Stroke border-b px-2"
+      >
+        <iconBtn icon-name="login-box-line" @click="handleEditor" />
         <Toolbar
-          style="border-bottom: 1px solid #ccc; height: calc(10vh - 48px)"
+          class="flex bg-transparent h-10"
+          style="background-color: transparent"
           :editor="editorRef"
           :default-config="toolbarConfig"
           mode="default"
         />
-        <Editor
-          v-model="valueHtml"
-          style="height: 80vh; overflow-y: hidden"
-          :default-config="editorConfig"
-          mode="default"
-          @on-created="handleCreated"
-        />
+        <XButton class="p-2" text icon-name="export-line" @click="saveDocx"> 导出word</XButton>
+        <!-- <iconBtn icon-name="screenshot-line" @click="screenshotStatus = true"></iconBtn> -->
+        <!--截图组件-->
       </div>
-      <XButton type="Primary" @click="saveDocx">导出word</XButton>
-      <iconBtn icon-name="screenshot-line" @click="screenshotStatus = true"></iconBtn>
-      <!--截图组件-->
+
+      <Editor
+        v-model="valueHtml"
+        class="w-140"
+        style="height: calc(100vh - 40px); overflow-y: hidden"
+        :default-config="editorConfig"
+        mode="simple"
+        @on-created="handleCreated"
+      />
+
       <screen-short
         v-if="screenshotStatus"
         @destroy-component="destroyComponent"
@@ -63,6 +70,66 @@ import mitts from '@/utils/mitts'
 import XButton from '@/components/XButton/index.vue'
 import iconBtn from '@/components/iconbtn/index.vue'
 
+import { IToolbarConfig, IEditorConfig } from '@wangeditor/editor'
+
+const toolbarConfig: Partial<IToolbarConfig> = {
+  // TS 语法
+  // const toolbarConfig = {                        // JS 语法
+  /* 工具栏配置 */
+}
+
+// 初始化 MENU_CONF 属性
+const editorConfig: Partial<IEditorConfig> = {
+  // TS 语法
+  // const editorConfig = {                       // JS 语法
+  MENU_CONF: {
+    fontFamily: {
+      fontFamilyList: [
+        '方正小标宋简体',
+        '黑体',
+        '仿宋_GB2312',
+        { name: '仿宋', value: '仿宋' },
+        'Arial',
+        'Tahoma',
+        'Verdana'
+      ]
+    },
+    fontSize: {
+      fontSizeList: [
+        { name: '二号', value: '29px' },
+        { name: '三号', value: '21px' }
+      ]
+    }
+  }
+
+  // 其他属性...
+}
+
+editorConfig.placeholder = '请输入内容...'
+
+toolbarConfig.toolbarKeys = [
+  // 菜单 key
+  'headerSelect',
+  'fontFamily',
+  // 分割线
+  '|',
+  'color',
+
+  'bgColor',
+  // 菜单 key
+  'bold',
+  'italic',
+  'numberedList'
+
+  // 菜单组，包含多个菜单
+
+  // 继续配置其他菜单...
+]
+
+const handleEditor = () => {
+  mitts.emit('editor')
+}
+
 const isElectron = ref(false)
 onBeforeMount(() => {
   isElectron.value = !!window.electronApi
@@ -79,10 +146,18 @@ const editorRef = shallowRef()
 const showEditor = ref(false)
 
 // 内容 HTML
-const valueHtml = ref('<h1>hello</h1>')
-
-const toolbarConfig = {}
-const editorConfig = { placeholder: '请输入内容...' }
+const valueHtml = ref(
+  `<h1 style="text-align: center;"><span style="font-size: 29px; font-family: 方正小标宋简体;">（自主发现研判）电报网民“***”在“***”群组称“***”攻击我领导人</span></h1><p><br></p>
+<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">工作发现，XXX年XX月XX日XX时XX分，电报网民“***”在“***”群组称“***”攻击我领导人。</span></p>
+<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">一、样本内容</span></p>
+<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">（内容）</span></p>
+<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">二、梳理分析</span></p>
+<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">截止目前**点赞***转发（截止目前暂无转发评论）</span></p>
+<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">三、链接</span></p>
+<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">（群组链接）</span></p>
+<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">四、附件</span></p>
+`
+)
 
 onMounted(() => {
   mitts.on('editor', () => {
@@ -117,7 +192,7 @@ const addDialog = inject(ADD_DIALOG)
 const show = () => {
   addDialog?.({
     title: '新增监测方案',
-    width: '600px',
+    width: '',
     showfooter: false,
     component: shallowRef(AddPlan)
   })
@@ -138,4 +213,27 @@ const handleMsg = async (msg: MessagesRes) => {
 }
 </script>
 
-<style scoped lang="less"></style>
+<style lang="less">
+.w-e-text-container {
+  h1 {
+    font-size: 20pt;
+    font-weight: bold;
+  }
+  h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: bold;
+  }
+  h5 {
+    font-size: 0.83em;
+    font-weight: bold;
+  }
+}
+</style>

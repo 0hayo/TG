@@ -1,24 +1,20 @@
 <template>
   <div class="h-full flex">
-    <div class="w-90 flex-col shrink-0 gap-2 p-16px border-r border-b-Neutral-Stroke-Stroke">
-      <h6 class="inline-flex items-center h-12 text-h6-medium">添加关键词</h6>
-      <el-input v-model="keyword" placeholder="输入新的关键词" @keydown.enter="keydownEnter">
+    <div class="w-90 flex-col pt-4 shrink-0 gap-2 border-r border-r-Neutral-Stroke-Stroke">
+      <h6 class="px-4 inline-flex items-center h-12 text-h6-medium">添加关键词</h6>
+      <el-input
+        v-model="keyword"
+        class="px-4"
+        placeholder="输入新的关键词"
+        @keydown.enter="keydownEnter"
+      >
         <template #prefix>
           <i class="ri-rss-line"></i>
         </template>
         <template #append><i class="ri-corner-down-left-line" @click="keydownEnter"></i></template>
       </el-input>
-      <h6 class="inline-flex items-center text-h6-medium mt-16px">曾用关键词</h6>
-      <div class="scroll-smooth overflow-y-auto">
-        <!-- <div
-          class="h-58px border-solid border-1px border-[var(--tg-border-color)] rounded-4px mt-16px flex items-center justify-between px-16px"
-        >
-          <p>方子舟读者交流群</p>
-          <div>
-            <el-button link :icon="Delete">删除</el-button>
-            <el-button :icon="Plus">启用</el-button>
-          </div>
-        </div> -->
+      <h6 class="px-4 inline-flex items-center h-12 text-h6-medium">曾用关键词</h6>
+      <div class="px-4 pb-4 grow scroll-smooth overflow-y-auto grid gap-2 content-start">
         <LinkCard
           v-for="(item, i) in keysList.data"
           :key="i"

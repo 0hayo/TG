@@ -1,10 +1,15 @@
 <template>
   <div
-    class="mb-12px transition ease-in-out delay-150 duration-500 h-14.5 rounded-1 flex items-center justify-between px-16px border border-Neutral-Stroke-Stroke hover:border-Layout-White hover:shadow-lg"
+    class="transition ease-in-out duration-600 h-14.5 rounded-1 flex items-center justify-between px-16px border-0.5 border-Neutral-Stroke-Stroke hover:border-Layout-White hover:shadow-lg"
   >
-    <div>
-      <p class="text-base-medium">{{ type === 'group' ? groupName || groupId : keyword }}</p>
-      <p v-if="type === 'group'" class="text-sm-regular text-Neutral-Text-Secondary">
+    <div class="w-43 flex-col items-start">
+      <p class="w-full text-base-medium whitespace-nowrap truncate">
+        {{ type === 'group' ? groupName || groupId : keyword }}
+      </p>
+      <p
+        v-if="type === 'group'"
+        class="text-sm-regular text-Neutral-Text-Secondary w-full text-base-medium whitespace-nowrap truncate"
+      >
         {{ keyword }}
       </p>
     </div>

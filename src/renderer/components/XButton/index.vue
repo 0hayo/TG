@@ -1,7 +1,7 @@
 <template>
   <button
     :class="[
-      'flex-inline justify-center items-center  border-rd-1 gap-2 text-base-regular',
+      'flex-inline justify-center items-center  border-rd-1 gap-2 text-base-medium color-neutral-50',
       sizeClass,
       typeClass
     ]"
@@ -52,23 +52,23 @@ export default defineComponent({
       switch (this.type) {
         case 'default':
           baseClass =
-            'bg-Neutral-Fill-Fill text-Neutral-Text-PrimaryDebit hover:bg-Neutral-Fill-FillHover active:bg-Neutral-Fill-FillActive'
+            'bg-Neutral-Fill-Fill  hover:bg-Neutral-Fill-FillHover active:bg-Neutral-Fill-FillActive'
           break
         case 'Primary':
           baseClass =
-            'bg-Primary-Fill-Fill text-Primary-Text-PrimaryDebit hover:bg-Primary-Fill-FillHover active:bg-Primary-Fill-FillActive'
+            'bg-Primary-Fill-Fill hover:bg-Primary-Fill-FillHover active:bg-Primary-Fill-FillActive'
           break
         case 'Success':
           baseClass =
-            'bg-Success-Fill-Fill text-Success-Text-PrimaryDebit hover:bg-Success-Fill-FillHover active:bg-Success-Fill-FillActive'
+            'bg-Success-Fill-Fill hover:bg-Success-Fill-FillHover active:bg-Success-Fill-FillActive'
           break
         case 'Warning':
           baseClass =
-            'bg-Warning-Fill-Fill text-Warning-Text-PrimaryDebit hover:bg-Warning-Fill-FillHover active:bg-Warning-Fill-FillActive'
+            'bg-Warning-Fill-Fill  hover:bg-Warning-Fill-FillHover active:bg-Warning-Fill-FillActive'
           break
         case 'Danger':
           baseClass =
-            'bg-Danger-Fill-Fill text-Danger-Text-PrimaryDebit hover:bg-Danger-Fill-FillHover active:bg-Danger-Fill-FillActive'
+            'bg-Danger-Fill-Fill  hover:bg-Danger-Fill-FillHover active:bg-Danger-Fill-FillActive'
           break
         default:
           break
