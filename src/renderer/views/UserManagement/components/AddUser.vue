@@ -93,6 +93,7 @@ const props = defineProps<{
   userType: 'user' | 'admin'
   queryAllUsers: () => void
   selectSites: SitesOrganization | undefined
+  cityCategory: string
 }>()
 
 const visible = ref(false)
@@ -101,9 +102,9 @@ const type = ref<'add' | 'edit'>('add')
 const userInfo = reactive({
   username: '',
   password: '',
-  organization: '1',
+  organization: '',
   account_level: props.userType === 'user' ? UserType.general : UserType.admin,
-  city_category: props.selectSites?.name || '',
+  city_category: '',
   expiration_date: '',
   created_at: '',
   font_size: '',
@@ -118,6 +119,8 @@ const userInfo = reactive({
 
 const confirm = async () => {
   try {
+    console.log(111111, userInfo, props)
+
     const res = await createUser({
       name: userInfo.name,
       username: userInfo.username,
@@ -163,6 +166,8 @@ defineExpose({
       })
     } else {
       type.value = 'add'
+      userInfo.organization = props.selectSites?.organizations ? '' : props.selectSites!.name
+      userInfo.city_category = props.cityCategory
     }
     visible.value = true
   }

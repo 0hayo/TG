@@ -70,6 +70,7 @@
     :user-type="userType"
     :query-all-users="queryAllUsers"
     :select-sites="selectSites"
+    :city-category="cityCategory"
   />
 
   <AddArea ref="addAreaRef" @update="querySitesOrganizations" />
@@ -130,10 +131,19 @@ const querySitesOrganizations = async () => {
 }
 
 const selectSites = ref<SitesOrganization>()
-const handleNodeClick = (data: SitesOrganization) => {
-  selectSites.value = data
+const cityCategory = ref('')
+const handleNodeClick = (row: SitesOrganization) => {
+  selectSites.value = row
+  if (!selectSites.value.organizations) {
+    data.value?.forEach((v) => {
+      v.organizations.forEach((j) => {
+        if (selectSites.value?.id === j.id) {
+          cityCategory.value = v.name
+        }
+      })
+    })
+  }
   userType.value = 'user'
-  console.log(data)
 }
 
 const addAreaRef = ref<InstanceType<typeof AddArea>>()

@@ -33,7 +33,9 @@
         </template>
         <template #append><i class="ri-corner-down-left-line" @click="addGroup"></i></template>
       </el-input>
-      <h6 class="px-4 inline-flex items-center text-h6-medium">查询结果</h6>
+      <h6 v-if="newGroupList.length > 0" class="px-4 inline-flex items-center text-h6-medium">
+        查询结果
+      </h6>
       <div class="px-4 scroll-smooth grid gap-2 content-start">
         <LinkCard
           v-for="(item, i) in newGroupList"
@@ -47,8 +49,13 @@
           "
         />
       </div>
-      <h6 class="px-4 inline-flex items-center text-h6-medium">可监测群组</h6>
-      <div class="px-4 pb-4 grow scroll-smooth overflow-y-auto grid gap-2 content-start">
+      <h6 v-if="user.getAccountLevel === '3'" class="px-4 inline-flex items-center text-h6-medium">
+        可监测群组
+      </h6>
+      <div
+        v-if="user.getAccountLevel === '3'"
+        class="px-4 pb-4 grow scroll-smooth overflow-y-auto grid gap-2 content-start"
+      >
         <LinkCard
           v-for="(item, i) in allActiveList"
           :key="i"
