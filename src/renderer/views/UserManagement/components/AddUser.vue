@@ -126,8 +126,8 @@ const confirm = async () => {
       username: userInfo.username,
       password: userInfo.password,
       account_level: userInfo.account_level,
-      organization: userInfo.organization,
-      city_category: userInfo.city_category,
+      organization: userInfo.account_level === UserType.general ? userInfo.organization : 'DTXC',
+      city_category: userInfo.account_level === UserType.general ? userInfo.city_category : 'DTXC',
       expiration_date: userInfo.expiration_date
     })
     if (res.IsSuccess) {
