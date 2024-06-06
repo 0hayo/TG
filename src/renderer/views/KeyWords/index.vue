@@ -19,7 +19,12 @@
             <el-button :icon="Plus">启用</el-button>
           </div>
         </div> -->
-        <LinkCard v-for="(item, i) in keywords" :key="i" :keyword="item" type="keyword"></LinkCard>
+        <LinkCard
+          v-for="(item, i) in keysList.data"
+          :key="i"
+          :keyword="item.keyword"
+          type="keyword"
+        ></LinkCard>
       </div>
     </div>
     <div class="grow p-16px flex flex-col">
@@ -71,20 +76,15 @@
 <script setup lang="ts">
 // import { Delete, Plus } from '@element-plus/icons-vue'
 import LinkCard from '@/components/linkCard/index.vue'
-import { addKey, getAllKey, keywordData, updateStatusKey } from '@/apis/KeyWords'
+import { addKey, getStatusKeys, keywordData, updateStatusKey } from '@/apis/KeyWords'
 
 onMounted(() => {
   getAllKeyword()
+  getAllKeywordTwo()
 })
 
 const keyword = ref('')
-const keywords = ref<string[]>([])
-
-const tableData = reactive({
-  pageSize: 1,
-  currentPage: 10,
-  data: [] as keywordData[]
-})
+// const keywords = ref<string[]>([])
 
 const keydownEnter = async () => {
   try {
@@ -103,11 +103,55 @@ const keydownEnter = async () => {
   }
 }
 
+// const getAllKeyword = async () => {
+//   try {
+//     const res = await getAllKey()
+//     if (res.IsSuccess) {
+//       tableData.data = res.Data
+//     } else {
+//       ElMessage.warning(res.Message)
+//     }
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
+const tableData = reactive({
+  pageSize: 1,
+  currentPage: 10,
+  data: [] as keywordData[]
+})
 const getAllKeyword = async () => {
   try {
-    const res = await getAllKey()
+    const res = await getStatusKeys({
+      status: 2,
+      page: tableData.currentPage,
+      per_page: tableData.pageSize
+    })
     if (res.IsSuccess) {
       tableData.data = res.Data
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const keysList = reactive({
+  pageSize: 1,
+  currentPage: 10,
+  data: [] as keywordData[]
+})
+const getAllKeywordTwo = async () => {
+  try {
+    const res = await getStatusKeys({
+      status: 1,
+      page: keysList.currentPage,
+      per_page: keysList.pageSize
+    })
+    if (res.IsSuccess) {
+      keysList.data = res.Data
     } else {
       ElMessage.warning(res.Message)
     }

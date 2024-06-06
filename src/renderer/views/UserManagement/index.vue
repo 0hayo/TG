@@ -6,6 +6,8 @@
       </div>
       <nav
         class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+        :class="{ adminActive: userType === 'admin' }"
+        @click="handleAdmin"
       >
         <i class="ri-user-line"></i>管理员
       </nav>
@@ -14,10 +16,17 @@
       </div>
       <nav
         class="flex self-stretch items-center h-8 gap-1 border-rd-1 px-2 text-base-medium hover:bg-Neutral-Fill-FillHover hover:color-Neutral-Text-PrimaryDebit"
+        @click="addAreaRef?.show(selectSites)"
       >
         <i class="ri-add-line"></i>新增地区
       </nav>
-      <el-tree class="mt-8px" :data="data" :props="defaultProps" @node-click="handleNodeClick" />
+      <el-tree
+        class="mt-8px"
+        :data="data"
+        :props="defaultProps"
+        highlight-current
+        @node-click="handleNodeClick"
+      />
     </div>
     <div class="flex-1 flex flex-col p-16px">
       <div class="flex items-center gap-2">
@@ -56,48 +65,26 @@
     </div>
   </div>
 
-  <AddUser ref="addUserRef" :query-all-users="queryAllUsers" />
+  <AddUser
+    ref="addUserRef"
+    :user-type="userType"
+    :query-all-users="queryAllUsers"
+    :select-sites="selectSites"
+  />
+
+  <AddArea ref="addAreaRef" @update="querySitesOrganizations" />
 </template>
 
 <script setup lang="ts">
 import XButton from '@/components/XButton/index.vue'
-import { UserInfo, getAllUsers } from '@/apis/user'
+import { SitesOrganization, UserInfo, getAllUsers, getSitesOrganizations } from '@/apis/user'
 import AddUser from './components/AddUser.vue'
+import AddArea from './components/AddArea.vue'
 
 onMounted(() => {
   queryAllUsers()
+  querySitesOrganizations()
 })
-
-interface Tree {
-  label: string
-  children?: Tree[]
-}
-
-const handleNodeClick = (data: Tree) => {
-  console.log(data)
-}
-
-const data: Tree[] = [
-  {
-    label: '岳阳',
-    children: [
-      {
-        label: '岳阳楼区'
-      },
-      {
-        label: '岳阳临湘'
-      },
-      {
-        label: '岳阳县'
-      }
-    ]
-  }
-]
-
-const defaultProps = {
-  children: 'children',
-  label: 'label'
-}
 
 const currentPage = ref(1)
 const pageSize = ref(10)
@@ -117,6 +104,50 @@ const queryAllUsers = async () => {
 }
 
 const addUserRef = ref<InstanceType<typeof AddUser>>()
+
+const data = ref<SitesOrganization[]>()
+
+const defaultProps = {
+  children: 'organizations',
+  label: 'name'
+}
+const querySitesOrganizations = async () => {
+  try {
+    const res = await getSitesOrganizations()
+    if (res.IsSuccess) {
+      data.value = res.Data.regions
+      data.value.forEach((item) => {
+        item.organizations.forEach((v) => {
+          v.id = v.org_id
+          v.name = v.org_name
+        })
+      })
+      console.log(data.value)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const selectSites = ref<SitesOrganization>()
+const handleNodeClick = (data: SitesOrganization) => {
+  selectSites.value = data
+  userType.value = 'user'
+  console.log(data)
+}
+
+const addAreaRef = ref<InstanceType<typeof AddArea>>()
+
+const userType = ref<'user' | 'admin'>('admin')
+const handleAdmin = () => {
+  userType.value = 'admin'
+  selectSites.value = undefined
+}
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.adminActive {
+  background: red;
+  color: white;
+}
+</style>

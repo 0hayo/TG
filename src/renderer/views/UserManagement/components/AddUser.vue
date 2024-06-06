@@ -62,7 +62,7 @@
           ></el-date-picker>
         </div>
       </el-form-item>
-      <el-form-item>
+      <!-- <el-form-item>
         <div>
           <p>账户角色</p>
           <el-radio-group v-model="userInfo.account_level" style="width: 200px">
@@ -70,7 +70,7 @@
             <el-radio :label="UserType.general">普通用户</el-radio>
           </el-radio-group>
         </div>
-      </el-form-item>
+      </el-form-item> -->
     </el-form>
     <template #footer>
       <XButton v-if="type === 'add'" class="w-25" type="Primary" @click="confirm">
@@ -85,12 +85,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import XButton from '@/components/XButton/index.vue'
-import { UserInfo, createUser, updateUser } from '@/apis/user'
+import { SitesOrganization, UserInfo, createUser, updateUser } from '@/apis/user'
 import lodash from 'lodash'
 import { UserType } from '@/common/types'
 
 const props = defineProps<{
+  userType: 'user' | 'admin'
   queryAllUsers: () => void
+  selectSites: SitesOrganization | undefined
 }>()
 
 const visible = ref(false)
@@ -100,8 +102,8 @@ const userInfo = reactive({
   username: '',
   password: '',
   organization: '1',
-  account_level: UserType.general,
-  city_category: '2',
+  account_level: props.userType === 'user' ? UserType.general : UserType.admin,
+  city_category: props.selectSites?.name || '',
   expiration_date: '',
   created_at: '',
   font_size: '',

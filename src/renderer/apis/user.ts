@@ -40,3 +40,31 @@ export function createUser(params: {
 export function updateUser(params: UserInfo) {
   return service.post<void, ApiResponse<null>>('/admin/update_user', params)
 }
+
+// 查询所有地区及其关联的所有单位名称
+export function getSitesOrganizations() {
+  return service.get<void, ApiResponse<{ regions: SitesOrganization[] }>>(
+    '/siteorg/get_sites_organizations'
+  )
+}
+export interface SitesOrganization {
+  id: number
+  name: string
+  organizations: Organization[]
+}
+export interface Organization {
+  id: number
+  name: string
+  org_id: number
+  org_name: string
+}
+
+// 创建地区
+export function addSite(params: { site_name: string }) {
+  return service.post<void, ApiResponse<null>>('/siteorg/add_site', params)
+}
+
+// 创建单位
+export function addOrg(params: { site_name: string; org_name: string }) {
+  return service.post<void, ApiResponse<null>>('/siteorg/add_org', params)
+}

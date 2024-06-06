@@ -1,6 +1,6 @@
 import { BrowserWindow } from 'electron'
 
-export const setWindowSize = (event, type: string) => {
+export const setWindowSize = async (event, type: string) => {
   const webContents = event.sender
   const win = BrowserWindow.fromWebContents(webContents)
   switch (type) {

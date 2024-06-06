@@ -35,6 +35,9 @@ service.interceptors.response.use(
     }
   },
   (error) => {
+    if (error.response.data.Status === 401) {
+      router.push('/login')
+    }
     return Promise.reject(ElMessage.error(error.response.data.Message))
   }
 )
