@@ -246,7 +246,7 @@ const updateTgStatus = async (row: GroupInfo) => {
   try {
     const res = await updateTggroupStatus({
       group_url: row.group_url,
-      new_status: '2'
+      new_status: 2
     })
     if (res.IsSuccess) {
       groupTableData[user.getAccountLevel]?.()

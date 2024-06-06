@@ -59,7 +59,7 @@ export function setUserMonitored(params: { group_url: string; new_status: boolea
 }
 
 // 超管_更新TG群组可用状态
-export function updateTggroupStatus(params: { group_url: string; new_status: string }) {
+export function updateTggroupStatus(params: { group_url: string; new_status: number }) {
   return service.post<void, ApiResponse<null>>('/tggroup/update_status', params)
 }
 
