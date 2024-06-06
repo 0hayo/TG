@@ -69,7 +69,6 @@ import { MessagesRes } from '@/apis/monitoringPlan'
 import mitts from '@/utils/mitts'
 import XButton from '@/components/XButton/index.vue'
 import iconBtn from '@/components/iconbtn/index.vue'
-
 import { IToolbarConfig, IEditorConfig } from '@wangeditor/editor'
 
 const toolbarConfig: Partial<IToolbarConfig> = {
@@ -145,16 +144,24 @@ const saveDocx = () => {
 const editorRef = shallowRef()
 const showEditor = ref(false)
 
+const currentMsg = ref<MessagesRes>()
 // 内容 HTML
-const valueHtml = ref(
-  `<h1 style="text-align: center;"><span style="font-size: 29px; font-family: 方正小标宋简体;">（自主发现研判）电报网民“***”在“***”群组称“***”攻击我领导人</span></h1><p><br></p>
-<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">工作发现，XXX年XX月XX日XX时XX分，电报网民“***”在“***”群组称“***”攻击我领导人。</span></p>
+const valueHtml = computed(
+  () => `<h1 style="text-align: center;"><span style="font-size: 29px; font-family: 方正小标宋简体;">（自主发现研判）电报网民“
+    ${currentMsg.value?.sender_id}”在“${currentMsg.value
+      ?.channel_name}”群组称“${currentMsg.value?.hit_keyword.join('、')}
+    ”攻击我领导人</span></h1><p><br></p>
+<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">工作发现，${currentMsg
+    .value?.message_time}，电报网民“${currentMsg.value?.sender_id}”在“${currentMsg.value
+    ?.channel_name}”群组称“${currentMsg.value?.hit_keyword.join('、')}”攻击我领导人。</span></p>
 <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">一、样本内容</span></p>
-<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">（内容）</span></p>
+<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">${currentMsg
+    .value?.message_text}</span></p>
 <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">二、梳理分析</span></p>
 <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">截止目前**点赞***转发（截止目前暂无转发评论）</span></p>
 <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">三、链接</span></p>
-<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">（群组链接）</span></p>
+<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">${currentMsg
+    .value?.message_link}</span></p>
 <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">四、附件</span></p>
 `
 )
@@ -184,7 +191,7 @@ const destroyComponent = function (status: boolean) {
 // 获取裁剪区域图片信息
 const getImg = function (base64: string) {
   console.log('截图组件传递的图片信息', base64)
-  valueHtml.value = valueHtml.value + `<img src='${base64}' />`
+  // valueHtml.value = valueHtml.value + `<img src='${base64}' />`
 }
 
 const addDialog = inject(ADD_DIALOG)
@@ -201,15 +208,17 @@ const show = () => {
 const webviewRef = ref()
 const tgSrc = ref('')
 const tgWight = ref('')
-const currentMsg = ref<MessagesRes>()
 const handleMsg = async (msg: MessagesRes) => {
   currentMsg.value = msg
+  currentMsg.value.message_text = currentMsg.value.message_text
+    .replaceAll('<p id="keyword">', '')
+    .replaceAll('</p>', '')
   tgSrc.value = msg.msg_online_link
   tgWight.value = msg.message_link
   // valueHtml.value = `用户：${msg.sender_name}；用户ID：${msg.sender_id}；时间：${msg.message_time}；群名：${msg.channel_name}；言论：${msg.message_text}；`
 
-  const image = await webviewRef.value.capturePage()
-  console.log(image)
+  // const image = await webviewRef.value.capturePage()
+  // console.log(image)
 }
 </script>
 
