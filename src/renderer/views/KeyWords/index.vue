@@ -113,8 +113,8 @@ const keydownEnter = async () => {
 // }
 
 const tableData = reactive({
-  pageSize: 1,
-  currentPage: 10,
+  pageSize: 10,
+  currentPage: 1,
   data: [] as keywordData[]
 })
 const getAllKeyword = async () => {
@@ -135,8 +135,8 @@ const getAllKeyword = async () => {
 }
 
 const keysList = reactive({
-  pageSize: 1,
-  currentPage: 10,
+  pageSize: 10,
+  currentPage: 1,
   data: [] as keywordData[]
 })
 const getAllKeywordTwo = async () => {
