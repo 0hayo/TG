@@ -76,7 +76,12 @@
           <el-table-column prop="" min-width="100" label="单位" />
           <el-table-column prop="group_id" min-width="100" label="名称" />
           <el-table-column prop="group_url" min-width="100" label="链接" />
-          <el-table-column prop="status" min-width="100" label="状态" />
+          <el-table-column prop="status" min-width="100" label="状态">
+            <template #default="{ row }">
+              <span v-if="row.status === 1" class="color-red">待通过</span>
+              <span v-else class="color-blue">通过</span>
+            </template>
+          </el-table-column>
           <el-table-column prop="added_at" min-width="100" label="添加时间" />
           <el-table-column prop="added_by" min-width="100" label="添加人" />
           <el-table-column fixed="right" label="操作" width="120">
@@ -100,7 +105,7 @@
                 重新申请
               </el-button>
               <el-button
-                v-if="user.getAccountLevel !== '3'"
+                v-if="user.getAccountLevel !== '3' && row.status === 1"
                 link
                 type="primary"
                 size="small"

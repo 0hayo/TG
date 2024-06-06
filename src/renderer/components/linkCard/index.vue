@@ -1,5 +1,6 @@
 <template>
   <div
+    v-loading="loading"
     class="transition ease-in-out duration-600 h-14.5 rounded-1 flex items-center justify-between px-16px border-0.5 border-Neutral-Stroke-Stroke hover:border-Layout-White hover:shadow-lg"
   >
     <div class="w-43 flex-col items-start">
@@ -79,8 +80,10 @@ const handleAdd = {
   }
 }
 
+const loading = ref(false)
 const getGroupName = async () => {
   try {
+    loading.value = true
     const res = await searchTitle({
       group_url: props.keyword
     })
@@ -94,6 +97,8 @@ const getGroupName = async () => {
     }
   } catch (_) {
     emits('delKeyword')
+  } finally {
+    loading.value = false
   }
 }
 </script>
