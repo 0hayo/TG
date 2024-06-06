@@ -33,6 +33,7 @@ const props = defineProps<{
 
 const emits = defineEmits<{
   delKeyword: [boolean?]
+  update: []
 }>()
 
 onMounted(() => {
@@ -54,7 +55,7 @@ const handleAdd = {
       })
       if (res.IsSuccess) {
         ElMessage.success(res.Message)
-        emits('delKeyword', true)
+        emits('update')
       } else {
         ElMessage.warning(res.Message)
       }
@@ -70,7 +71,7 @@ const handleAdd = {
       })
       if (res.IsSuccess) {
         ElMessage.success(res.Message)
-        emits('delKeyword', true)
+        emits('update')
       } else {
         ElMessage.warning(res.Message)
       }

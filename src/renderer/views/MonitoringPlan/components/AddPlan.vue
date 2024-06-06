@@ -64,7 +64,7 @@ import { ElMessage, FormRules, type FormProps, FormInstance } from 'element-plus
 import XButton from '@/components/XButton/index.vue'
 import mitts from '@/utils/mitts'
 import { addPlan } from '@/apis/monitoringPlan'
-import { getAllKey, keywordData } from '@/apis/KeyWords'
+import { getAllKey, getStatusKeys, keywordData } from '@/apis/KeyWords'
 
 onMounted(() => {
   getAllKeyword()
@@ -93,7 +93,11 @@ const ruleFormRef = ref<FormInstance>()
 const keywordsList = ref<keywordData[]>()
 const getAllKeyword = async () => {
   try {
-    const res = await getAllKey()
+    const res = await getStatusKeys({
+      status: 2,
+      page: 1,
+      per_page: 9999
+    })
     if (res.IsSuccess) {
       keywordsList.value = res.Data
     } else {

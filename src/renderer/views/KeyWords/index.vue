@@ -20,12 +20,13 @@
           :key="i"
           :keyword="item.keyword"
           type="keyword"
-          @del-keyword="
+          @update="
             () => {
               getAllKeyword()
               getAllKeywordTwo()
             }
           "
+          @del-keyword="() => editStatus(item.keyword, 9)"
         ></LinkCard>
       </div>
     </div>
@@ -52,11 +53,11 @@
                 link
                 type="primary"
                 size="small"
-                @click="editStatus(row, row.is_enabled ? 1 : 2)"
+                @click="editStatus(row.keyword, row.is_enabled ? 1 : 2)"
               >
                 {{ row.is_enabled ? '停用' : '启用' }}
               </el-button>
-              <el-button link type="primary" size="small" @click="editStatus(row, 1)">
+              <el-button link type="primary" size="small" @click="editStatus(row.keyword, 1)">
                 删除
               </el-button>
             </template>
@@ -162,10 +163,10 @@ const getAllKeywordTwo = async () => {
   }
 }
 
-const editStatus = async (row: keywordData, status: 1 | 2 | 9) => {
+const editStatus = async (keyword: string, status: 1 | 2 | 9) => {
   try {
     const res = await updateStatusKey({
-      keyword: row.keyword,
+      keyword: keyword,
       status
     })
     if (res.IsSuccess) {
