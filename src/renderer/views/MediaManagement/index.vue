@@ -78,7 +78,12 @@
         <el-select placeholder="监测中"> </el-select>
       </div>
       <div class="w-full grow relative">
-        <el-table :data="tableData.data" stripe style="position: absolute; width: 100%">
+        <el-table
+          :data="tableData.data"
+          stripe
+          height="100%"
+          style="position: absolute; width: 100%"
+        >
           <el-table-column label="序号" width="60" type="index" />
           <el-table-column prop="" min-width="100" label="单位" />
           <el-table-column prop="group_name" min-width="100" label="名称" />
