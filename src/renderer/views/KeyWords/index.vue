@@ -20,6 +20,12 @@
           :key="i"
           :keyword="item.keyword"
           type="keyword"
+          @del-keyword="
+            () => {
+              getAllKeyword()
+              getAllKeywordTwo()
+            }
+          "
         ></LinkCard>
       </div>
     </div>
@@ -164,6 +170,7 @@ const editStatus = async (row: keywordData, status: 1 | 2 | 9) => {
     })
     if (res.IsSuccess) {
       getAllKeyword()
+      getAllKeywordTwo()
       ElMessage.success(res.Message)
     } else {
       ElMessage.warning(res.Message)
