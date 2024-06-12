@@ -37,6 +37,16 @@ export function addPlan(params: {
   return service.post<void, ApiResponse<null>>('/tgplan/add_plan', params)
 }
 
+// 更新监测方案
+export function updatePlan(params: {
+  plan_id: string
+  plan_name: string
+  tg_user_group_id: string
+  inspect_keys: string[]
+}) {
+  return service.post<void, ApiResponse<null>>('/tgplan/update_plan', params)
+}
+
 // 查询当前用户所有方案
 export interface PlanInfo {
   created_at: string

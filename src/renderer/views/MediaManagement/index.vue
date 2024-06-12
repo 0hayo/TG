@@ -49,11 +49,14 @@
           "
         />
       </div>
-      <h6 v-if="user.getAccountLevel === '3'" class="px-4 inline-flex items-center text-h6-medium">
+      <h6
+        v-if="user.getAccountLevel === UserType.general"
+        class="px-4 inline-flex items-center text-h6-medium"
+      >
         可监测群组
       </h6>
       <div
-        v-if="user.getAccountLevel === '3'"
+        v-if="user.getAccountLevel === UserType.general"
         class="px-4 pb-4 grow scroll-smooth overflow-y-auto grid gap-2 content-start"
       >
         <LinkCard
@@ -65,7 +68,7 @@
           @del-keyword="
             () => {
               queryAllActive()
-              groupTableData[user.getAccountLevel]?.()
+              queryAllList()
             }
           "
         />
@@ -85,7 +88,12 @@
           style="position: absolute; width: 100%"
         >
           <el-table-column label="序号" width="60" type="index" />
-          <el-table-column prop="" min-width="100" label="单位" />
+          <el-table-column
+            v-if="user.getAccountLevel !== UserType.general"
+            prop="organization"
+            min-width="100"
+            label="单位"
+          />
           <el-table-column prop="group_name" min-width="100" label="名称" />
           <el-table-column prop="group_url" min-width="100" label="链接" />
           <el-table-column prop="status" min-width="100" label="状态">
@@ -99,7 +107,7 @@
           <el-table-column fixed="right" label="操作" width="120">
             <template #default="{ row }">
               <el-button
-                v-if="user.getAccountLevel === '3'"
+                v-if="row.status === 2"
                 link
                 type="primary"
                 size="small"
@@ -107,7 +115,7 @@
               >
                 取消监测
               </el-button>
-              <el-button
+              <!-- <el-button
                 v-if="user.getAccountLevel === '3'"
                 link
                 type="primary"
@@ -115,9 +123,9 @@
                 @click="addGroups(row)"
               >
                 重新申请
-              </el-button>
+              </el-button> -->
               <el-button
-                v-if="user.getAccountLevel !== '3' && row.status === 1"
+                v-if="user.getAccountLevel !== UserType.general && row.status === 1"
                 link
                 type="primary"
                 size="small"
@@ -126,7 +134,7 @@
                 通过
               </el-button>
               <el-button
-                v-if="user.getAccountLevel !== '3'"
+                v-if="user.getAccountLevel !== UserType.general"
                 link
                 type="danger"
                 size="small"
@@ -153,11 +161,12 @@
 <script setup lang="ts">
 import {
   GroupInfo,
-  addTgGroup,
-  adminGetAllGroups,
+  // addTgGroup,
+  // adminGetAllGroups,
   deleteGroup,
   getAllActive,
-  getUserMonitored,
+  getAllList,
+  // getUserMonitored,
   updateTggroupStatus
 } from '@/apis/mediaManagement'
 import LinkCard from '@/components/linkCard/index.vue'
@@ -168,7 +177,7 @@ import { UserType } from '@/common/types'
 const user = useUser()
 
 onMounted(() => {
-  groupTableData[user.getAccountLevel]?.()
+  queryAllList()
   queryAllActive()
 })
 
@@ -190,38 +199,38 @@ const addGroup = () => {
   groupInput.value = ''
 }
 
-const getAdminGetAllGroups = async () => {
-  try {
-    const res = await adminGetAllGroups({
-      page: tableData.pageNum,
-      per_page: tableData.pageSize
-    })
-    if (res.IsSuccess) {
-      tableData.data = res.Data
-    } else {
-      ElMessage.warning(res.Message)
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
+// const getAdminGetAllGroups = async () => {
+//   try {
+//     const res = await adminGetAllGroups({
+//       page: tableData.pageNum,
+//       per_page: tableData.pageSize
+//     })
+//     if (res.IsSuccess) {
+//       tableData.data = res.Data
+//     } else {
+//       ElMessage.warning(res.Message)
+//     }
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
-const groupTableData = {
-  [UserType.root]: getAdminGetAllGroups,
-  [UserType.admin]: getAdminGetAllGroups,
-  [UserType.general]: async () => {
-    try {
-      const res = await getUserMonitored()
-      if (res.IsSuccess) {
-        tableData.data = res.Data
-      } else {
-        ElMessage.warning(res.Message)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-}
+// const groupTableData = {
+//   [UserType.root]: getAdminGetAllGroups,
+//   [UserType.admin]: getAdminGetAllGroups,
+//   [UserType.general]: async () => {
+//     try {
+//       const res = await getUserMonitored()
+//       if (res.IsSuccess) {
+//         tableData.data = res.Data
+//       } else {
+//         ElMessage.warning(res.Message)
+//       }
+//     } catch (error) {
+//       console.log(error)
+//     }
+//   }
+// }
 
 const allActiveList = ref<GroupInfo[]>()
 const queryAllActive = async () => {
@@ -244,7 +253,7 @@ const setUserMonitoreds = async (row: GroupInfo, b: boolean) => {
       new_status: b
     })
     if (res.IsSuccess) {
-      groupTableData[user.getAccountLevel]?.()
+      queryAllList()
       ElMessage.success(res.Message)
     } else {
       ElMessage.warning(res.Message)
@@ -261,7 +270,7 @@ const updateTgStatus = async (row: GroupInfo) => {
       new_status: 2
     })
     if (res.IsSuccess) {
-      groupTableData[user.getAccountLevel]?.()
+      queryAllList()
       ElMessage.success(res.Message)
     } else {
       ElMessage.warning(res.Message)
@@ -277,7 +286,7 @@ const deleteGroups = async (row: GroupInfo) => {
       group_url: row.group_url
     })
     if (res.IsSuccess) {
-      groupTableData[user.getAccountLevel]?.()
+      queryAllList()
       ElMessage.success(res.Message)
     } else {
       ElMessage.warning(res.Message)
@@ -287,16 +296,32 @@ const deleteGroups = async (row: GroupInfo) => {
   }
 }
 
-const addGroups = async (row: GroupInfo) => {
+// const addGroups = async (row: GroupInfo) => {
+//   try {
+//     const res = await addTgGroup({
+//       group_url: row.group_url,
+//       group_id: row.group_id,
+//       group_name: row.group_name
+//     })
+//     if (res.IsSuccess) {
+//       queryAllList()
+//       ElMessage.success(res.Message)
+//     } else {
+//       ElMessage.warning(res.Message)
+//     }
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
+const queryAllList = async () => {
   try {
-    const res = await addTgGroup({
-      group_url: row.group_url,
-      group_id: row.group_id,
-      group_name: row.group_name
+    const res = await getAllList({
+      page: tableData.pageNum,
+      per_page: tableData.pageSize
     })
     if (res.IsSuccess) {
-      groupTableData[user.getAccountLevel]?.()
-      ElMessage.success(res.Message)
+      tableData.data = res.Data
     } else {
       ElMessage.warning(res.Message)
     }

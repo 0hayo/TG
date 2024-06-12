@@ -30,8 +30,6 @@
           mode="default"
         />
         <XButton class="p-2" text icon-name="export-line" @click="saveDocx"> 导出word</XButton>
-        <!-- <iconBtn icon-name="screenshot-line" @click="screenshotStatus = true"></iconBtn> -->
-        <!--截图组件-->
       </div>
 
       <Editor
@@ -70,6 +68,7 @@ import mitts from '@/utils/mitts'
 import XButton from '@/components/XButton/index.vue'
 import iconBtn from '@/components/iconbtn/index.vue'
 import { IToolbarConfig, IEditorConfig } from '@wangeditor/editor'
+import { cloneDeep } from 'lodash'
 
 const toolbarConfig: Partial<IToolbarConfig> = {
   // TS 语法
@@ -170,14 +169,16 @@ onMounted(() => {
   mitts.on('editor', () => {
     showEditor.value = !showEditor.value
   })
+  // window.electron.ipcRenderer.on('webview-screenshot-data', (event, base64Image) => {
+  //   console.log(event, base64Image)
+  // })
 })
-
 // 组件销毁时，也及时销毁编辑器
-onBeforeUnmount(() => {
-  const editor = editorRef.value
-  if (editor == null) return
-  editor.destroy()
-})
+// onBeforeUnmount(() => {
+//   const editor = editorRef.value
+//   if (editor == null) return
+//   editor.destroy()
+// })
 
 const handleCreated = (editor) => {
   editorRef.value = editor // 记录 editor 实例，重要！
@@ -209,7 +210,7 @@ const webviewRef = ref()
 const tgSrc = ref('')
 const tgWight = ref('')
 const handleMsg = async (msg: MessagesRes) => {
-  currentMsg.value = msg
+  currentMsg.value = cloneDeep(msg)
   currentMsg.value.message_text = currentMsg.value.message_text
     .replaceAll('<p id="keyword">', '')
     .replaceAll('</p>', '')
@@ -219,6 +220,7 @@ const handleMsg = async (msg: MessagesRes) => {
 
   // const image = await webviewRef.value.capturePage()
   // console.log(image)
+  // window.electron.ipcRenderer.send('capture-webview-screenshot', msg.msg_online_link)
 }
 </script>
 

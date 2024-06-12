@@ -12,7 +12,7 @@
         v-if="route.name === 'MonitoringPlan'"
         icon-name="list-settings-line"
         text
-        @click="showDrawer = true"
+        @click="showAddPaln"
       />
     </div>
     <div class="flex-row flex-auto justify-between items-center h-full">
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <el-drawer
+  <!-- <el-drawer
     ref="drawerRef"
     v-model="showDrawer"
     v-loading="keyParams.loading"
@@ -83,21 +83,23 @@
     <div class="footer">
       <el-button class="font_family icon-filter" @click="saveKeyword">保存</el-button>
     </div>
-  </el-drawer>
+  </el-drawer> -->
 </template>
 
 <script setup lang="ts">
 import useMonitoringData from '@/store/common/monitoringData'
-import { ElDrawer } from 'element-plus'
+// import { ElDrawer } from 'element-plus'
 import XButton from '@/components/XButton/index.vue'
 import iconBtn from '@/components/iconbtn/index.vue'
 import mitts from '@/utils/mitts'
-import { getAllKey, keywordData } from '@/apis/KeyWords'
-import usePlanStore from '@/store/common/usePlan'
+// import { getAllKey, keywordData } from '@/apis/KeyWords'
+// import usePlanStore from '@/store/common/usePlan'
 import useUser from '@/store/common/useUser'
+import { addDialog } from './dialog'
+import AddPlan from '@/views/MonitoringPlan/components/AddPlan.vue'
 
 const route = useRoute()
-const usePlan = usePlanStore()
+// const usePlan = usePlanStore()
 const user = useUser()
 const monitoringData = useMonitoringData()
 
@@ -118,40 +120,52 @@ const setRingtones = (v: boolean) => {
   monitoringData.setRingtones(v)
 }
 
-const showDrawer = ref(false)
+// const showDrawer = ref(false)
 
-const drawerRef = ref<InstanceType<typeof ElDrawer>>()
+// const drawerRef = ref<InstanceType<typeof ElDrawer>>()
 
-const keyParams = reactive({
-  keywordsList: [] as keywordData[],
-  loading: false,
-  keywords: [] as string[]
-})
-const getAllKeyword = async () => {
-  try {
-    keyParams.loading = true
-    const res = await getAllKey()
-    if (res.IsSuccess) {
-      keyParams.keywordsList = res.Data
-    } else {
-      keyParams.loading = false
-      ElMessage.warning(res.Message)
-    }
-  } catch (_) {
-    keyParams.loading = false
-  }
-}
-const openKeyword = () => {
-  keyParams.keywords = usePlan.getKeywords
-  getAllKeyword()
-}
+// const keyParams = reactive({
+//   keywordsList: [] as keywordData[],
+//   loading: false,
+//   keywords: [] as string[]
+// })
+// const getAllKeyword = async () => {
+//   try {
+//     keyParams.loading = true
+//     const res = await getAllKey()
+//     if (res.IsSuccess) {
+//       keyParams.keywordsList = res.Data
+//     } else {
+//       keyParams.loading = false
+//       ElMessage.warning(res.Message)
+//     }
+//   } catch (_) {
+//     keyParams.loading = false
+//   }
+// }
+// const openKeyword = () => {
+//   keyParams.keywords = usePlan.getKeywords
+//   getAllKeyword()
+// }
 
-const saveKeyword = () => {
-  usePlan.setKeywords(keyParams.keywords)
-}
+// const saveKeyword = () => {
+//   usePlan.setKeywords(keyParams.keywords)
+// }
 
 const handleEditor = () => {
   mitts.emit('editor')
+}
+
+const showAddPaln = () => {
+  addDialog?.({
+    title: '新增监测方案',
+    width: '',
+    showfooter: false,
+    props: {
+      type: 'edit'
+    },
+    component: shallowRef(AddPlan)
+  })
 }
 </script>
 

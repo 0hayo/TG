@@ -53,7 +53,7 @@
   </div>
   <div class="flex justify-end items-center gap-4 h-12 border-t border-Neutral-Stroke-Stroke px-4">
     <XButton type="Primary" @click="save(ruleFormRef)"
-      ><i class="ri-check-line"></i>新增方案</XButton
+      ><i class="ri-check-line"></i>{{ type === 'add' ? '新增' : '保存' }}方案</XButton
     >
     <XButton type="Warning" @click="emits('close')"><i class="ri-close-line"></i>取消</XButton>
   </div>
@@ -63,25 +63,44 @@
 import { ElMessage, FormRules, type FormProps, FormInstance } from 'element-plus'
 import XButton from '@/components/XButton/index.vue'
 import mitts from '@/utils/mitts'
-import { addPlan } from '@/apis/monitoringPlan'
+import { addPlan, updatePlan } from '@/apis/monitoringPlan'
 import { getStatusKeys, keywordData } from '@/apis/KeyWords'
+import usePlanStore from '@/store/common/usePlan'
 
-onMounted(() => {
-  getAllKeyword()
-})
-
-const value1 = ref(false)
+const props = withDefaults(
+  defineProps<{
+    type?: 'add' | 'edit'
+  }>(),
+  {
+    type: 'add'
+  }
+)
 
 const emits = defineEmits<{
   close: [string?]
 }>()
 
+const planStore = usePlanStore()
+
+onMounted(() => {
+  getAllKeyword()
+  if (props.type === 'edit') {
+    formLabelAlign.plan_name = planStore.getPlanInfo.plan_name
+    formLabelAlign.tg_user_group_id = planStore.getPlanInfo.tg_user_group_id
+    formLabelAlign.inspect_keys = planStore.getPlanInfo.inspect_keys
+    plan_id.value = planStore.getPlanInfo.plan_id
+  }
+})
+
+const value1 = ref(false)
+
 const labelPosition = ref<FormProps['labelPosition']>('top')
 
+const plan_id = ref()
 const formLabelAlign = reactive({
   plan_name: '',
   tg_user_group_id: 'Telegram',
-  inspect_keys: []
+  inspect_keys: [] as string[]
 })
 
 const rules = ref<FormRules<typeof formLabelAlign>>({
@@ -112,8 +131,12 @@ const save = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate(async (valid) => {
     if (valid) {
-      await addPlan(formLabelAlign)
-      ElMessage.success('新增成功')
+      if (props.type === 'edit') {
+        await updatePlan({ ...formLabelAlign, plan_id: plan_id.value })
+      } else {
+        await addPlan(formLabelAlign)
+      }
+      ElMessage.success('保存成功')
       mitts.emit('updatePlanList')
       emits('close', 'update')
     }

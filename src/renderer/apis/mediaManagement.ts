@@ -18,6 +18,11 @@ export function addUserMonitored(params: {
   return service.post<void, ApiResponse<null>>('/tggroup/add_group', params)
 }
 
+// 超管_添加一个有效群组
+export function suAddGroup(params: { group_url: string; group_id: string; group_name: string }) {
+  return service.post<void, ApiResponse<null>>('/tggroup/su_add_group', params)
+}
+
 // 管理员_查询所有群组
 export interface GroupInfo {
   added_at: string
@@ -27,10 +32,16 @@ export interface GroupInfo {
   group_name: string
   id: number
   media_type: string
+  organization: string
   status: number
+  role: 'su' | 'org' | 'userself'
 }
 export function adminGetAllGroups(params: { page: number; per_page: number }) {
   return service.get<void, ApiResponse<GroupInfo[]>>('/tggroup/admin_get_all_groups', { params })
+}
+// 查询所有可用群组
+export function getAllList(params: { page: number; per_page: number }) {
+  return service.get<void, ApiResponse<GroupInfo[]>>('/tggroup/all_list', { params })
 }
 
 // 管理员_查询所有群组

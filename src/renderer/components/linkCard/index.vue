@@ -20,10 +20,14 @@
 </template>
 
 <script setup lang="ts">
+import useUser from '@/store/common/useUser'
 import XButton from '../XButton/index.vue'
 import iconBtn from '../iconbtn/index.vue'
 import { updateStatusKey } from '@/apis/KeyWords'
-import { searchTitle, addUserMonitored } from '@/apis/mediaManagement'
+import { searchTitle, addUserMonitored, suAddGroup } from '@/apis/mediaManagement'
+import { UserType } from '@/common/types'
+
+const user = useUser()
 
 const props = defineProps<{
   keyword: string
@@ -37,8 +41,6 @@ const emits = defineEmits<{
 }>()
 
 onMounted(() => {
-  console.log(props.keyword)
-
   props.type === 'group' && !props.groupId && getGroupName()
 })
 
@@ -48,11 +50,13 @@ const group_id = ref('')
 const handleAdd = {
   group: async () => {
     try {
-      const res = await addUserMonitored({
-        group_url: props.keyword,
-        group_name: groupName.value || props.groupId || '',
-        group_id: group_id.value || props.keyword.split('https://t.me/')[1]
-      })
+      const res = await (user.getAccountLevel === UserType.general ? addUserMonitored : suAddGroup)(
+        {
+          group_url: props.keyword,
+          group_name: groupName.value || props.groupId || '',
+          group_id: group_id.value || props.keyword.split('https://t.me/')[1]
+        }
+      )
       if (res.IsSuccess) {
         ElMessage.success(res.Message)
         emits('update')

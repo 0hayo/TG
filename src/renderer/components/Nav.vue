@@ -108,6 +108,7 @@ const getPlan = async () => {
     const res = await getUserPlans()
     if (res.IsSuccess) {
       planList.value = res.Data
+      usePlan.setPlanList(res.Data)
     } else {
       ElMessage.warning(res.Message)
     }

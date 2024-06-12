@@ -6,23 +6,29 @@ import { PlanInfo } from '@/apis/monitoringPlan'
 const usePlanStore = defineStore(NAMES.USE_PLAN, {
   state: () => {
     return {
-      planInfo: {} as PlanInfo
+      planInfo: {} as PlanInfo,
+      planList: [] as PlanInfo[]
     }
   },
   getters: {
     getKeywords(state) {
-      return state.planInfo?.inspect_keys || []
+      return (
+        state.planList.filter((v) => v.plan_id === state.planInfo.plan_id)[0].inspect_keys || []
+      )
     },
     getPlanInfo(state) {
-      return state.planInfo
+      return state.planList.filter((v) => v.plan_id === state.planInfo.plan_id)[0]
     }
   },
   actions: {
     setPlan(data: PlanInfo) {
       this.$state.planInfo = data
     },
-    setKeywords(data: string[]) {
-      this.$state.planInfo.inspect_keys = data
+    // setKeywords(data: string[]) {
+    //   this.$state.planInfo.inspect_keys = data
+    // },
+    setPlanList(data: PlanInfo[]) {
+      this.$state.planList = data
     }
   },
   //开启数据缓存
