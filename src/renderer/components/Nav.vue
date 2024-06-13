@@ -78,7 +78,7 @@ import AddPlan from '@/views/MonitoringPlan/components/AddPlan.vue'
 import mitts from '@/utils/mitts'
 import usePlanStore from '@/store/common/usePlan'
 import moment from 'moment'
-import { PlanInfo, getUserPlans } from '@/apis/monitoringPlan'
+import { PlanInfo, getUserPlans, getOrgPlans } from '@/apis/monitoringPlan'
 import useUser from '@/store/common/useUser'
 import { UserType } from '@/common/types'
 
@@ -103,9 +103,24 @@ const show = () => {
 }
 
 const planList = ref<PlanInfo[]>()
+// const getPlan = async () => {
+//   try {
+//     const res = await getUserPlans()
+//     if (res.IsSuccess) {
+//       planList.value = res.Data
+//       usePlan.setPlanList(res.Data)
+//     } else {
+//       ElMessage.warning(res.Message)
+//     }
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
+//单位内方案
 const getPlan = async () => {
   try {
-    const res = await getUserPlans()
+    const res = await getOrgPlans()
     if (res.IsSuccess) {
       planList.value = res.Data
       usePlan.setPlanList(res.Data)
@@ -166,7 +181,5 @@ onUnmounted(() => {
 }
 .drag {
   -webkit-app-region: drag;
-}
-.logo {
 }
 </style>
