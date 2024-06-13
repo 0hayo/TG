@@ -68,3 +68,8 @@ export function addSite(params: { site_name: string }) {
 export function addOrg(params: { site_name: string; org_name: string }) {
   return service.post<void, ApiResponse<null>>('/siteorg/add_org', params)
 }
+
+// 超管_删除用户
+export function deleteUser(params: { username: string }) {
+  return service.post<void, ApiResponse<null>>('/admin/delete_user', params)
+}

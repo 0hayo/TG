@@ -49,7 +49,9 @@
               <el-button link type="primary" size="small" @click="addUserRef?.show(row)">
                 编辑
               </el-button>
-              <el-button link type="danger" size="small">删除</el-button>
+              <el-button link type="danger" size="small" @click="delUser(row.username)">
+                删除
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -78,7 +80,13 @@
 
 <script setup lang="ts">
 import XButton from '@/components/XButton/index.vue'
-import { SitesOrganization, UserInfo, getAllUsers, getSitesOrganizations } from '@/apis/user'
+import {
+  SitesOrganization,
+  UserInfo,
+  deleteUser,
+  getAllUsers,
+  getSitesOrganizations
+} from '@/apis/user'
 import AddUser from './components/AddUser.vue'
 import AddArea from './components/AddArea.vue'
 
@@ -152,6 +160,27 @@ const userType = ref<'user' | 'admin'>('admin')
 const handleAdmin = () => {
   userType.value = 'admin'
   selectSites.value = undefined
+}
+
+const delUser = async (username: string) => {
+  await ElMessageBox.confirm('删除此用户?', '提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+  try {
+    const res = await deleteUser({
+      username
+    })
+    if (res.IsSuccess) {
+      queryAllUsers()
+      ElMessage.success(res.Message)
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }
 </script>
 
