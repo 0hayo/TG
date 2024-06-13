@@ -60,6 +60,20 @@ export function getUserPlans() {
   return service.get<void, ApiResponse<PlanInfo[]>>('/tgplan/get_user_plans')
 }
 
+// 查询当前单位所有方案
+export interface PlanInfo {
+  created_at: string
+  inspect_keys: string[]
+  is_active: boolean
+  plan_id: number
+  plan_name: string
+  tg_user_group_id: string
+  username: string
+}
+export function getOrgPlans() {
+  return service.get<void, ApiResponse<PlanInfo[]>>('/tgplan/get_org_plans')
+}
+
 // 删除监测方案
 export function deletePlan(params: { plan_id: number }) {
   return service.post<void, ApiResponse<null>>('/tgplan/delete_plan', params)

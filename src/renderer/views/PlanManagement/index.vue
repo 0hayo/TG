@@ -12,7 +12,7 @@
         <el-table-column prop="inspect_keys" label="关键词" />
         <el-table-column prop="is_active" label="状态" />
         <el-table-column prop="created_at" label="生效时间" />
-        <el-table-column prop="" label="创建人" />
+        <el-table-column prop="username" label="创建人" />
         <el-table-column fixed="right" label="操作" width="120">
           <template #default="{ row }">
             <el-button link type="danger" size="small" @click="deletePlans(row.plan_id)">
@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { PlanInfo, deletePlan, getUserPlans } from '@/apis/monitoringPlan'
+import { PlanInfo, deletePlan, getUserPlans, getOrgPlans } from '@/apis/monitoringPlan'
 import XButton from '@/components/XButton/index.vue'
 import { addDialog } from '@/components/dialog'
 import mitts from '@/utils/mitts'
@@ -64,7 +64,7 @@ const show = () => {
 const planList = ref<PlanInfo[]>()
 const getPlan = async () => {
   try {
-    const res = await getUserPlans()
+    const res = await getOrgPlans()
     if (res.IsSuccess) {
       planList.value = res.Data
     } else {
