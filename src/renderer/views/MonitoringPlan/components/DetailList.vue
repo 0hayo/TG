@@ -56,7 +56,7 @@
 
 <script setup lang="ts">
 import { MessagesRes, latestKeyMessages } from '@/apis/monitoringPlan'
-import { useQueryAllGroup } from '@/composable'
+import useMonitoringData from '@/store/common/monitoringData'
 import usePlanStore from '@/store/common/usePlan'
 
 const emits = defineEmits<{
@@ -79,14 +79,14 @@ onUnmounted(() => {
   clearInterval(timer)
 })
 
-const groupList = useQueryAllGroup()
+const monitoring = useMonitoringData()
 
 const monitoringData = ref<MessagesRes[]>([])
 const queryLatestMessages = async () => {
-  if (groupList.value.length === 0) return
+  if (monitoring.getGroupIds.length === 0) return
   try {
     const res = await latestKeyMessages({
-      channel_name: groupList.value.map((v) => v.group_id).join(','),
+      channel_name: monitoring.getGroupIds.join(','),
       keywords: usePlan.getKeywords.join(',')
     })
     if (res.IsSuccess) {

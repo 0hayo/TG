@@ -1,27 +1,24 @@
 import { defineStore } from 'pinia'
 import NAMES from '../types'
 import { MonitoringData } from '../types/interface'
-import { GroupRes } from '@/apis/types'
+import { GroupInfo } from '@/apis/mediaManagement'
 
 // 监测数据
 const useMonitoringData = defineStore(NAMES.MONITORING_DATA, {
   state: () => {
     return {
       monitoringData: [] as MonitoringData[],
-      groupList: [
-        {
-          groupId: '',
-          chatId: '',
-          groupName: '',
-          groupNickname: ''
-        }
-      ] as GroupRes[],
+      groupList: [] as GroupInfo[],
       keywordsList: [] as string[],
       maxMsg: 100,
       ringtones: true
     }
   },
-  getters: {},
+  getters: {
+    getGroupIds(state) {
+      return state.groupList.map((v) => v.group_id) || []
+    }
+  },
   actions: {
     pushMonitoringData(data: MonitoringData) {
       this.$state.monitoringData.unshift(data)
@@ -29,7 +26,7 @@ const useMonitoringData = defineStore(NAMES.MONITORING_DATA, {
         this.$state.monitoringData.length = this.$state.maxMsg
       }
     },
-    setGroupList(data: GroupRes[]) {
+    setGroupList(data: GroupInfo[]) {
       this.$state.groupList = data
     },
     setKeywordsList(data: string[]) {

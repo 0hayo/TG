@@ -1,8 +1,11 @@
 import { GroupInfo, getAllList } from '@/apis/mediaManagement'
+import useMonitoringData from '@/store/common/monitoringData'
 import mitts from '@/utils/mitts'
 
 export const useQueryAllGroup = () => {
-  onMounted(() => {
+  const monitoringData = useMonitoringData()
+
+  onBeforeMount(() => {
     queryAllList()
     mitts.on('queryAllGroup', () => {
       queryAllList()
@@ -18,7 +21,7 @@ export const useQueryAllGroup = () => {
         per_page: 999
       })
       if (res.IsSuccess) {
-        data.value = res.Data.result || []
+        monitoringData.setGroupList(res.Data.result)
       } else {
         ElMessage.warning(res.Message)
       }
