@@ -26,6 +26,7 @@ import iconBtn from '../iconbtn/index.vue'
 import { updateStatusKey } from '@/apis/KeyWords'
 import { searchTitle, addUserMonitored, suAddGroup } from '@/apis/mediaManagement'
 import { UserType } from '@/common/types'
+import mitts from '@/utils/mitts'
 
 const user = useUser()
 
@@ -60,6 +61,7 @@ const handleAdd = {
       if (res.IsSuccess) {
         ElMessage.success(res.Message)
         emits('update')
+        mitts.emit('queryAllGroup')
       } else {
         ElMessage.warning(res.Message)
       }

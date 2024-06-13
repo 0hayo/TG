@@ -65,7 +65,7 @@ const handle = async () => {
       useUser().setToken(res.Data.access_token)
       useUser().setUserInfo(res.Data.user_info)
       if (res.Data.user_info.account_level === UserType.general) {
-        const id = planStore.getPlanInfo.plan_id || 0
+        const id = planStore.getPlanInfo?.plan_id || 0
         router.push(`/MonitoringPlan/${id}`)
       } else {
         router.push('/MediaManagement')

@@ -68,7 +68,8 @@
           @del-keyword="
             () => {
               queryAllActive()
-              queryAllList()
+
+              groupTableData[user.getAccountLevel]()
             }
           "
         />
@@ -107,7 +108,7 @@
           <el-table-column fixed="right" label="操作" width="120">
             <template #default="{ row }">
               <el-button
-                v-if="row.status === 2"
+                v-if="user.getAccountLevel === UserType.general && row.status === 2"
                 link
                 type="primary"
                 size="small"
@@ -152,7 +153,7 @@
         class="mt-16px justify-end"
         :page-sizes="[100, 200, 300, 400]"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
+        :total="tableData.total"
       />
     </div>
   </div>
@@ -162,11 +163,11 @@
 import {
   GroupInfo,
   // addTgGroup,
-  // adminGetAllGroups,
+  adminGetAllGroups,
   deleteGroup,
   getAllActive,
-  getAllList,
-  // getUserMonitored,
+  // getAllList,
+  getOrgGroups,
   updateTggroupStatus
 } from '@/apis/mediaManagement'
 import LinkCard from '@/components/linkCard/index.vue'
@@ -177,13 +178,14 @@ import { UserType } from '@/common/types'
 const user = useUser()
 
 onMounted(() => {
-  queryAllList()
+  groupTableData[user.getAccountLevel]()
   queryAllActive()
 })
 
 const tableData = reactive({
   pageNum: 1,
   pageSize: 10,
+  total: 0,
   data: [] as GroupInfo[]
 })
 
@@ -199,38 +201,41 @@ const addGroup = () => {
   groupInput.value = ''
 }
 
-// const getAdminGetAllGroups = async () => {
-//   try {
-//     const res = await adminGetAllGroups({
-//       page: tableData.pageNum,
-//       per_page: tableData.pageSize
-//     })
-//     if (res.IsSuccess) {
-//       tableData.data = res.Data
-//     } else {
-//       ElMessage.warning(res.Message)
-//     }
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+const getAdminGetAllGroups = async () => {
+  try {
+    const res = await adminGetAllGroups({
+      page: tableData.pageNum,
+      per_page: tableData.pageSize
+    })
+    if (res.IsSuccess) {
+      tableData.data = res.Data
+    } else {
+      ElMessage.warning(res.Message)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-// const groupTableData = {
-//   [UserType.root]: getAdminGetAllGroups,
-//   [UserType.admin]: getAdminGetAllGroups,
-//   [UserType.general]: async () => {
-//     try {
-//       const res = await getUserMonitored()
-//       if (res.IsSuccess) {
-//         tableData.data = res.Data
-//       } else {
-//         ElMessage.warning(res.Message)
-//       }
-//     } catch (error) {
-//       console.log(error)
-//     }
-//   }
-// }
+const groupTableData = {
+  [UserType.root]: getAdminGetAllGroups,
+  [UserType.admin]: getAdminGetAllGroups,
+  [UserType.general]: async () => {
+    try {
+      const res = await getOrgGroups({
+        page: tableData.pageNum,
+        per_page: tableData.pageSize
+      })
+      if (res.IsSuccess) {
+        tableData.data = res.Data
+      } else {
+        ElMessage.warning(res.Message)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
 const allActiveList = ref<GroupInfo[]>()
 const queryAllActive = async () => {
@@ -253,7 +258,7 @@ const setUserMonitoreds = async (row: GroupInfo, b: boolean) => {
       new_status: b
     })
     if (res.IsSuccess) {
-      queryAllList()
+      groupTableData[user.getAccountLevel]()
       ElMessage.success(res.Message)
     } else {
       ElMessage.warning(res.Message)
@@ -270,7 +275,7 @@ const updateTgStatus = async (row: GroupInfo) => {
       new_status: 2
     })
     if (res.IsSuccess) {
-      queryAllList()
+      groupTableData[user.getAccountLevel]()
       ElMessage.success(res.Message)
     } else {
       ElMessage.warning(res.Message)
@@ -286,7 +291,7 @@ const deleteGroups = async (row: GroupInfo) => {
       group_url: row.group_url
     })
     if (res.IsSuccess) {
-      queryAllList()
+      groupTableData[user.getAccountLevel]()
       ElMessage.success(res.Message)
     } else {
       ElMessage.warning(res.Message)
@@ -304,7 +309,8 @@ const deleteGroups = async (row: GroupInfo) => {
 //       group_name: row.group_name
 //     })
 //     if (res.IsSuccess) {
-//       queryAllList()
+//
+// groupTableData[user.getAccountLevel]()
 //       ElMessage.success(res.Message)
 //     } else {
 //       ElMessage.warning(res.Message)
@@ -314,19 +320,20 @@ const deleteGroups = async (row: GroupInfo) => {
 //   }
 // }
 
-const queryAllList = async () => {
-  try {
-    const res = await getAllList({
-      page: tableData.pageNum,
-      per_page: tableData.pageSize
-    })
-    if (res.IsSuccess) {
-      tableData.data = res.Data
-    } else {
-      ElMessage.warning(res.Message)
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
+// const queryAllList = async () => {
+//   try {
+//     const res = await getAllList({
+//       page: tableData.pageNum,
+//       per_page: tableData.pageSize
+//     })
+//     if (res.IsSuccess) {
+//       tableData.data = res.Data.result
+//       tableData.total = res.Data.pageinfo.total
+//     } else {
+//       ElMessage.warning(res.Message)
+//     }
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 </script>

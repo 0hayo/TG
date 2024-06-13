@@ -13,7 +13,7 @@ const usePlanStore = defineStore(NAMES.USE_PLAN, {
   getters: {
     getKeywords(state) {
       return (
-        state.planList.filter((v) => v.plan_id === state.planInfo.plan_id)[0].inspect_keys || []
+        state.planList.filter((v) => v.plan_id === state.planInfo.plan_id)[0]?.inspect_keys || []
       )
     },
     getPlanInfo(state) {

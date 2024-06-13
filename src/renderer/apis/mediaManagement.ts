@@ -1,5 +1,5 @@
 import service from '@/apis/service'
-import { ApiResponse } from '@/apis/types'
+import { ApiResponse, ApiResponsePage } from '@/apis/types'
 
 // 群组ID查群组名
 export function searchTitle(params: { group_url: string }) {
@@ -41,7 +41,7 @@ export function adminGetAllGroups(params: { page: number; per_page: number }) {
 }
 // 查询所有可用群组
 export function getAllList(params: { page: number; per_page: number }) {
-  return service.get<void, ApiResponse<GroupInfo[]>>('/tggroup/all_list', { params })
+  return service.get<void, ApiResponsePage<GroupInfo[]>>('/tggroup/all_list', { params })
 }
 
 // 管理员_查询所有群组
@@ -57,6 +57,11 @@ export interface GroupInfo {
 }
 export function getUserMonitored() {
   return service.get<void, ApiResponse<GroupInfo[]>>('/tggroup/get_user_monitored')
+}
+
+// 用户_查询单位所有群组
+export function getOrgGroups(params: { page: number; per_page: number }) {
+  return service.get<void, ApiResponse<GroupInfo[]>>('/tggroup/get_org_groups', { params })
 }
 
 // 管理员_查询所有群组

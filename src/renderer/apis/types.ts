@@ -5,6 +5,20 @@ export interface ApiResponse<T> {
   Status: string
 }
 
+export interface ApiResponsePage<T> {
+  IsSuccess: boolean
+  Message: string
+  Data: {
+    pageinfo: {
+      page: number
+      per_page: number
+      total: number
+    }
+    result: T
+  }
+  Status: string
+}
+
 export interface PlansRes {
   create_time?: string
   filters: PlanFilters[]
