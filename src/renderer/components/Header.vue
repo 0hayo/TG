@@ -158,7 +158,7 @@ const handleEditor = () => {
 
 const showAddPaln = () => {
   addDialog?.({
-    title: '新增监测方案',
+    title: '修改监测方案',
     width: '',
     showfooter: false,
     props: {

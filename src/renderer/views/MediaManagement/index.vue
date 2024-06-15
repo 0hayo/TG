@@ -77,8 +77,10 @@
     <div class="grow p-16px flex flex-col">
       <div class="flex gap-24px items-center">
         <h6 class="inline-flex items-center h-12 text-h6-medium">TG群组监测列表</h6>
-        <el-select placeholder="所有单位"> </el-select>
-        <el-select placeholder="监测中"> </el-select>
+        <el-select v-if="user.getAccountLevel !== UserType.general" placeholder="所有单位">
+        </el-select>
+        <el-select v-if="user.getAccountLevel !== UserType.general" placeholder="监测中">
+        </el-select>
       </div>
       <div class="w-full grow relative">
         <el-table

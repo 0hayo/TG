@@ -57,9 +57,9 @@
               >
                 {{ row.is_enabled ? '停用' : '启用' }}
               </el-button>
-              <el-button link type="primary" size="small" @click="editStatus(row.keyword, 1)">
+              <!-- <el-button link type="primary" size="small" @click="editStatus(row.keyword, 1)">
                 删除
-              </el-button>
+              </el-button> -->
             </template>
           </el-table-column>
         </el-table>
