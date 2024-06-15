@@ -68,7 +68,6 @@
           @del-keyword="
             () => {
               queryAllActive()
-
               groupTableData[user.getAccountLevel]()
             }
           "

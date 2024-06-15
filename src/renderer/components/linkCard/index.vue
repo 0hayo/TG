@@ -50,7 +50,6 @@ const group_id = ref('')
 
 const handleAdd = {
   group: async () => {
-    mitts.emit('queryAllGroup')
     try {
       const res = await (user.getAccountLevel === UserType.general ? addUserMonitored : suAddGroup)(
         {

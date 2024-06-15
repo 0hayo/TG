@@ -19,6 +19,11 @@ export function getAllKey() {
   return service.get<void, ApiResponse<keywordData[]>>('/inspect_key/get_all')
 }
 
+// 用户_查询单位所有关键词
+export function getOrgKey(params: { page: number; per_page: number }) {
+  return service.get<void, ApiResponse<keywordData[]>>('/inspect_key/get_org_key', { params })
+}
+
 // 查询当前用户指定状态监测关键词 status: 关键词状态，类型为int。可选值有2=有效，1=历史删除，9=永久删除。
 export function getStatusKeys(params: { status: number; page: number; per_page: number }) {
   return service.get<void, ApiResponse<keywordData[]>>('/inspect_key/get_status', { params })

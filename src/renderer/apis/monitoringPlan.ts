@@ -22,7 +22,11 @@ export function latestMessages(params: { channel_name?: string; keywords: string
   })
 }
 // 查询频道消息for关键词
-export function latestKeyMessages(params: { channel_name?: string; keywords: string }) {
+export function latestKeyMessages(params: {
+  channel_name: string
+  keywords: string
+  time_threshold: string
+}) {
   return service.get<void, ApiResponse<MessagesRes[]>>('/tgmsg/latest_key_messages', {
     params
   })

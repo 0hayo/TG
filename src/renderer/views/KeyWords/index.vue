@@ -79,7 +79,7 @@
 <script setup lang="ts">
 // import { Delete, Plus } from '@element-plus/icons-vue'
 import LinkCard from '@/components/linkCard/index.vue'
-import { addKey, getStatusKeys, keywordData, updateStatusKey } from '@/apis/KeyWords'
+import { addKey, getOrgKey, getStatusKeys, keywordData, updateStatusKey } from '@/apis/KeyWords'
 
 onMounted(() => {
   getAllKeyword()
@@ -126,8 +126,7 @@ const tableData = reactive({
 })
 const getAllKeyword = async () => {
   try {
-    const res = await getStatusKeys({
-      status: 2,
+    const res = await getOrgKey({
       page: tableData.currentPage,
       per_page: tableData.pageSize
     })

@@ -58,6 +58,7 @@
 import { MessagesRes, latestKeyMessages } from '@/apis/monitoringPlan'
 import useMonitoringData from '@/store/common/monitoringData'
 import usePlanStore from '@/store/common/usePlan'
+// import moment from 'moment'
 
 const emits = defineEmits<{
   handleMsg: [MessagesRes]
@@ -87,7 +88,8 @@ const queryLatestMessages = async () => {
   try {
     const res = await latestKeyMessages({
       channel_name: monitoring.getGroupIds.join(','),
-      keywords: usePlan.getKeywords.join(',')
+      keywords: usePlan.getKeywords.join(','),
+      time_threshold: '2024-06-08 02:13:20'
     })
     if (res.IsSuccess) {
       monitoringData.value = res.Data

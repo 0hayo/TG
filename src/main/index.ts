@@ -24,6 +24,10 @@ function createWindow(): void {
     }
   })
 
+  mainWindow.webContents.session.setProxy({
+    proxyRules: 'http://127.0.0.1:7890'
+  })
+
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
