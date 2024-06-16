@@ -42,6 +42,7 @@
           :key="item"
           :keyword="item"
           type="group"
+          @update="groupTableData[user.getAccountLevel]"
           @del-keyword="
             () => {
               newGroupList.splice(i, 1)
@@ -65,6 +66,7 @@
           :keyword="item.group_url"
           :group-id="item.group_name"
           type="group"
+          @update="groupTableData[user.getAccountLevel]"
           @del-keyword="
             () => {
               queryAllActive()
