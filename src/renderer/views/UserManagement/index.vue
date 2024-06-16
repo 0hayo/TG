@@ -56,14 +56,14 @@
           </el-table-column>
         </el-table>
       </div>
-      <el-pagination
+      <!-- <el-pagination
         v-model:current-page="currentPage"
         v-model:page-size="pageSize"
         class="mt-16px justify-end"
         :page-sizes="[100, 200, 300, 400]"
         layout="total, sizes, prev, pager, next, jumper"
         :total="400"
-      />
+      /> -->
     </div>
   </div>
 
@@ -95,8 +95,8 @@ onMounted(() => {
   querySitesOrganizations()
 })
 
-const currentPage = ref(1)
-const pageSize = ref(10)
+// const currentPage = ref(1)
+// const pageSize = ref(9999)
 
 const tableData = ref<UserInfo[]>()
 const queryAllUsers = async () => {

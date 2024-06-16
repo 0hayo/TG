@@ -148,14 +148,14 @@
           </el-table-column>
         </el-table>
       </div>
-      <el-pagination
+      <!-- <el-pagination
         v-model:current-page="tableData.pageNum"
         v-model:page-size="tableData.pageSize"
         class="mt-16px justify-end"
         :page-sizes="[100, 200, 300, 400]"
         layout="total, sizes, prev, pager, next, jumper"
         :total="tableData.total"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -185,7 +185,7 @@ onMounted(() => {
 
 const tableData = reactive({
   pageNum: 1,
-  pageSize: 10,
+  pageSize: 9999,
   total: 0,
   data: [] as GroupInfo[]
 })

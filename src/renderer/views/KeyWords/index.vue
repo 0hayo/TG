@@ -64,14 +64,14 @@
           </el-table-column>
         </el-table>
       </div>
-      <el-pagination
+      <!-- <el-pagination
         v-model:current-page="tableData.currentPage"
         v-model:page-size="tableData.pageSize"
         class="mt-16px justify-end"
         :page-sizes="[100, 200, 300, 400]"
         layout="total, sizes, prev, pager, next, jumper"
         :total="400"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -120,7 +120,7 @@ const keydownEnter = async () => {
 // }
 
 const tableData = reactive({
-  pageSize: 10,
+  pageSize: 9999,
   currentPage: 1,
   data: [] as keywordData[]
 })

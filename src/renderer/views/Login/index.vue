@@ -31,8 +31,8 @@
             <el-input v-model="params.username" placeholder="用户名"></el-input>
             <p class="text-base-regular">密码</p>
             <el-input v-model="params.password" type="password" placeholder="密码"></el-input>
-            <p class="text-base-regular">代理地址</p>
-            <el-input v-model="params.proxyUrl" placeholder="用户名"></el-input>
+            <p v-if="isElectron" class="text-base-regular">代理地址</p>
+            <el-input v-if="isElectron" v-model="params.proxyUrl" placeholder="用户名"></el-input>
           </div>
 
           <XButton class="w-full" type="Primary" @click="handle">登 录</XButton>
@@ -54,6 +54,11 @@ import usePlanStore from '@/store/common/usePlan'
 const router = useRouter()
 const planStore = usePlanStore()
 
+const isElectron = ref(false)
+onBeforeMount(() => {
+  isElectron.value = !!window.electronApi
+})
+
 const params = reactive({
   username: 'a123',
   password: '123',
@@ -68,7 +73,7 @@ const handle = async () => {
       useUser().setToken(res.Data.access_token)
       useUser().setUserInfo(res.Data.user_info)
       planStore.setProxyUrl(params.proxyUrl)
-      window.electron.ipcRenderer.send('setProxy', params.proxyUrl)
+      isElectron && window.electron.ipcRenderer.send('setProxy', params.proxyUrl)
       if (res.Data.user_info.account_level === UserType.general) {
         const id = planStore.getPlanInfo?.plan_id || 0
         router.push(`/MonitoringPlan/${id}`)

@@ -22,19 +22,19 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-pagination
+    <!-- <el-pagination
       v-model:current-page="currentPage"
       v-model:page-size="pageSize"
       class="mt-16px justify-end"
       :page-sizes="[100, 200, 300, 400]"
       layout="total, sizes, prev, pager, next, jumper"
       :total="400"
-    />
+    /> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { PlanInfo, deletePlan, getUserPlans, getOrgPlans } from '@/apis/monitoringPlan'
+import { PlanInfo, deletePlan, getOrgPlans } from '@/apis/monitoringPlan'
 import XButton from '@/components/XButton/index.vue'
 import { addDialog } from '@/components/dialog'
 import mitts from '@/utils/mitts'
@@ -44,8 +44,8 @@ onMounted(async () => {
   getPlan()
 })
 
-const currentPage = ref(1)
-const pageSize = ref(10)
+// const currentPage = ref(1)
+// const pageSize = ref(10)
 
 const show = () => {
   addDialog({

@@ -14,7 +14,6 @@
         ref="webviewRef"
         class="w-full h-full"
         :src="tgSrc"
-        @did-frame-finish-load="loadCommit"
       ></webview>
       <TelegramPost v-else-if="currentMsg" :key="tgSrc" :current-msg="currentMsg" />
     </div>
@@ -125,6 +124,8 @@ onBeforeMount(() => {
 })
 
 const saveDocx = () => {
+  console.log(valueHtml.value)
+
   asBlob(valueHtml.value).then((data) => {
     saveAs(data, '实施方案.docx')
   })
@@ -212,10 +213,6 @@ const screenshot = () => {
   window.electron.ipcRenderer.send('capture-webview-screenshot')
 }
 
-const loadCommit = () => {
-  console.log(1111111123)
-}
-
 onMounted(() => {
   window.electron.ipcRenderer.on('screenshot-data', (_, buffer) => {
     const blob = new Blob([buffer], { type: 'image/png' })
@@ -223,7 +220,6 @@ onMounted(() => {
     fileReader.readAsDataURL(blob)
     fileReader.addEventListener('load', function () {
       const res = fileReader.result
-      console.log(111, res)
       msgImg.value = `<img src="${res}" />`
     })
   })
