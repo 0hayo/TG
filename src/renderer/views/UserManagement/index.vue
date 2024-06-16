@@ -92,18 +92,25 @@ import AddArea from './components/AddArea.vue'
 
 onMounted(() => {
   queryAllUsers()
+  setInterval(queryAllUsers, 600000)
   querySitesOrganizations()
 })
 
 // const currentPage = ref(1)
 // const pageSize = ref(9999)
 
-const tableData = ref<UserInfo[]>()
+const tableData = computed(() => {
+  return tableDataBackup.value?.filter((v) => {
+    console.log(selectSites.value?.name)
+    return v.organization === selectSites.value?.name || !selectSites.value?.name
+  })
+})
+const tableDataBackup = ref<UserInfo[]>()
 const queryAllUsers = async () => {
   try {
     const res = await getAllUsers()
     if (res.IsSuccess) {
-      tableData.value = res.Data
+      tableDataBackup.value = res.Data
     } else {
       ElMessage.warning(res.Message)
     }
