@@ -119,15 +119,13 @@ const userInfo = reactive({
 
 const confirm = async () => {
   try {
-    console.log(111111, userInfo, props)
-
     const res = await createUser({
       name: userInfo.name,
       username: userInfo.username,
       password: userInfo.password,
       account_level: userInfo.account_level,
-      organization: userInfo.account_level === UserType.general ? userInfo.organization : 'DTXC',
-      city_category: userInfo.account_level === UserType.general ? userInfo.city_category : 'DTXC',
+      organization: userInfo.organization,
+      city_category: userInfo.city_category,
       expiration_date: userInfo.expiration_date
     })
     if (res.IsSuccess) {
