@@ -14,6 +14,7 @@
         ref="webviewRef"
         class="w-full h-full"
         :src="tgSrc"
+        @did-frame-finish-load="loadCommit"
       ></webview>
       <TelegramPost v-else-if="currentMsg" :key="tgSrc" :current-msg="currentMsg" />
     </div>
@@ -30,6 +31,7 @@
           mode="default"
         />
         <XButton class="p-2" text icon-name="export-line" @click="saveDocx"> 导出word</XButton>
+        <XButton class="p-2" text icon-name="export-line" @click="screenshot"> 截图 </XButton>
       </div>
 
       <Editor
@@ -71,9 +73,19 @@ import { IToolbarConfig, IEditorConfig } from '@wangeditor/editor'
 import { cloneDeep } from 'lodash'
 
 const toolbarConfig: Partial<IToolbarConfig> = {
-  // TS 语法
-  // const toolbarConfig = {                        // JS 语法
-  /* 工具栏配置 */
+  toolbarKeys: [
+    // 菜单 key
+    'headerSelect',
+    'fontFamily',
+    // 分割线
+    '|',
+    'color',
+    'bgColor',
+    // 菜单 key
+    'bold',
+    'italic',
+    'numberedList'
+  ]
 }
 
 // 初始化 MENU_CONF 属性
@@ -98,31 +110,10 @@ const editorConfig: Partial<IEditorConfig> = {
         { name: '三号', value: '21px' }
       ]
     }
-  }
-
+  },
   // 其他属性...
+  placeholder: '请输入内容...'
 }
-
-editorConfig.placeholder = '请输入内容...'
-
-toolbarConfig.toolbarKeys = [
-  // 菜单 key
-  'headerSelect',
-  'fontFamily',
-  // 分割线
-  '|',
-  'color',
-
-  'bgColor',
-  // 菜单 key
-  'bold',
-  'italic',
-  'numberedList'
-
-  // 菜单组，包含多个菜单
-
-  // 继续配置其他菜单...
-]
 
 const handleEditor = () => {
   mitts.emit('editor')
@@ -162,16 +153,15 @@ const valueHtml = computed(
 <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">${currentMsg
     .value?.message_link}</span></p>
 <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">四、附件</span></p>
+${msgImg.value}
 `
 )
+const msgImg = ref()
 
 onMounted(() => {
   mitts.on('editor', () => {
     showEditor.value = !showEditor.value
   })
-  // window.electron.ipcRenderer.on('webview-screenshot-data', (event, base64Image) => {
-  //   console.log(event, base64Image)
-  // })
 })
 // 组件销毁时，也及时销毁编辑器
 // onBeforeUnmount(() => {
@@ -216,12 +206,28 @@ const handleMsg = async (msg: MessagesRes) => {
     .replaceAll('</p>', '')
   tgSrc.value = msg.msg_online_link
   tgWight.value = msg.message_link
-  // valueHtml.value = `用户：${msg.sender_name}；用户ID：${msg.sender_id}；时间：${msg.message_time}；群名：${msg.channel_name}；言论：${msg.message_text}；`
-
-  // const image = await webviewRef.value.capturePage()
-  // console.log(image)
-  // window.electron.ipcRenderer.send('capture-webview-screenshot', msg.msg_online_link)
 }
+
+const screenshot = () => {
+  window.electron.ipcRenderer.send('capture-webview-screenshot')
+}
+
+const loadCommit = () => {
+  console.log(1111111123)
+}
+
+onMounted(() => {
+  window.electron.ipcRenderer.on('screenshot-data', (_, buffer) => {
+    const blob = new Blob([buffer], { type: 'image/png' })
+    const fileReader = new FileReader()
+    fileReader.readAsDataURL(blob)
+    fileReader.addEventListener('load', function () {
+      const res = fileReader.result
+      console.log(111, res)
+      msgImg.value = `<img src="${res}" />`
+    })
+  })
+})
 </script>
 
 <style lang="less">

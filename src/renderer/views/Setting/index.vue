@@ -60,7 +60,7 @@
       </div>
       <div class="flex-col gap-2">
         <h6 class="text-h6-medium">账户设置</h6>
-        <XButton class="self-start" icon-name="draft-line"> 修改密码 </XButton>
+        <!-- <XButton class="self-start" icon-name="draft-line"> 修改密码 </XButton> -->
         <XButton class="self-start" icon-name="draft-line" @click="handleLogout">
           注销登录
         </XButton>

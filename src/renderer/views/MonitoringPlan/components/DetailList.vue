@@ -94,6 +94,7 @@ const queryLatestMessages = async () => {
     if (res.IsSuccess) {
       monitoringData.value = res.Data
       monitoringData.value.forEach((item) => {
+        item.hit_keyword = item.hit_keyword || []
         item.hit_keyword.forEach((v) => {
           item.message_text = item.message_text.replaceAll(v, `<p id="keyword">${v}</p>`)
         })

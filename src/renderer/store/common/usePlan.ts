@@ -7,7 +7,8 @@ const usePlanStore = defineStore(NAMES.USE_PLAN, {
   state: () => {
     return {
       planInfo: {} as PlanInfo,
-      planList: [] as PlanInfo[]
+      planList: [] as PlanInfo[],
+      proxyUrl: 'http://127.0.0.1:7890'
     }
   },
   getters: {
@@ -29,6 +30,9 @@ const usePlanStore = defineStore(NAMES.USE_PLAN, {
     // },
     setPlanList(data: PlanInfo[]) {
       this.$state.planList = data
+    },
+    setProxyUrl(data: string) {
+      this.$state.proxyUrl = data
     }
   },
   //开启数据缓存
