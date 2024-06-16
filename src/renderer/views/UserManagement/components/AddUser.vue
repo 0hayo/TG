@@ -118,14 +118,20 @@ const userInfo = reactive({
 })
 
 const confirm = async () => {
+  if (props.selectSites?.name && !props.selectSites?.org_name) {
+    ElMessage.warning('请选择单位！')
+    return
+  }
   try {
     const res = await createUser({
       name: userInfo.name,
       username: userInfo.username,
       password: userInfo.password,
       account_level: userInfo.account_level,
-      organization: userInfo.organization,
-      city_category: userInfo.city_category,
+      organization:
+        props.selectSites?.name && props.selectSites?.org_name ? userInfo.organization : '管理员',
+      city_category:
+        props.selectSites?.name && props.selectSites?.org_name ? userInfo.city_category : '管理员',
       expiration_date: userInfo.expiration_date
     })
     if (res.IsSuccess) {

@@ -50,6 +50,8 @@ export function getSitesOrganizations() {
 export interface SitesOrganization {
   id: number
   name: string
+  org_id?: number
+  org_name?: string
   organizations: Organization[]
 }
 export interface Organization {
