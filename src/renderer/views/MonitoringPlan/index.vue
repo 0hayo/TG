@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$route.params.planCount == '0'" class="w-full h-full">
+  <div v-if="planCount == '0'" class="w-full h-full">
     <div class="img"></div>
     <div>暂无无监测方案，<a @click="show"> 请点我添加</a>监测方案</div>
   </div>
@@ -118,8 +118,10 @@ const handleEditor = () => {
   mitts.emit('editor')
 }
 
+const planCount = ref('0')
 const isElectron = ref(false)
 onBeforeMount(() => {
+  planCount.value = useRoute().params.planCount as string
   isElectron.value = !!window.electronApi
 })
 

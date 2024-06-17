@@ -59,6 +59,18 @@ import { MessagesRes, latestKeyMessages } from '@/apis/monitoringPlan'
 import useMonitoringData from '@/store/common/monitoringData'
 import usePlanStore from '@/store/common/usePlan'
 // import moment from 'moment'
+import { useQueryAllGroup } from '@/composable'
+
+let timer
+useQueryAllGroup(() => {
+  timer = setInterval(() => {
+    queryLatestMessages()
+  }, 2000)
+})
+
+onUnmounted(() => {
+  clearInterval(timer)
+})
 
 const emits = defineEmits<{
   handleMsg: [MessagesRes]
@@ -69,21 +81,13 @@ const usePlan = usePlanStore()
 const activeMsgId = ref('')
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-let timer
-onMounted(() => {
-  timer = setInterval(() => {
-    queryLatestMessages()
-  }, 2000)
-})
-
-onUnmounted(() => {
-  clearInterval(timer)
-})
 
 const monitoring = useMonitoringData()
 
 const monitoringData = ref<MessagesRes[]>([])
 const queryLatestMessages = async () => {
+  console.log('monitoring.getGroupIds', monitoring.getGroupIds)
+
   if (monitoring.getGroupIds.length === 0) return
   try {
     const res = await latestKeyMessages({

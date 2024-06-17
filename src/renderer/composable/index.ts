@@ -2,7 +2,7 @@ import { GroupInfo, getAllList } from '@/apis/mediaManagement'
 import useMonitoringData from '@/store/common/monitoringData'
 import mitts from '@/utils/mitts'
 
-export const useQueryAllGroup = () => {
+export const useQueryAllGroup = (cb: () => void) => {
   const monitoringData = useMonitoringData()
 
   onBeforeMount(() => {
@@ -22,6 +22,7 @@ export const useQueryAllGroup = () => {
       })
       if (res.IsSuccess) {
         monitoringData.setGroupList(res.Data.result)
+        cb()
       } else {
         ElMessage.warning(res.Message)
       }

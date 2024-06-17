@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import DialogProvide from '@/components/dialog/index.vue'
-import { useQueryAllGroup } from './composable'
-
-useQueryAllGroup()
 
 const time = ref(false)
 
