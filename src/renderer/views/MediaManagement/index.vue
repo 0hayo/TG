@@ -50,7 +50,7 @@
           "
         />
       </div>
-      <h6
+      <!-- <h6
         v-if="user.getAccountLevel === UserType.general"
         class="px-4 inline-flex items-center text-h6-medium"
       >
@@ -74,7 +74,7 @@
             }
           "
         />
-      </div>
+      </div> -->
     </div>
     <div class="grow p-16px flex flex-col">
       <div class="flex gap-24px items-center">
@@ -110,7 +110,7 @@
           <el-table-column prop="added_by" min-width="100" label="添加人" />
           <el-table-column fixed="right" label="操作" width="120">
             <template #default="{ row }">
-              <el-button
+              <!-- <el-button
                 v-if="user.getAccountLevel === UserType.general && row.status === 2"
                 link
                 type="primary"
@@ -118,7 +118,7 @@
                 @click="setUserMonitoreds(row, false)"
               >
                 取消监测
-              </el-button>
+              </el-button> -->
               <!-- <el-button
                 v-if="user.getAccountLevel === '3'"
                 link
@@ -175,7 +175,7 @@ import {
 } from '@/apis/mediaManagement'
 import LinkCard from '@/components/linkCard/index.vue'
 import useUser from '@/store/common/useUser'
-import { setUserMonitored } from '@/apis/mediaManagement'
+// import { setUserMonitored } from '@/apis/mediaManagement'
 import { UserType } from '@/common/types'
 
 const user = useUser()
@@ -254,22 +254,22 @@ const queryAllActive = async () => {
   }
 }
 
-const setUserMonitoreds = async (row: GroupInfo, b: boolean) => {
-  try {
-    const res = await setUserMonitored({
-      group_url: row.group_url,
-      new_status: b
-    })
-    if (res.IsSuccess) {
-      groupTableData[user.getAccountLevel]()
-      ElMessage.success(res.Message)
-    } else {
-      ElMessage.warning(res.Message)
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
+// const setUserMonitoreds = async (row: GroupInfo, b: boolean) => {
+//   try {
+//     const res = await setUserMonitored({
+//       group_url: row.group_url,
+//       new_status: b
+//     })
+//     if (res.IsSuccess) {
+//       groupTableData[user.getAccountLevel]()
+//       ElMessage.success(res.Message)
+//     } else {
+//       ElMessage.warning(res.Message)
+//     }
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 const updateTgStatus = async (row: GroupInfo) => {
   try {

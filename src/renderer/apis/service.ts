@@ -29,7 +29,8 @@ service.interceptors.response.use(
   (response) => {
     const data = response.data
     if (response.status !== 200) {
-      Promise.reject(ElMessage.error(data.Message))
+      // Promise.reject(ElMessage.error(data.Message))
+      return Promise.reject(data)
     } else {
       return data
     }
@@ -38,7 +39,8 @@ service.interceptors.response.use(
     if (error?.response?.data?.Status === 401) {
       router.push('/login')
     }
-    return Promise.reject(ElMessage.error(error?.message))
+    // return Promise.reject(ElMessage.error(error?.message))
+    return Promise.reject(error)
   }
 )
 

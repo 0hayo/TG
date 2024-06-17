@@ -141,7 +141,7 @@ const getAllKeyword = async () => {
 }
 
 const keysList = reactive({
-  pageSize: 10,
+  pageSize: 99999,
   currentPage: 1,
   data: [] as keywordData[]
 })
