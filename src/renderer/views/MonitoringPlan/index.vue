@@ -207,6 +207,7 @@ const handleMsg = async (msg: MessagesRes) => {
     .replaceAll('</p>', '')
   tgSrc.value = msg.msg_online_link
   tgWight.value = msg.message_link
+  msgImg.value = ''
 }
 
 const screenshot = () => {

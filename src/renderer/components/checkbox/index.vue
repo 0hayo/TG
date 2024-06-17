@@ -29,7 +29,7 @@ const modelValues = useVModel(props, 'modelValue', emit)
   margin: 0;
   &.is-checked {
     background: rgba(78, 167, 252, 0.1);
-    border-bottom: 0.5px solid @primary;
+    // border-bottom: 0.5px solid @primary;
   }
 }
 </style>

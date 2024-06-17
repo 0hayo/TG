@@ -93,7 +93,7 @@ defineExpose({
 
 <style scoped lang="less">
 .link {
-  color: @primary;
+  // color: @primary;
 }
 .urlList {
   max-height: 150px;

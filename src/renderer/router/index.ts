@@ -45,24 +45,24 @@ const routes: Array<RouteRecordRaw> = [
           auth: false
         }
       },
-      {
-        path: '/TgConfiguration',
-        name: 'TgConfiguration',
-        component: () => import('@/views/TgConfiguration/index.vue'),
-        meta: {
-          title: 'TgConfiguration',
-          auth: false
-        }
-      },
-      {
-        path: '/DataCenter',
-        name: 'DataCenter',
-        component: () => import('@/views/DataCenter/index.vue'),
-        meta: {
-          title: 'DataCenter',
-          auth: false
-        }
-      },
+      // {
+      //   path: '/TgConfiguration',
+      //   name: 'TgConfiguration',
+      //   component: () => import('@/views/TgConfiguration/index.vue'),
+      //   meta: {
+      //     title: 'TgConfiguration',
+      //     auth: false
+      //   }
+      // },
+      // {
+      //   path: '/DataCenter',
+      //   name: 'DataCenter',
+      //   component: () => import('@/views/DataCenter/index.vue'),
+      //   meta: {
+      //     title: 'DataCenter',
+      //     auth: false
+      //   }
+      // },
       {
         path: '/KeyWords',
         name: 'KeyWords',

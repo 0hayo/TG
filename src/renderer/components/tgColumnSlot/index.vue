@@ -49,7 +49,7 @@ const emit = defineEmits<{
     height: 52px;
     .el-button {
       width: 100%;
-      background-color: @button-fill;
+      // background-color: @button-fill;
     }
   }
 }

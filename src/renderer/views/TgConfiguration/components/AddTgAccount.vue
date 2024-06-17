@@ -71,12 +71,12 @@ const handleBtn = async () => {
       chatId: chatId.value,
       nickname: nickname.value
     })
-    if (res.code === SUCCESS_CODE) {
-      ElMessage.success('新增成功')
-      emit('close', 'update')
-    } else {
-      ElMessage.warning(res.message)
-    }
+    // if (res.code === SUCCESS_CODE) {
+    //   ElMessage.success('新增成功')
+    //   emit('close', 'update')
+    // } else {
+    //   ElMessage.warning(res.message)
+    // }
   } catch (error) {
     console.log(error)
   }
@@ -89,9 +89,9 @@ const handleBtn = async () => {
   height: 32px;
   line-height: 32px;
   padding: 0 8px;
-  background-color: @button-fill;
+  // background-color: @button-fill;
 }
 .link {
-  color: @primary;
+  // color: @primary;
 }
 </style>

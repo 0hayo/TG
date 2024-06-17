@@ -67,7 +67,7 @@ defineExpose({
   cursor: pointer;
   &.active {
     background: rgba(78, 167, 252, 0.1);
-    border-bottom: 0.5px solid @primary;
+    // border-bottom: 0.5px solid @primary;
   }
 }
 </style>

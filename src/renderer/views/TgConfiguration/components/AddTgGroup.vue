@@ -94,7 +94,7 @@ const handleBtn = async () => {
 
 <style scoped lang="less">
 .link {
-  color: @primary;
+  // color: @primary;
 }
 .urlList {
   p {

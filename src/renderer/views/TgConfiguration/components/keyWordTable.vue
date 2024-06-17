@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import { deleteKeywords, queryKeywords } from '@/apis'
 import { KeywordsRes } from '@/apis/types'
-import { SUCCESS_CODE } from '@/constants'
+// import { SUCCESS_CODE } from '@/constants'
 // import { getAllGroupKeyword } from '@/utils'
 import { ElTable } from 'element-plus'
 const props = defineProps<{
@@ -66,10 +66,10 @@ const getKeywords = async () => {
   const res = await queryKeywords({
     groupIds: props.selectGroup
   })
-  if (res.code === SUCCESS_CODE) {
-    tableData.value = res.data
-    tableLoading.value = false
-  }
+  // if (res.code === SUCCESS_CODE) {
+  //   tableData.value = res.data
+  //   tableLoading.value = false
+  // }
 }
 
 const delKeyword = async (row: KeywordsRes) => {
@@ -84,12 +84,12 @@ const delKeyword = async (row: KeywordsRes) => {
         keywords: row.keywords
       }
     ])
-    if (res.code === SUCCESS_CODE) {
-      getKeywords()
-      ElMessage.success('删除成功')
-    } else {
-      ElMessage.warning(res.message)
-    }
+    // if (res.code === SUCCESS_CODE) {
+    //   getKeywords()
+    //   ElMessage.success('删除成功')
+    // } else {
+    //   ElMessage.warning(res.message)
+    // }
   })
 }
 
@@ -112,12 +112,12 @@ const delKeywords = async () => {
       }
     })
     const res = await deleteKeywords(params)
-    if (res.code === SUCCESS_CODE) {
-      getKeywords()
-      ElMessage.success('删除成功')
-    } else {
-      ElMessage.warning(res.message)
-    }
+    // if (res.code === SUCCESS_CODE) {
+    //   getKeywords()
+    //   ElMessage.success('删除成功')
+    // } else {
+    //   ElMessage.warning(res.message)
+    // }
   })
 }
 
@@ -131,7 +131,7 @@ defineExpose({
 .head {
   height: 32px;
   line-height: 32px;
-  background: @button-fill;
+  // background: @button-fill;
   font-size: 3;
   color: @Secondary-text;
   padding: 16px;
