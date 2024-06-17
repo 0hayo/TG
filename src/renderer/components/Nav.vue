@@ -78,7 +78,7 @@ import AddPlan from '@/views/MonitoringPlan/components/AddPlan.vue'
 import mitts from '@/utils/mitts'
 import usePlanStore from '@/store/common/usePlan'
 import moment from 'moment'
-import { PlanInfo, getUserPlans, getOrgPlans } from '@/apis/monitoringPlan'
+import { PlanInfo, getOrgPlans } from '@/apis/monitoringPlan'
 import useUser from '@/store/common/useUser'
 import { UserType } from '@/common/types'
 
