@@ -82,18 +82,7 @@ const emits = defineEmits<{
 
 const planStore = usePlanStore()
 
-onMounted(() => {
-  getAllKeyword()
-  if (props.type === 'edit') {
-    formLabelAlign.plan_name = planStore.getPlanInfo.plan_name
-    formLabelAlign.tg_user_group_id = planStore.getPlanInfo.tg_user_group_id
-    formLabelAlign.inspect_keys = planStore.getPlanInfo.inspect_keys
-    plan_id.value = planStore.getPlanInfo.plan_id
-  }
-})
-
 const value1 = ref(false)
-
 const labelPosition = ref<FormProps['labelPosition']>('top')
 
 const plan_id = ref()
@@ -109,7 +98,8 @@ const rules = ref<FormRules<typeof formLabelAlign>>({
 
 const ruleFormRef = ref<FormInstance>()
 
-const keywordsList = ref<keywordData[]>()
+const keywordsList = ref<keywordData[]>([])
+
 const getAllKeyword = async () => {
   try {
     const res = await getOrgKey({
@@ -117,7 +107,10 @@ const getAllKeyword = async () => {
       per_page: 9999
     })
     if (res.IsSuccess) {
-      keywordsList.value = res.Data
+      keywordsList.value = res.Data.filter((keyword: keywordData) => keyword.status === 2)
+      if (props.type === 'edit') {
+        initializeFormData()
+      }
     } else {
       ElMessage.warning(res.Message)
     }
@@ -125,6 +118,20 @@ const getAllKeyword = async () => {
     console.log(_)
   }
 }
+
+const initializeFormData = () => {
+  formLabelAlign.plan_name = planStore.getPlanInfo.plan_name
+  formLabelAlign.tg_user_group_id = planStore.getPlanInfo.tg_user_group_id
+  formLabelAlign.inspect_keys = planStore.getPlanInfo.inspect_keys
+  plan_id.value = planStore.getPlanInfo.plan_id
+}
+
+onMounted(() => {
+  getAllKeyword()
+  if (props.type === 'edit') {
+    // Initialize form data only after keywords are fetched
+  }
+})
 
 const save = async (formEl: FormInstance | undefined) => {
   if (!formEl) return

@@ -67,6 +67,7 @@ const getPlan = async () => {
     const res = await getOrgPlans()
     if (res.IsSuccess) {
       planList.value = res.Data
+      console.log(res.Data)
     } else {
       ElMessage.warning(res.Message)
     }
