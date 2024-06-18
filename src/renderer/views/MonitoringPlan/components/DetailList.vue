@@ -86,8 +86,6 @@ const monitoring = useMonitoringData()
 
 const monitoringData = ref<MessagesRes[]>([])
 const queryLatestMessages = async () => {
-  console.log('monitoring.getGroupIds', monitoring.getGroupIds)
-
   if (monitoring.getGroupIds.length === 0) return
   try {
     const res = await latestKeyMessages({
@@ -112,6 +110,10 @@ const queryLatestMessages = async () => {
     }
   } catch (error) {
     console.log(error)
+  } finally {
+    setTimeout(() => {
+      queryLatestMessages()
+    }, 1000)
   }
 }
 </script>

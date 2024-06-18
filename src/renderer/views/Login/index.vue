@@ -1,9 +1,9 @@
 <template>
-  <div class="flex justify-center items-center p-20">
+  <div class="h-100vh w-full flex justify-center items-center">
     <div
-      class="w-200 h-112.5 bg-Layout-Card border-rd-4 border-2 border-Layout-White flex-col justify-center shadow-2xl"
+      class="w-full h-full bg-Layout-Card border-rd-4 border-2 border-Layout-White flex-col justify-center shadow-2xl"
     >
-      <div class="self-end flex p-3">
+      <div v-if="isElectron" class="self-end flex p-3">
         <iconBtn
           icon-name="subtract-line"
           type="WindowsControls"
@@ -23,16 +23,16 @@
           @click="setWindowSize('close')"
         ></iconBtn>
       </div>
-      <div class="flex flex-1">
-        <div class="w-63 p-4 ml-20 grid gap-8">
+      <div class="w-full flex items-center flex-1 gap-x-80px">
+        <div class="w-63 p-4 ml-20 grid h-400px">
           <h2 class="text-h4-medium">嗨！欢迎您使用谛听巡查系统</h2>
           <div>
             <p class="text-base-regular">用户名</p>
             <el-input v-model="params.username" placeholder="用户名"></el-input>
-            <p class="text-base-regular">密码</p>
+            <p class="text-base-regular mt-24px">密码</p>
             <el-input v-model="params.password" type="password" placeholder="密码"></el-input>
-            <p v-if="isElectron" class="text-base-regular">代理地址</p>
-            <el-input v-if="isElectron" v-model="params.proxyUrl" placeholder="用户名"></el-input>
+            <!-- <p v-if="isElectron" class="text-base-regular">代理地址</p>
+            <el-input v-if="isElectron" v-model="params.proxyUrl" placeholder="代理地址"></el-input> -->
           </div>
 
           <XButton class="w-full" type="Primary" @click="handle">登 录</XButton>
@@ -61,8 +61,8 @@ onBeforeMount(() => {
 
 const params = reactive({
   username: 'a123',
-  password: '123',
-  proxyUrl: planStore.proxyUrl
+  password: '123'
+  // proxyUrl: planStore.proxyUrl
 })
 
 const handle = async () => {
@@ -72,14 +72,15 @@ const handle = async () => {
       ElMessage.success(res.Message)
       useUser().setToken(res.Data.access_token)
       useUser().setUserInfo(res.Data.user_info)
-      planStore.setProxyUrl(params.proxyUrl)
-      isElectron && window.electron.ipcRenderer.send('setProxy', params.proxyUrl)
+      // planStore.setProxyUrl(params.proxyUrl)
+      // isElectron && window.electron.ipcRenderer.send('setProxy', params.proxyUrl)
       if (res.Data.user_info.account_level === UserType.general) {
         const id = planStore.getPlanInfo?.plan_id || 0
         router.push(`/MonitoringPlan/${id}`)
       } else {
         router.push('/MediaManagement')
       }
+      isElectron && setWindowSize('max')
     } else {
       ElMessage.warning(res.Message)
     }

@@ -8,10 +8,10 @@ import { electronStore } from './store'
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
-    width: 1440,
-    height: 810,
-    minWidth: 1440,
-    minHeight: 810,
+    width: 800,
+    height: 450,
+    minWidth: 800,
+    minHeight: 450,
     show: false,
     autoHideMenuBar: true,
     frame: false,
@@ -41,6 +41,16 @@ function createWindow(): void {
   ipcMain.on('setProxy', (_, data: string) => {
     mainWindow.webContents.session.setProxy({
       proxyRules: data
+    })
+  })
+
+  ipcMain.on('setProxyWebview', (_, data: string) => {
+    webContents.getAllWebContents().forEach((win) => {
+      if (win.getType() == 'webview') {
+        win.session.setProxy({
+          proxyRules: data
+        })
+      }
     })
   })
 

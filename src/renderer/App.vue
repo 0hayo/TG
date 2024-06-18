@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import DialogProvide from '@/components/dialog/index.vue'
+import useUser from './store/common/useUser'
+
+const user = useUser()
 
 const time = ref(false)
 
 onBeforeMount(async () => {
+  if (user.token) {
+    window?.electronApi?.setWindowSize('max')
+  }
   time.value = new Date().getTime() > new Date('2025-2-10').getTime()
 })
 </script>

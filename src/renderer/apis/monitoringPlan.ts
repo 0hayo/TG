@@ -27,9 +27,7 @@ export function latestKeyMessages(params: {
   keywords: string
   time_threshold: string
 }) {
-  return service.get<void, ApiResponse<MessagesRes[]>>('/tgmsg/latest_key_messages', {
-    params
-  })
+  return service.post<void, ApiResponse<MessagesRes[]>>('/tgmsg/latest_key_messages', params)
 }
 
 // 创建监测方案

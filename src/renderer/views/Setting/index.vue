@@ -61,6 +61,12 @@
       <div class="flex-col gap-2">
         <h6 class="text-h6-medium">账户设置</h6>
         <!-- <XButton class="self-start" icon-name="draft-line"> 修改密码 </XButton> -->
+        <div v-if="isElectron" class="flex items-center gap-12px">
+          <p class="text-base-regular">代理地址</p>
+          <el-input v-model="proxyUrl" placeholder="代理地址" style="width: 200px"></el-input>
+          <XButton class="self-start" icon-name="draft-line" @click="saveProxy"> 保存设置 </XButton>
+        </div>
+
         <XButton class="self-start" icon-name="draft-line" @click="handleLogout">
           注销登录
         </XButton>
@@ -74,10 +80,24 @@ import XButton from '@/components/XButton/index.vue'
 import { logout } from '@/apis/login'
 import router from '@/router'
 import useUser from '@/store/common/useUser'
+import usePlanStore from '@/store/common/usePlan'
+
+const planStore = usePlanStore()
 
 const radio = ref()
 const radio2 = ref()
 const radio3 = ref()
+
+const proxyUrl = ref(planStore.proxyUrl)
+const isElectron = ref(false)
+onBeforeMount(() => {
+  isElectron.value = !!window.electronApi
+})
+const saveProxy = () => {
+  planStore.setProxyUrl(proxyUrl.value)
+  isElectron && window.electron.ipcRenderer.send('setProxy', proxyUrl.value)
+  ElMessage.success('设置成功！')
+}
 
 const handleLogout = async () => {
   try {
@@ -85,6 +105,7 @@ const handleLogout = async () => {
     if (res.IsSuccess) {
       router.push('/login')
       useUser().setReset()
+      setWindowSize('max')
       ElMessage.success(res.Message)
     } else {
       ElMessage.warning(res.Message)
@@ -92,6 +113,10 @@ const handleLogout = async () => {
   } catch (error) {
     console.log(error)
   }
+}
+
+const setWindowSize = (type: string) => {
+  window.electronApi.setWindowSize(type)
 }
 </script>
 
