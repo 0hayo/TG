@@ -8,13 +8,17 @@ export const setWindowSize = async (event, type: string) => {
       win?.minimize()
       break
     case 'max':
-      win?.isMaximized() ? win?.unmaximize() : win?.maximize()
+      if (win?.isMaximized()) {
+        win?.setSize(1440, 820)
+        win?.center()
+      } else win?.maximize()
       break
     case 'maximize':
       win?.maximize()
       break
     case 'unmaximize':
-      win?.unmaximize()
+      win?.setSize(800, 450)
+      win?.center()
       break
     case 'close':
       win?.close()

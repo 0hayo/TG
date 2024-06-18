@@ -4,7 +4,7 @@
     <div>暂无无监测方案，<a @click="show"> 请点我添加</a>监测方案</div>
   </div>
   <div v-else class="flex-row flex-1">
-    <div class="w-120 border-r border-Neutral-Stroke-Stroke">
+    <div class="w-116 border-r border-Neutral-Stroke-Stroke">
       <DetailListVue @handle-msg="handleMsg" />
     </div>
     <div class="flex-1">
@@ -17,9 +17,12 @@
       ></webview>
       <TelegramPost v-else-if="currentMsg" :key="tgSrc" :current-msg="currentMsg" />
     </div>
-    <div :class="showEditor ? 'w-140' : 'w-0'" class="transition-all duration-150 ease-in-out">
+    <div
+      :class="showEditor ? 'w-116' : 'w-0'"
+      class="transition-all duration-150 ease-in-out border-l border-Neutral-Stroke-Stroke"
+    >
       <div
-        class="w-140 flex justify-between items-center border-b-Neutral-Stroke-Stroke border-b px-2"
+        class="flex justify-between items-center border-b-Neutral-Stroke-Stroke border-b px-2 bg-[#fff]"
       >
         <iconBtn icon-name="login-box-line" @click="handleEditor" />
         <Toolbar
@@ -29,13 +32,18 @@
           :default-config="toolbarConfig"
           mode="default"
         />
-        <XButton class="p-2" text icon-name="export-line" @click="saveDocx"> 导出word</XButton>
+        <XButton
+          class="p-2 pos-absolute bottom-1 right-2 z-36 shadow-blue"
+          icon-name="export-line"
+          @click="saveDocx"
+        >
+          导出word</XButton
+        >
         <XButton class="p-2" text icon-name="export-line" @click="screenshot"> 截图 </XButton>
       </div>
 
       <Editor
         v-model="valueHtml"
-        class="w-140"
         style="height: calc(100vh - 40px); overflow-y: hidden"
         :default-config="editorConfig"
         mode="simple"
@@ -75,7 +83,7 @@ const toolbarConfig: Partial<IToolbarConfig> = {
   toolbarKeys: [
     // 菜单 key
     'headerSelect',
-    'fontFamily',
+    // 'fontFamily',
     // 分割线
     '|',
     'color',
