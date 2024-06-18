@@ -63,9 +63,7 @@ import { useQueryAllGroup } from '@/composable'
 
 let timer
 useQueryAllGroup(() => {
-  // timer = setInterval(() => {
   queryLatestMessages()
-  // }, 2000)
 })
 
 onUnmounted(() => {
