@@ -18,7 +18,7 @@ const usePlanStore = defineStore(NAMES.USE_PLAN, {
       )
     },
     getPlanInfo(state) {
-      return state.planList.filter((v) => v.plan_id === state.planInfo.plan_id)[0]
+      return state.planInfo
     }
   },
   actions: {

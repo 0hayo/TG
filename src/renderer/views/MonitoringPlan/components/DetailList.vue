@@ -55,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { MessagesRes, latestKeyMessages } from '@/apis/monitoringPlan'
+import { MessagesRes, PlanInfo, latestKeyMessages } from '@/apis/monitoringPlan'
 import useMonitoringData from '@/store/common/monitoringData'
 import usePlanStore from '@/store/common/usePlan'
 // import moment from 'moment'
@@ -63,8 +63,7 @@ import { useQueryAllGroup } from '@/composable'
 
 let timer
 useQueryAllGroup(() => {
-  params.channel_name = monitoring.getGroupIds.join(',')
-  params.keywords = usePlan.getKeywords.join(',')
+  planInfo.value = usePlan.getPlanInfo
   queryLatestMessages()
 })
 
@@ -84,17 +83,19 @@ const activeMsgId = ref('')
 
 const monitoring = useMonitoringData()
 
-const params = reactive({
-  channel_name: '',
-  keywords: '',
-  time_threshold: '2024-06-08 02:13:20'
-})
+const planInfo = ref<PlanInfo>()
 
 const monitoringData = ref<MessagesRes[]>([])
 const queryLatestMessages = async () => {
   if (monitoring.getGroupIds.length === 0) return
   try {
-    const res = await latestKeyMessages(params)
+    const keywords =
+      usePlan.planList.filter((v) => v.plan_id === planInfo.value?.plan_id)[0]?.inspect_keys || []
+    const res = await latestKeyMessages({
+      channel_name: monitoring.getGroupIds.join(','),
+      keywords: keywords.join(','),
+      time_threshold: '2024-06-08 02:13:20'
+    })
     if (res.IsSuccess) {
       monitoringData.value = res.Data
       monitoringData.value.forEach((item) => {
