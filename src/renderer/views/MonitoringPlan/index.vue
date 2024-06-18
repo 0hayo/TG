@@ -33,7 +33,8 @@
           mode="default"
         />
         <XButton
-          class="p-2 pos-fixed top-26 right-4 z-10 shadow-blue"
+          :class="showEditor ? 'right-4' : 'right--30'"
+          class="p-2 pos-fixed top-26 z-10 shadow-blue"
           type="Primary"
           icon-name="export-line"
           @click="saveDocx"
