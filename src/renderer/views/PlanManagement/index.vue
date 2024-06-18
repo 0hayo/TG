@@ -50,7 +50,7 @@ onMounted(async () => {
 const show = () => {
   addDialog({
     title: '新增方案',
-    width: '',
+    width: '800',
     component: shallowRef(AddPlan),
     showfooter: false,
     callBack(name: string) {

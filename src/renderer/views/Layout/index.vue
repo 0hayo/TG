@@ -5,7 +5,7 @@
     <Nav></Nav>
     <div class="w-full overflow-hidden">
       <Header></Header>
-      <router-view v-slot="{ Component }" style="height: calc(100% - 3rem)">
+      <router-view v-slot="{ Component }" style="height: calc(100% - 3rem); overflow-y: auto">
         <keep-alive>
           <component :is="Component" :key="$route.fullPath" />
         </keep-alive>

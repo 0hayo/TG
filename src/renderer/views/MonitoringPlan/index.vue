@@ -126,8 +126,6 @@ onBeforeMount(() => {
 })
 
 const saveDocx = () => {
-  console.log(valueHtml.value)
-
   asBlob(valueHtml.value).then((data) => {
     saveAs(data, '实施方案.docx')
   })
@@ -213,11 +211,11 @@ const handleMsg = async (msg: MessagesRes) => {
 }
 
 const screenshot = () => {
-  window.electron.ipcRenderer.send('capture-webview-screenshot')
+  window.electron?.ipcRenderer.send('capture-webview-screenshot')
 }
 
 onMounted(() => {
-  window.electron.ipcRenderer.on('screenshot-data', (_, buffer) => {
+  window.electron?.ipcRenderer.on('screenshot-data', (_, buffer) => {
     const blob = new Blob([buffer], { type: 'image/png' })
     const fileReader = new FileReader()
     fileReader.readAsDataURL(blob)

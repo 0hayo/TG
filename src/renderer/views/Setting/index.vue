@@ -105,7 +105,7 @@ const handleLogout = async () => {
     if (res.IsSuccess) {
       router.push('/login')
       useUser().setReset()
-      setWindowSize('max')
+      setWindowSize('unmaximize')
       ElMessage.success(res.Message)
     } else {
       ElMessage.warning(res.Message)

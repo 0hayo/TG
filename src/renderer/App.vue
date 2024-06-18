@@ -8,7 +8,7 @@ const time = ref(false)
 
 onBeforeMount(async () => {
   if (user.token) {
-    window?.electronApi?.setWindowSize('max')
+    window?.electronApi?.setWindowSize('maximize')
   }
   time.value = new Date().getTime() > new Date('2025-2-10').getTime()
 })

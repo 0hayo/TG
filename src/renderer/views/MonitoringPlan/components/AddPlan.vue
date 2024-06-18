@@ -38,7 +38,7 @@
       <el-form-item label="选择关键词" class="flex-1">
         <el-checkbox-group
           v-model="formLabelAlign.inspect_keys"
-          class="grid grid-cols-[180px_180px] gap-2 grid-rows-8 content-start"
+          class="grid grid-cols-[1fr_1fr] gap-2 grid-rows-8 content-start"
         >
           <el-checkbox
             v-for="item in keywordsList"
