@@ -33,13 +33,14 @@
           mode="default"
         />
         <XButton
-          class="p-2 pos-absolute bottom-1 right-2 z-36 shadow-blue"
+          class="p-2 pos-fixed top-26 right-4 z-10 shadow-blue"
+          type="Primary"
           icon-name="export-line"
           @click="saveDocx"
         >
           导出word</XButton
         >
-        <XButton class="p-2" text icon-name="export-line" @click="screenshot"> 截图 </XButton>
+        <XButton class="p-2" text icon-name="screenshot-line" @click="screenshot"> 截图 </XButton>
       </div>
 
       <Editor

@@ -1,7 +1,8 @@
 <template>
   <div class="h-full flex justify-center p-6">
     <div class="flex-col gap-4 w-146">
-      <div class="flex-col gap-2">
+      <!-- 主题选择 -->
+      <!-- <div class="flex-col gap-2">
         <h6 class="text-h6-medium">主题选择</h6>
         <el-radio-group v-model="radio" class="flex gap-16px mt-16px">
           <div>
@@ -17,16 +18,20 @@
             <el-radio value="1" size="large">主题 3</el-radio>
           </div>
         </el-radio-group>
-      </div>
-      <div class="flex-col gap-2">
+      </div> -->
+
+      <!-- 系统模式选择 -->
+      <!-- <div class="flex-col gap-2">
         <h6 class="text-h6-medium">模式选择</h6>
         <el-radio-group v-model="radio2">
           <el-radio-button value="New York">跟随系统</el-radio-button>
           <el-radio-button value="Washington">白天</el-radio-button>
           <el-radio-button value="Los Angeles">夜晚</el-radio-button>
         </el-radio-group>
-      </div>
-      <div class="flex-col gap-2">
+      </div> -->
+
+      <!-- 方案展示字体大小调节 -->
+      <!-- <div class="flex-col gap-2">
         <h6 class="text-h6-medium">
           字体大小
           <p class="text-base-regular color-Danger-Text-Primary">仅调节方案展示字体大小</p>
@@ -57,16 +62,18 @@
           <el-radio value="2">大号</el-radio>
           <el-radio value="2">特大号</el-radio>
         </el-radio-group>
+      </div> -->
+
+      <div class="flex-col gap-2">
+        <h6 class="text-h6-medium">代理设置</h6>
+        <!-- <XButton class="self-start" icon-name="draft-line"> 修改密码 </XButton> -->
+        <el-input v-model="proxyUrl" placeholder="代理地址" style="width: 200px"></el-input>
+        <XButton class="self-start" icon-name="draft-line" @click="saveProxy"> 保存设置 </XButton>
       </div>
+
       <div class="flex-col gap-2">
         <h6 class="text-h6-medium">账户设置</h6>
         <!-- <XButton class="self-start" icon-name="draft-line"> 修改密码 </XButton> -->
-        <div v-if="isElectron" class="flex items-center gap-12px">
-          <p class="text-base-regular">代理地址</p>
-          <el-input v-model="proxyUrl" placeholder="代理地址" style="width: 200px"></el-input>
-          <XButton class="self-start" icon-name="draft-line" @click="saveProxy"> 保存设置 </XButton>
-        </div>
-
         <XButton class="self-start" icon-name="draft-line" @click="handleLogout">
           注销登录
         </XButton>
