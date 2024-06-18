@@ -107,7 +107,7 @@ const getAllKeyword = async () => {
       per_page: 9999
     })
     if (res.IsSuccess) {
-      keywordsList.value = res.Data.filter((keyword: keywordData) => keyword.status === 2)
+      keywordsList.value = res.Data.filter((v) => v.status === 2)
       if (props.type === 'edit') {
         initializeFormData()
       }

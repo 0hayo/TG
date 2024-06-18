@@ -131,7 +131,7 @@ const getAllKeyword = async () => {
     })
     if (res.IsSuccess) {
       // 过滤掉状态为1（停用）的关键词
-      tableData.data = res.Data.filter((keyword: keywordData) => keyword.status === 2)
+      tableData.data = res.Data.filter((v) => v.status === 2)
     } else {
       ElMessage.warning(res.Message)
     }
