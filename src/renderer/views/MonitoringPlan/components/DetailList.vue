@@ -60,6 +60,7 @@ import useMonitoringData from '@/store/common/monitoringData'
 import usePlanStore from '@/store/common/usePlan'
 // import moment from 'moment'
 import { useQueryAllGroup } from '@/composable'
+import moment from 'moment'
 
 let timer
 useQueryAllGroup(() => {
@@ -94,7 +95,7 @@ const queryLatestMessages = async () => {
     const res = await latestKeyMessages({
       channel_name: monitoring.getGroupIds.join(','),
       keywords: keywords.join(','),
-      time_threshold: '2024-06-08 02:13:20'
+      time_threshold: moment().format('YYYY-MM-DD 00:00:00')
     })
     if (res.IsSuccess) {
       monitoringData.value = res.Data
