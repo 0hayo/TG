@@ -3,22 +3,23 @@
     <div
       class="w-full h-full bg-Layout-Card border-rd-4 border-2 overflow-hidden border-Layout-White flex-col justify-center shadow-2xl"
     >
-      <div v-if="isElectron" class="w-full flex p-3 justify-end bg-Layout-Sidebar drag">
-        <!-- <div class="flex p-3 justify-end"> -->
-        <iconBtn
-          icon-name="subtract-line"
-          type="WindowsControls"
-          size="lg"
-          @click="setWindowSize('min')"
-        ></iconBtn>
-        <iconBtn icon-name="aspect-ratio-line" type="WindowsControls" size="lg"></iconBtn>
-        <iconBtn
-          icon-name="close-line"
-          type="WindowsControls"
-          size="lg"
-          @click="setWindowSize('close')"
-        ></iconBtn>
-        <!-- </div> -->
+      <div v-if="isElectron" class="w-full flex justify-end bg-Layout-Sidebar">
+        <div class="w-full h-full drag"></div>
+        <div class="flex p-3">
+          <iconBtn
+            icon-name="subtract-line"
+            type="WindowsControls"
+            size="lg"
+            @click="setWindowSize('min')"
+          ></iconBtn>
+          <iconBtn icon-name="aspect-ratio-line" type="WindowsControls" size="lg"></iconBtn>
+          <iconBtn
+            icon-name="close-line"
+            type="WindowsControls"
+            size="lg"
+            @click="setWindowSize('close')"
+          ></iconBtn>
+        </div>
       </div>
       <div class="w-full flex items-center flex-1 gap-x-80px">
         <div class="w-63 p-4 ml-20 grid h-400px">
