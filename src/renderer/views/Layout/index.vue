@@ -5,7 +5,7 @@
     <Nav></Nav>
     <div class="w-full overflow-hidden">
       <Header></Header>
-      <router-view v-slot="{ Component }" style="height: calc(100% - 3rem); overflow-y: auto">
+      <router-view v-slot="{ Component }" style="height: calc(100% - 3rem); overflow-y: hidden">
         <keep-alive>
           <component :is="Component" :key="$route.fullPath" />
         </keep-alive>
@@ -24,5 +24,6 @@ import Header from '@/components/Header.vue'
   ::-webkit-scrollbar {
     display: none; /* Chrome Safari */
   }
+  border-radius: 8px;
 }
 </style>
