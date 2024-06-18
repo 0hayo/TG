@@ -63,6 +63,8 @@ import { useQueryAllGroup } from '@/composable'
 
 let timer
 useQueryAllGroup(() => {
+  params.channel_name = monitoring.getGroupIds.join(',')
+  params.keywords = usePlan.getKeywords.join(',')
   queryLatestMessages()
 })
 
@@ -82,15 +84,17 @@ const activeMsgId = ref('')
 
 const monitoring = useMonitoringData()
 
+const params = reactive({
+  channel_name: '',
+  keywords: '',
+  time_threshold: '2024-06-08 02:13:20'
+})
+
 const monitoringData = ref<MessagesRes[]>([])
 const queryLatestMessages = async () => {
   if (monitoring.getGroupIds.length === 0) return
   try {
-    const res = await latestKeyMessages({
-      channel_name: monitoring.getGroupIds.join(','),
-      keywords: usePlan.getKeywords.join(','),
-      time_threshold: '2024-06-08 02:13:20'
-    })
+    const res = await latestKeyMessages(params)
     if (res.IsSuccess) {
       monitoringData.value = res.Data
       monitoringData.value.forEach((item) => {
