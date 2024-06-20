@@ -1,6 +1,6 @@
 <template>
   <div class="flex-col bg-Layout-Sidebar">
-    <div class="w-12.5rem h-12 px-4 line-height-3rem color-Neutral-Text-Primary drag">
+    <div class="w-44 h-12 px-4 line-height-3rem color-Neutral-Text-Primary drag">
       <div class="flex gap-2 items-center">
         <img src="../assets/img/logo.svg" alt="lgog" />
         <p class="text-h6-medium">谛听巡查</p>

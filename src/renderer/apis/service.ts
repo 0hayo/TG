@@ -1,7 +1,7 @@
 import router from '@/router'
 import NAMES from '@/store/types'
 import axios, { InternalAxiosRequestConfig } from 'axios'
-import { ElMessage } from 'element-plus'
+// import { ElMessage } from 'element-plus'
 
 const service = axios.create({
   baseURL: `http://127.0.0.1:6060/aps`, // 开发
