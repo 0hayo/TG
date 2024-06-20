@@ -5,7 +5,7 @@
     <!-- <transition-group name="el-zoom-in-center"> -->
     <div
       v-for="item in monitoringData"
-      :key="item.sender_id"
+      :key="item.message_id"
       class="w-112 flex-col gap-2 px-4 py-2 rounded text-base-regular border-2 border-transparent cursor-pointer msg_hover"
       :class="{ msg_active: activeMsgId === item.message_id }"
       @click="
@@ -61,6 +61,9 @@ import usePlanStore from '@/store/common/usePlan'
 // import moment from 'moment'
 import { useQueryAllGroup } from '@/composable'
 import moment from 'moment'
+import useUser from '@/store/common/useUser'
+
+const user = useUser()
 
 let timer
 useQueryAllGroup(() => {
@@ -89,9 +92,10 @@ const planInfo = ref<PlanInfo>()
 const monitoringData = ref<MessagesRes[]>([])
 const queryLatestMessages = async () => {
   if (monitoring.getGroupIds.length === 0) return
+  const keywords =
+    usePlan.planList.filter((v) => v.plan_id === planInfo.value?.plan_id)[0]?.inspect_keys || []
+  if (!keywords) return
   try {
-    const keywords =
-      usePlan.planList.filter((v) => v.plan_id === planInfo.value?.plan_id)[0]?.inspect_keys || []
     const res = await latestKeyMessages({
       channel_name: monitoring.getGroupIds.join(','),
       keywords: keywords.join(','),
@@ -115,9 +119,10 @@ const queryLatestMessages = async () => {
   } catch (error) {
     console.log(error)
   } finally {
-    setTimeout(() => {
-      queryLatestMessages()
-    }, 1000)
+    user.token &&
+      setTimeout(() => {
+        queryLatestMessages()
+      }, 1000)
   }
 }
 </script>
