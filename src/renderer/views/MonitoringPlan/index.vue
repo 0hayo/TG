@@ -1,9 +1,5 @@
 <template>
-  <div v-if="planCount == '0'" class="w-full h-full">
-    <div class="img"></div>
-    <div>暂无无监测方案，<a @click="show"> 请点我添加</a>监测方案</div>
-  </div>
-  <div v-else class="flex-row flex-1">
+  <div class="flex-row flex-1">
     <div class="w-116 border-r border-Neutral-Stroke-Stroke">
       <DetailListVue @handle-msg="handleMsg" />
     </div>
