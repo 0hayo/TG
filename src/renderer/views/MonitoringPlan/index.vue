@@ -18,8 +18,8 @@
       <TelegramPost v-else-if="currentMsg" :key="tgSrc" :current-msg="currentMsg" />
     </div>
     <div
-      :class="showEditor ? 'w-116' : 'w-0'"
-      class="transition-all duration-150 ease-in-out border-l border-Neutral-Stroke-Stroke"
+      :class="showEditor ? 'block' : 'hidden'"
+      class="w-116 transition-all duration-150 ease-in-out border-l border-Neutral-Stroke-Stroke"
     >
       <div
         class="flex justify-between items-center border-b-Neutral-Stroke-Stroke border-b px-2 bg-[#fff]"
@@ -33,8 +33,7 @@
           mode="default"
         />
         <XButton
-          :class="showEditor ? 'right-4' : 'right--30'"
-          class="p-2 pos-fixed top-26 z-10 shadow-blue"
+          class="p-2 right-4 pos-fixed top-26 z-10 shadow-blue"
           type="Primary"
           icon-name="export-line"
           @click="saveDocx"
