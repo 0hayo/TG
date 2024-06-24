@@ -147,31 +147,14 @@ const showEditor = ref(false)
 
 const currentMsg = ref<MessagesRes>()
 // 内容 HTML
-const valueHtml = computed(
-  () => `<h1 style="text-align: center;"><span style="font-size: 29px; font-family: 方正小标宋简体;">（自主发现研判）电报网民“
-    ${currentMsg.value?.sender_id}”在“${currentMsg.value
-      ?.channel_name}”群组称“${currentMsg.value?.hit_keyword.join('、')}
-    ”攻击我领导人</span></h1><p><br></p>
-<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">工作发现，${currentMsg
-    .value?.message_time}，电报网民“${currentMsg.value?.sender_id}”在“${currentMsg.value
-    ?.channel_name}”群组称“${currentMsg.value?.hit_keyword.join('、')}”攻击我领导人。</span></p>
-<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">一、样本内容</span></p>
-<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">${currentMsg
-    .value?.message_text}</span></p>
-<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">二、梳理分析</span></p>
-<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">截止目前**点赞***转发（截止目前暂无转发评论）</span></p>
-<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">三、链接</span></p>
-<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">${currentMsg
-    .value?.message_link}</span></p>
-<p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">四、附件</span></p>
-${msgImg.value}
-`
-)
-const msgImg = ref()
+const valueHtml = ref('')
 
 onMounted(() => {
   mitts.on('editor', () => {
     showEditor.value = !showEditor.value
+  })
+  mitts.on('refreshWebview', () => {
+    webviewRef.value?.reload()
   })
 })
 // 组件销毁时，也及时销毁编辑器
@@ -217,7 +200,7 @@ const handleMsg = async (msg: MessagesRes) => {
     .replaceAll('</p>', '')
   tgSrc.value = msg.msg_online_link
   tgWight.value = msg.message_link
-  msgImg.value = ''
+  editorRef.value?.setHtml(setHtml())
 }
 
 const screenshot = () => {
@@ -229,12 +212,32 @@ onMounted(() => {
     const blob = new Blob([buffer], { type: 'image/png' })
     const fileReader = new FileReader()
     fileReader.readAsDataURL(blob)
-    fileReader.addEventListener('load', function () {
+    fileReader.addEventListener('load', async function () {
       const res = fileReader.result
-      msgImg.value = `<img src="${res}" />`
+      editorRef.value?.setHtml(editorRef.value?.getHtml() + `<image src="${res}" ></image>`)
     })
   })
 })
+
+const setHtml = () => {
+  return `<h1 style="text-align: center;"><span style="font-size: 29px; font-family: 方正小标宋简体;">（自主发现研判）电报网民“
+      ${currentMsg.value?.sender_id}”在“${currentMsg.value
+        ?.channel_name}”群组称“${currentMsg.value?.hit_keyword.join('、')}
+      ”攻击我领导人</span></h1><p><br></p>
+  <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">工作发现，${currentMsg
+    .value?.message_time}，电报网民“${currentMsg.value?.sender_id}”在“${currentMsg.value
+    ?.channel_name}”群组称“${currentMsg.value?.hit_keyword.join('、')}”攻击我领导人。</span></p>
+  <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">一、样本内容</span></p>
+  <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">${currentMsg
+    .value?.message_text}</span></p>
+  <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">二、梳理分析</span></p>
+  <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">截止目前**点赞***转发（截止目前暂无转发评论）</span></p>
+  <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">三、链接</span></p>
+  <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">${currentMsg
+    .value?.message_link}</span></p>
+  <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">四、附件</span></p>
+  `
+}
 </script>
 
 <style lang="less">

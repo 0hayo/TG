@@ -25,6 +25,15 @@
       >
         舆情上报编辑
       </XButton>
+      <XButton
+        v-if="route.name === 'MonitoringPlan'"
+        class="justify-start"
+        text
+        icon-name="draft-line"
+        @click="refreshWebview"
+      >
+        刷新
+      </XButton>
       <div class="drag flex-1 h-full"></div>
       <div class="flex-row gap-4">
         <div class="flex">
@@ -166,6 +175,10 @@ const showAddPaln = () => {
     },
     component: shallowRef(AddPlan)
   })
+}
+
+const refreshWebview = () => {
+  mitts.emit('refreshWebview')
 }
 </script>
 
