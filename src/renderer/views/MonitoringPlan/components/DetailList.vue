@@ -6,7 +6,7 @@
     <div
       v-for="item in monitoringData"
       :key="item.message_id"
-      class="w-112 flex-col gap-2 px-4 py-2 rounded text-base-regular border-2 border-transparent cursor-pointer msg_hover"
+      class="w-108 flex-col gap-2 px-4 py-2 rounded text-base-regular border-2 border-transparent cursor-pointer msg_hover"
       :class="{ msg_active: activeMsgId === item.message_id }"
       @click="
         () => {

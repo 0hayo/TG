@@ -78,7 +78,7 @@ const handle = async () => {
       } else {
         router.push('/MediaManagement')
       }
-      isElectron && setWindowSize('maximize')
+      isElectron && setWindowSize('loginmaximize')
     } else {
       ElMessage.warning(res.Message)
     }

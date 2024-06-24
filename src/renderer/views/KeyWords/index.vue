@@ -1,7 +1,7 @@
 <template>
   <div class="h-full flex">
     <div class="w-90 flex-col gap-2 pt-4 border-r border-r-Neutral-Stroke-Stroke">
-      <h6 class="px-4 inline-flex items-center h-14 text-h6-medium">添加关键词</h6>
+      <h6 class="px-4 inline-flex items-center h-12 text-h6-medium">添加关键词</h6>
       <el-input
         v-model="keyword"
         class="px-4"
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="grow p-16px flex flex-col">
-      <h6 class="px-4 inline-flex items-center h-12 text-h6-medium">添加关键词</h6>
+      <h6 class="px-4 mb-2 inline-flex items-center h-12 text-h6-medium">添加关键词</h6>
       <div class="relative w-full grow">
         <el-table
           :data="tableData.data"
