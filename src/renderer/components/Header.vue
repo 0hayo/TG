@@ -29,7 +29,7 @@
         v-if="route.name === 'MonitoringPlan'"
         class="justify-start"
         text
-        icon-name="draft-line"
+        icon-name="refresh-line"
         @click="refreshWebview"
       >
         刷新
@@ -40,10 +40,10 @@
           <img src="" alt="" />
           <p class="text-Neutral-Text-Primary">{{ user.getUserInfo.name }}</p>
         </div>
-        <div>
+        <!-- <div>
           <i v-if="ringtones" class="ri-moon-line cursor-pointer" @click="setRingtones(false)"></i>
           <i v-else class="ri-sun-line cursor-pointer" @click="setRingtones(true)"></i>
-        </div>
+        </div> -->
         <div v-if="isElectron" class="flex">
           <iconBtn
             icon-name="subtract-line"

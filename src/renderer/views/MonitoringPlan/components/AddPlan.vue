@@ -16,7 +16,7 @@
             <template #append><i class="ri-corner-down-left-line"></i></template>
           </el-input>
         </el-form-item>
-        <el-form-item>
+        <!-- <el-form-item>
           <el-switch v-model="value1">
             <template #active-action>
               <span class="custom-active-action"><i class="ri-notification-4-line"></i></span>
@@ -26,7 +26,7 @@
             </template>
           </el-switch>
           <span>系统通知</span>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="选择媒体">
           <el-radio-group v-model="formLabelAlign.tg_user_group_id" class="items-start! flex-col">
             <el-radio value="Telegram" label="Telegram">Telegram </el-radio>

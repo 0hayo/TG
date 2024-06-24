@@ -21,22 +21,23 @@
       </nav>
     </div>
     <div class="w-90 flex-col gap-2 pt-4 border-r border-r-Neutral-Stroke-Stroke">
-      <h6 class="px-4 inline-flex items-center h-12 text-h6-medium">TG群组查询</h6>
-      <el-input
-        v-model="groupInput"
-        class="px-4"
-        placeholder="输入需要查询的群链接"
-        @keydown.enter="addGroup"
-      >
-        <template #prefix>
-          <i class="ri-link-m"></i>
-        </template>
-        <template #append><i class="ri-corner-down-left-line" @click="addGroup"></i></template>
-      </el-input>
-      <h6 v-if="newGroupList.length > 0" class="px-4 inline-flex items-center text-h6-medium">
-        查询结果
-      </h6>
-      <div class="px-4 scroll-smooth grid gap-2 content-start">
+      <div>
+        <h6 class="px-4 inline-flex items-center h-12 text-h6-medium">TG群组查询</h6>
+        <el-input
+          v-model="groupInput"
+          class="px-4"
+          placeholder="输入需要查询的群链接"
+          @keydown.enter="addGroup"
+        >
+          <template #prefix>
+            <i class="ri-link-m"></i>
+          </template>
+          <template #append><i class="ri-corner-down-left-line" @click="addGroup"></i></template>
+        </el-input>
+      </div>
+
+      <h6 class="px-4 inline-flex items-center text-h6-medium">查询结果</h6>
+      <div v-if="newGroupList.length > 0" class="px-4 scroll-smooth grid gap-2 content-start">
         <LinkCard
           v-for="(item, i) in newGroupList"
           :key="item"
@@ -78,7 +79,7 @@
     </div>
     <div class="grow p-16px flex flex-col">
       <div class="flex gap-24px items-center">
-        <h6 class="inline-flex items-center mb-2 h-12 text-h6-medium">TG群组监测列表</h6>
+        <h6 class="inline-flex items-center h-12 text-h6-medium">TG群组监测列表</h6>
         <el-select v-if="user.getAccountLevel !== UserType.general" placeholder="所有单位">
         </el-select>
         <el-select v-if="user.getAccountLevel !== UserType.general" placeholder="监测中">
@@ -102,13 +103,18 @@
           <el-table-column prop="group_url" min-width="100" label="链接" />
           <el-table-column prop="status" min-width="100" label="状态">
             <template #default="{ row }">
-              <span v-if="row.status === 1" class="color-red">待通过</span>
-              <span v-else class="color-blue">通过</span>
+              <span v-if="row.status === 1" class="color-Danger-Text-Primary">待通过</span>
+              <span v-else class="color-Success-Text-Primary">监测中</span>
             </template>
           </el-table-column>
           <el-table-column prop="added_at" min-width="100" label="添加时间" />
           <el-table-column prop="added_by" min-width="100" label="添加人" />
-          <el-table-column fixed="right" label="操作" width="120">
+          <el-table-column
+            v-if="user.getAccountLevel !== UserType.general"
+            fixed="right"
+            label="操作"
+            width="120"
+          >
             <template #default="{ row }">
               <!-- <el-button
                 v-if="user.getAccountLevel === UserType.general && row.status === 2"

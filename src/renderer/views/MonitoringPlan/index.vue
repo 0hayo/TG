@@ -1,9 +1,5 @@
 <template>
-  <div v-if="planCount == '0'" class="w-full h-full">
-    <div class="img"></div>
-    <div>暂无无监测方案，<a @click="show"> 请点我添加</a>监测方案</div>
-  </div>
-  <div v-else class="flex-row flex-1">
+  <div class="flex-row flex-1">
     <div class="w-116 border-r border-Neutral-Stroke-Stroke">
       <DetailListVue @handle-msg="handleMsg" />
     </div>
@@ -18,13 +14,13 @@
       <TelegramPost v-else-if="currentMsg" :key="tgSrc" :current-msg="currentMsg" />
     </div>
     <div
-      :class="showEditor ? 'w-116' : 'w-0'"
-      class="transition-all duration-150 ease-in-out border-l border-Neutral-Stroke-Stroke"
+      :class="showEditor ? 'flex-col' : 'hidden'"
+      class="w-116 transition-all duration-150 ease-in-out border-l border-Neutral-Stroke-Stroke"
     >
       <div
-        class="flex justify-between items-center border-b-Neutral-Stroke-Stroke border-b px-2 bg-[#fff]"
+        class="flex justify-between items-center border-b-Neutral-Stroke-Stroke border-b bg-[#fff]"
       >
-        <iconBtn icon-name="login-box-line" @click="handleEditor" />
+        <!-- <iconBtn icon-name="login-box-line" @click="handleEditor" /> -->
         <Toolbar
           class="flex bg-transparent h-10"
           style="background-color: transparent"
@@ -33,8 +29,7 @@
           mode="default"
         />
         <XButton
-          :class="showEditor ? 'right-4' : 'right--30'"
-          class="p-2 pos-fixed top-26 z-10 shadow-blue"
+          class="p-2 right-4 pos-fixed top-26 z-10 shadow-blue"
           type="Primary"
           icon-name="export-line"
           @click="saveDocx"
@@ -77,23 +72,24 @@ import { saveAs } from 'file-saver'
 import { MessagesRes } from '@/apis/monitoringPlan'
 import mitts from '@/utils/mitts'
 import XButton from '@/components/XButton/index.vue'
-import iconBtn from '@/components/iconbtn/index.vue'
+// import iconBtn from '@/components/iconbtn/index.vue'
 import { IToolbarConfig, IEditorConfig } from '@wangeditor/editor'
 import { cloneDeep } from 'lodash'
 
 const toolbarConfig: Partial<IToolbarConfig> = {
   toolbarKeys: [
     // 菜单 key
-    'headerSelect',
-    // 'fontFamily',
+    // 'headerSelect',
+    'fontSize',
+    'fontFamily',
     // 分割线
     '|',
     'color',
     'bgColor',
     // 菜单 key
-    'bold',
-    'italic',
-    'numberedList'
+    'bold'
+    // 'italic'
+    // 'numberedList'
   ]
 }
 

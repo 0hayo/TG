@@ -1,18 +1,22 @@
 <template>
   <div class="h-full flex">
     <div class="w-90 flex-col gap-2 pt-4 border-r border-r-Neutral-Stroke-Stroke">
-      <h6 class="px-4 inline-flex items-center h-12 text-h6-medium">添加关键词</h6>
-      <el-input
-        v-model="keyword"
-        class="px-4"
-        placeholder="输入新的关键词"
-        @keydown.enter="keydownEnter"
-      >
-        <template #prefix>
-          <i class="ri-rss-line"></i>
-        </template>
-        <template #append><i class="ri-corner-down-left-line" @click="keydownEnter"></i></template>
-      </el-input>
+      <div>
+        <h6 class="px-4 inline-flex items-center h-12 text-h6-medium">添加关键词</h6>
+        <el-input
+          v-model="keyword"
+          class="px-4"
+          placeholder="输入新的关键词"
+          @keydown.enter="keydownEnter"
+        >
+          <template #prefix>
+            <i class="ri-rss-line"></i>
+          </template>
+          <template #append
+            ><i class="ri-corner-down-left-line" @click="keydownEnter"></i
+          ></template>
+        </el-input>
+      </div>
       <h6 class="px-4 inline-flex items-center h-12 text-h6-medium">曾用关键词</h6>
       <div class="px-4 pb-4 grow scroll-smooth overflow-y-auto grid gap-2 content-start">
         <LinkCard
@@ -31,7 +35,7 @@
       </div>
     </div>
     <div class="grow p-16px flex flex-col">
-      <h6 class="px-4 mb-2 inline-flex items-center h-12 text-h6-medium">添加关键词</h6>
+      <h6 class="px-4 inline-flex items-center h-12 text-h6-medium">添加关键词</h6>
       <div class="relative w-full grow">
         <el-table
           :data="tableData.data"
