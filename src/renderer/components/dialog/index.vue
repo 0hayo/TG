@@ -15,7 +15,7 @@
       <template #header="{ close, titleId }">
         <div class="flex justify-between items-center h-full">
           <h6 :id="titleId" class="text-h6-medium inline-flex gap-2">
-            <i class="ri-gps-line"></i>新增方案
+            <i class="ri-gps-line"></i>{{ item.title }}
           </h6>
           <iconBtn icon-name="close-line" @click="close"> </iconBtn>
         </div>
