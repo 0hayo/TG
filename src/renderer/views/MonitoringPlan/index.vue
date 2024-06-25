@@ -217,12 +217,15 @@ onMounted(() => {
 
 const setHtml = () => {
   return `<h1 style="text-align: center;"><span style="font-size: 29px; font-family: 方正小标宋简体;">（自主发现研判）电报网民“
-      ${currentMsg.value?.sender_id}”在“${currentMsg.value
-        ?.channel_name}”群组称“${currentMsg.value?.hit_keyword.join('、')}
+      ${currentMsg.value?.sender_name}(${currentMsg.value?.sender_id})”在“${currentMsg.value
+        ?.channel_group_name}”群组称“${currentMsg.value?.hit_keyword.join('、')}
       ”攻击我领导人</span></h1><p><br></p>
   <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">工作发现，${currentMsg
-    .value?.message_time}，电报网民“${currentMsg.value?.sender_id}”在“${currentMsg.value
-    ?.channel_name}”群组称“${currentMsg.value?.hit_keyword.join('、')}”攻击我领导人。</span></p>
+    .value?.message_time}，电报网民“${currentMsg.value?.sender_name}(${currentMsg.value
+    ?.sender_id})”在“${currentMsg.value
+    ?.channel_group_name}”群组称“${currentMsg.value?.hit_keyword.join(
+    '、'
+  )}”攻击我领导人。</span></p>
   <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:黑体;">一、样本内容</span></p>
   <p style="text-align:left;text-indent:32pt;line-height:28px;"><span style="font-size:21px;font-family:仿宋_GB2312;">${currentMsg
     .value?.message_text}</span></p>

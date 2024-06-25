@@ -3,6 +3,7 @@ import { ApiResponse } from './types'
 
 // 查询频道消息_最新
 export interface MessagesRes {
+  channel_group_name: string
   channel_name: string
   file_path: string
   file_type: string

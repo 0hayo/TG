@@ -74,6 +74,9 @@ dependencies:
   vue-router:
     specifier: ^4.2.5
     version: 4.2.5(vue@3.3.7)
+  vue-virtual-scroller:
+    specifier: ^1.1.2
+    version: 1.1.2(vue@3.3.7)
   vue-web-screen-shot:
     specifier: ^1.5.3
     version: 1.5.3(core-js@3.37.0)(vue@3.3.7)
@@ -5030,6 +5033,10 @@ packages:
       compute-scroll-into-view: 1.0.20
     dev: false
 
+  /scrollparent@2.1.0:
+    resolution: {integrity: sha512-bnnvJL28/Rtz/kz2+4wpBjHzWoEzXhVg/TE8BeVGJHUqE8THNIRnDxDWMktwM+qahvlRdvlLdsQfYe+cuqfZeA==}
+    dev: false
+
   /scule@1.0.0:
     resolution: {integrity: sha512-4AsO/FrViE/iDNEPaAQlb77tf0csuq27EsVpy6ett584EcRTp6pTDLoGWVxCD77y5iU5FauOvhsI4o1APwPoSQ==}
     dev: true
@@ -5713,6 +5720,18 @@ packages:
       - supports-color
     dev: true
 
+  /vue-observe-visibility@0.4.6:
+    resolution: {integrity: sha512-xo0CEVdkjSjhJoDdLSvoZoQrw/H2BlzB5jrCBKGZNXN2zdZgMuZ9BKrxXDjNP2AxlcCoKc8OahI3F3r3JGLv2Q==}
+    dev: false
+
+  /vue-resize@0.4.5(vue@3.3.7):
+    resolution: {integrity: sha512-bhP7MlgJQ8TIkZJXAfDf78uJO+mEI3CaLABLjv0WNzr4CcGRGPIAItyWYnP6LsPA4Oq0WE+suidNs6dgpO4RHg==}
+    peerDependencies:
+      vue: ^2.3.0
+    dependencies:
+      vue: 3.3.7(typescript@5.2.2)
+    dev: false
+
   /vue-router@4.2.5(vue@3.3.7):
     resolution: {integrity: sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==}
     peerDependencies:
@@ -5740,6 +5759,17 @@ packages:
       semver: 7.5.4
       typescript: 5.2.2
     dev: true
+
+  /vue-virtual-scroller@1.1.2(vue@3.3.7):
+    resolution: {integrity: sha512-SkUyc7QHCJFB5h1Fya7LxVizlVzOZZuFVipBGHYoTK8dwLs08bIz/tclvRApYhksaJIm/nn51inzO2UjpGJPMQ==}
+    peerDependencies:
+      vue: ^2.6.11
+    dependencies:
+      scrollparent: 2.1.0
+      vue: 3.3.7(typescript@5.2.2)
+      vue-observe-visibility: 0.4.6
+      vue-resize: 0.4.5(vue@3.3.7)
+    dev: false
 
   /vue-web-screen-shot@1.5.3(core-js@3.37.0)(vue@3.3.7):
     resolution: {integrity: sha512-aYyLr14ggSyCH+v5QivsRHtD6sYexhC0BFqmR0p+9qqfKQupSgzSxBAcQi6rqVEy69cEMb1yqFG34tDbjFwpIQ==}

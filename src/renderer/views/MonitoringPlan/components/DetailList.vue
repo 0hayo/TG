@@ -2,7 +2,6 @@
   <div
     class="h-full scroll-smooth overflow-y-auto overflow-x-clip grid grid-flow-row auto-rows-max px-4 py-2 gap-3"
   >
-    <!-- <transition-group name="el-zoom-in-center"> -->
     <div
       v-for="item in monitoringData"
       :key="item.message_id"
@@ -22,13 +21,13 @@
         </div>
         <div class="color-Neutral-Text-Tertiary">{{ item.message_time }}</div>
       </div>
-      <!-- <div class="descriptions__cell">
-        <div class="descriptions_label">群名</div>
-        <div class="descriptions_content">{{ item.channel_name }}</div>
-      </div> -->
       <div class="flex-inline gap-2">
         <div class="color-Neutral-Text-Tertiary">发言人</div>
         <div class="color-Primary-Text-Primary">{{ item.sender_name }}</div>
+      </div>
+      <div class="flex-inline gap-2">
+        <div class="color-Neutral-Text-Tertiary">群名</div>
+        <div class="color-Primary-Text-Primary">{{ item.channel_group_name }}</div>
       </div>
       <hr />
       <div class="flex">
@@ -37,19 +36,6 @@
           v-html="item.message_text"
         ></div>
       </div>
-      <!-- <div class="">{{ item.message_link }}</div> -->
-      <!-- <div class="">{{ item.msg_online_link }}</div> -->
-      <!-- <div class="button">
-        <el-button
-          class="font_family icon-Frame"
-          @click="
-            handleCopy(
-              `用户：${item.sender_name}；用户ID：${item.sender_id}；时间：${item.message_time}；群名：${item.channel_name}；言论：${item.message_text}；`
-            )
-          "
-          >复制举证
-        </el-button>
-      </div> -->
     </div>
   </div>
 </template>
@@ -58,7 +44,6 @@
 import { MessagesRes, PlanInfo, latestKeyMessages } from '@/apis/monitoringPlan'
 import useMonitoringData from '@/store/common/monitoringData'
 import usePlanStore from '@/store/common/usePlan'
-// import moment from 'moment'
 import { useQueryAllGroup } from '@/composable'
 import moment from 'moment'
 import useUser from '@/store/common/useUser'
@@ -90,6 +75,9 @@ const monitoring = useMonitoringData()
 const planInfo = ref<PlanInfo>()
 
 const monitoringData = ref<MessagesRes[]>([])
+
+const MAX_MESSAGES = 500 // 设置保留的最大消息数
+
 const queryLatestMessages = async () => {
   if (monitoring.getGroupIds.length === 0) return
   const keywords =
@@ -102,13 +90,33 @@ const queryLatestMessages = async () => {
       time_threshold: moment().format('YYYY-MM-DD 00:00:00')
     })
     if (res.IsSuccess) {
-      monitoringData.value = res.Data
-      monitoringData.value.forEach((item) => {
+      const newMessages = res.Data
+
+      // 更新 hit_keyword 和 message_text
+      newMessages.forEach((item) => {
         item.hit_keyword = item.hit_keyword || []
         item.hit_keyword.forEach((v) => {
           item.message_text = item.message_text.replaceAll(v, `<p id="keyword">${v}</p>`)
         })
       })
+
+      // 合并数据并去重
+      const mergedData = [...monitoringData.value]
+      newMessages.forEach((newItem) => {
+        if (!mergedData.some((existingItem) => existingItem.message_id === newItem.message_id)) {
+          mergedData.push(newItem)
+        }
+      })
+
+      // 按消息时间排序
+      // mergedData.sort((a, b) => new Date(b.message_time) - new Date(a.message_time))
+      mergedData.sort((a, b) => {
+        return new Date(b.message_time).getTime() - new Date(a.message_time).getTime()
+      })
+
+      // 保留最新的 MAX_MESSAGES 条消息
+      monitoringData.value = mergedData.slice(0, MAX_MESSAGES)
+
       if (monitoringData.value.length > 0 && !activeMsgId.value) {
         activeMsgId.value = monitoringData.value[0].message_id
         emits('handleMsg', monitoringData.value[0])

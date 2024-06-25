@@ -25,7 +25,10 @@
       >
         舆情上报编辑
       </XButton>
-      <XButton
+
+      <!-- 刷新只对某个方案生效，先隐藏 -->
+
+      <!-- <XButton
         v-if="route.name === 'MonitoringPlan'"
         class="justify-start"
         text
@@ -33,7 +36,8 @@
         @click="refreshWebview"
       >
         刷新
-      </XButton>
+      </XButton> -->
+
       <div class="drag flex-1 h-full"></div>
       <div class="flex-row gap-4">
         <div class="flex">
@@ -96,7 +100,7 @@
 </template>
 
 <script setup lang="ts">
-import useMonitoringData from '@/store/common/monitoringData'
+// import useMonitoringData from '@/store/common/monitoringData'
 // import { ElDrawer } from 'element-plus'
 import XButton from '@/components/XButton/index.vue'
 import iconBtn from '@/components/iconbtn/index.vue'
@@ -110,7 +114,7 @@ import AddPlan from '@/views/MonitoringPlan/components/AddPlan.vue'
 const route = useRoute()
 // const usePlan = usePlanStore()
 const user = useUser()
-const monitoringData = useMonitoringData()
+// const monitoringData = useMonitoringData()
 
 const isElectron = ref(false)
 onBeforeMount(() => {
@@ -121,13 +125,14 @@ const setWindowSize = (type: string) => {
   window.electronApi.setWindowSize(type)
 }
 
-const ringtones = computed(() => monitoringData.$state.ringtones)
-const setRingtones = (v: boolean) => {
-  !v
-    ? document.documentElement.classList.add('dark')
-    : document.documentElement.classList.remove('dark')
-  monitoringData.setRingtones(v)
-}
+// 主题切换
+// const ringtones = computed(() => monitoringData.$state.ringtones)
+// const setRingtones = (v: boolean) => {
+//   !v
+//     ? document.documentElement.classList.add('dark')
+//     : document.documentElement.classList.remove('dark')
+//   monitoringData.setRingtones(v)
+// }
 
 // const showDrawer = ref(false)
 
@@ -177,9 +182,9 @@ const showAddPaln = () => {
   })
 }
 
-const refreshWebview = () => {
-  mitts.emit('refreshWebview')
-}
+// const refreshWebview = () => {
+//   mitts.emit('refreshWebview')
+// }
 </script>
 
 <style scoped lang="less">
